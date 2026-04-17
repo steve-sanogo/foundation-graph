@@ -125,7 +125,7 @@ async function parseIntent(apiKey, question, bookHint) {
   const prompt = INTENT_PROMPT + question +
     (bookHint && bookHint !== 'all' ? `\n(L'utilisateur a filtre sur le corpus : ${bookHint})` : '');
 
-  const raw = await callGemini(apiKey, prompt, 256);
+  const raw = await callGemini(apiKey, prompt, 128);
 
   try {
     const clean  = raw.replace(/```json|```/g, '').trim();
@@ -546,10 +546,34 @@ async function generateAnswer(apiKey, question, intent, results) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// GEMINI API helper
+// GEMINI API helper — with retry on 429 and in-memory response cache
 // ─────────────────────────────────────────────────────────────────────────────
 
+// Simple in-memory cache for the duration of the Worker instance lifetime.
+// Keyed by a hash of (prompt, maxTokens). Avoids double-billing identical
+// requests and protects against 429 on repeated test queries.
+const GEMINI_CACHE = new Map();
+const CACHE_MAX_SIZE = 64; // evict oldest entry when full
+
+function cacheKey(prompt, maxTokens) {
+  // Lightweight hash: first 120 chars + last 60 chars + maxTokens
+  const sig = prompt.slice(0, 120) + '|' + prompt.slice(-60) + '|' + maxTokens;
+  return sig;
+}
+
+/**
+ * Call the Gemini API with automatic retry on 429 (rate limit).
+ * Retries up to MAX_RETRIES times with exponential backoff.
+ * Results are cached in memory for the lifetime of the Worker instance.
+ */
 async function callGemini(apiKey, prompt, maxTokens = 512) {
+  const key = cacheKey(prompt, maxTokens);
+
+  if (GEMINI_CACHE.has(key)) {
+    console.log('[callGemini] cache hit');
+    return GEMINI_CACHE.get(key);
+  }
+
   const endpoint =
     `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
@@ -561,21 +585,69 @@ async function callGemini(apiKey, prompt, maxTokens = 512) {
     },
   };
 
-  const resp = await fetch(endpoint, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(body),
-  });
+  const MAX_RETRIES = 3;
+  // Backoff delays in ms: 2s, 6s, 15s
+  const BACKOFF_MS = [2000, 6000, 15000];
 
-  if (!resp.ok) {
-    const errText = await resp.text();
-    throw new Error(`Gemini API error ${resp.status}: ${errText.slice(0, 200)}`);
+  let lastError = null;
+
+  for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
+    if (attempt > 0) {
+      const delay = BACKOFF_MS[attempt - 1] ?? 15000;
+      console.warn(`[callGemini] 429 rate limit — retry ${attempt}/${MAX_RETRIES} after ${delay}ms`);
+      await sleep(delay);
+    }
+
+    const resp = await fetch(endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+
+    // Rate limited — retry
+    if (resp.status === 429) {
+      const retryAfter = resp.headers.get('Retry-After');
+      if (retryAfter && attempt < MAX_RETRIES) {
+        const waitMs = Math.min(parseInt(retryAfter, 10) * 1000 || BACKOFF_MS[attempt], 30000);
+        console.warn(`[callGemini] Retry-After header: ${retryAfter}s — waiting ${waitMs}ms`);
+        await sleep(waitMs);
+        continue;
+      }
+      lastError = new Error(
+        'Quota Gemini API depasse (429). Le tier gratuit est limite a 15 requetes/minute. ' +
+        'Patientez quelques secondes et reessayez, ou configurez la facturation sur ' +
+        'https://aistudio.google.com/apikey'
+      );
+      continue;
+    }
+
+    if (!resp.ok) {
+      const errText = await resp.text();
+      throw new Error(`Gemini API error ${resp.status}: ${errText.slice(0, 300)}`);
+    }
+
+    const data = await resp.json();
+    const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+    if (!text) throw new Error('Reponse Gemini vide ou bloquee par le filtre de securite.');
+
+    const result = text.trim();
+
+    // Store in cache — evict oldest entry if at capacity
+    if (GEMINI_CACHE.size >= CACHE_MAX_SIZE) {
+      const oldestKey = GEMINI_CACHE.keys().next().value;
+      GEMINI_CACHE.delete(oldestKey);
+    }
+    GEMINI_CACHE.set(key, result);
+
+    return result;
   }
 
-  const data = await resp.json();
-  const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
-  if (!text) throw new Error('Empty Gemini response');
-  return text.trim();
+  // All retries exhausted
+  throw lastError ?? new Error('Gemini API : echec apres plusieurs tentatives.');
+}
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
