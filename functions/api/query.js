@@ -37,8 +37,8 @@ export async function onRequestPost(context) {
       return jsonResponse({ error: 'GEMINI_API_KEY not configured.' }, 500, corsHeaders);
     }
 
-    // ── Step 1: Parse intent ────────────────────────────────────────────────
-    const intent = await parseIntent(GEMINI_KEY, question, bookHint);
+    // ── Step 1: Parse intent (rule-based, no API call) ──────────────────────
+    const intent = parseIntent(question, bookHint);
     console.log('[query] intent:', JSON.stringify(intent));
 
     // ── Step 2: Load flat data ───────────────────────────────────────────────
@@ -83,80 +83,247 @@ export async function onRequestOptions() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// STEP 1 — Intent parsing with Gemini
+// STEP 1 — Rule-based intent parser (no LLM call, instant, free)
+//
+// Replaces the previous Gemini-based parseIntent. Handles all query patterns
+// observed in the application without consuming any API quota.
 // ─────────────────────────────────────────────────────────────────────────────
 
-const INTENT_PROMPT = `Tu es un assistant NLP specialise dans l'analyse de graphes de personnages du Cycle de Fondation d'Isaac Asimov.
+// Known character names and their canonical form.
+// Covers both French and English variants found in the corpus.
+const ENTITY_ALIASES = {
+  // PAF characters
+  'hari seldon':        'Hari Seldon',
+  'seldon':             'Hari Seldon',
+  'hari':               'Hari Seldon',
+  'dors venabili':      'Dors Venabili',
+  'dors':               'Dors Venabili',
+  'venabili':           'Dors Venabili',
+  'hummin':             'Hummin',
+  'chetter hummin':     'Hummin',
+  'demerzel':           'Demerzel',
+  'eto demerzel':       'Demerzel',
+  'cleon':              'Cléon',
+  'cléon':              'Cléon',
+  "cléon ier":          'Cléon',
+  'emperor':            'Cléon',
+  'empereur':           'Cléon',
+  'amaryl':             'Amaryl',
+  'yugo amaryl':        'Amaryl',
+  'raych':              'Raych',
+  'leggen':             'Leggen',
+  'jenarr leggen':      'Leggen',
+  'tisalver':           'Tisalver',
+  'davan':              'Davan',
+  'rachelle':           'Rachelle',
+  'mannix':             'Mannix',
+  // LCA characters
+  'baley':              'Baley',
+  'elijah baley':       'Baley',
+  'elijah':             'Baley',
+  'lije':               'Baley',
+  'daneel':             'Daneel',
+  'r. daneel':          'Daneel',
+  'daneel olivaw':      'Daneel',
+  'olivaw':             'Daneel',
+  'enderby':            'Enderby',
+  'julius enderby':     'Enderby',
+  'julius':             'Enderby',
+  'fastolfe':           'Fastolfe',
+  'dr fastolfe':        'Fastolfe',
+  'sarton':             'Sarton',
+  'dr sarton':          'Sarton',
+  'clousarr':           'Clousarr',
+  'francis clousarr':   'Clousarr',
+  'jessie':             'Jessie',
+  'bentley':            'Bentley',
+  'sammy':              'Sammy',
+  'r. sammy':           'Sammy',
+  'gerrigel':           'Gerrigel',
+};
 
-Corpus disponibles :
-- "lca" = "Les Cavernes d'Acier" / "The Caves of Steel"
-- "paf" = "Prelude a Fondation" / "Prelude to Foundation"
+// Book name variants → canonical key
+const BOOK_ALIASES = {
+  'lca': 'lca', 'les cavernes': 'lca', "cavernes d'acier": 'lca',
+  'the caves': 'lca', 'caves of steel': 'lca', 'caves': 'lca',
+  'paf': 'paf', 'prelude': 'paf', 'prélude': 'paf',
+  'fondation': 'paf', 'foundation': 'paf',
+  'prelude to foundation': 'paf', 'prélude à fondation': 'paf',
+};
 
-Intentions disponibles :
-- neighbors_by_polarity  → lister les voisins d'un personnage selon une polarite (ami / ennemi / neutre / any)
-- relation_between_entities → detailler la relation entre deux personnages
-- top_central_characters → classer les personnages les plus connectes
-- character_summary      → resumer les connexions d'un personnage
-- book_or_chapter_stats  → statistiques d'un chapitre ou d'un ouvrage
+// Polarity keywords in both languages
+const POLARITY_PATTERNS = {
+  ami:     /\b(ami[se]?|all(y|ies)|friend|allie?[ds]?|proche|favorable)\b/i,
+  ennemi:  /\b(ennemi[se]?|enem(y|ies)|foe|hostile|adversaire|antagoniste|contre)\b/i,
+  neutre:  /\b(neutre?|neutral|indiff[eé]rent)\b/i,
+};
 
-Regles :
-- Normalise les noms de personnages a leur forme canonique courte (ex: "Hari Seldon", "Baley", "Daneel", "Hummin", "Dors").
-- Pour "book" : utilise "lca", "paf", ou "all" si non precise ou ambigu.
-- Pour "polarity" : utilise "ami", "ennemi", "neutre", ou null si non precise.
-- Pour "chapter" : utilise un entier (ex: 3) si precise, sinon null. Ne mets jamais une chaine de caracteres.
-- "language" : "fr" ou "en" selon la langue de la question.
+// Intent detection patterns
+const INTENT_PATTERNS = [
+  {
+    intent: 'relation_between_entities',
+    patterns: [
+      /relation\s+entre/i,
+      /lien\s+entre/i,
+      /rapport\s+entre/i,
+      /relationship\s+between/i,
+      /link\s+between/i,
+      /comment\s+.{1,30}\s+(se\s+rapport|interact|connai)/i,
+    ],
+  },
+  {
+    intent: 'top_central_characters',
+    patterns: [
+      /plus\s+(connect|central|important|influent)/i,
+      /most\s+(connect|central|important|influent)/i,
+      /personnages?\s+(principal|central|hub|cl[eé])/i,
+      /main\s+character/i,
+      /qui\s+(sont|est)\s+le[s]?\s+plus/i,
+      /top\s+\d*\s*character/i,
+      /classement\s+(des\s+)?personnage/i,
+    ],
+  },
+  {
+    intent: 'book_or_chapter_stats',
+    patterns: [
+      /stat[si]/i,
+      /statistique/i,
+      /combien\s+(de\s+)?(personnage|lien|noeud|edge|node)/i,
+      /how\s+many/i,
+      /densit[eé]/i,
+      /chapitre\s+\d/i,
+      /chapter\s+\d/i,
+    ],
+  },
+  {
+    intent: 'neighbors_by_polarity',
+    patterns: [
+      /ennemi[s]?\s+(de|d'|du)/i,
+      /ami[s]?\s+(de|d'|du)/i,
+      /all(y|ies|ied)\s+of/i,
+      /enem(y|ies)\s+of/i,
+      /friend[s]?\s+of/i,
+      /adversaire[s]?\s+(de|d'|du)/i,
+      /qui\s+(sont|est)\s+l[ae]?[s']?\s*(ennemi|ami|hostile|proche)/i,
+      /who\s+(are|is)\s+.{0,20}(ally|allies|enemy|enemies|friend|foe)/i,
+    ],
+  },
+  {
+    intent: 'character_summary',
+    patterns: [
+      /r[eé]sum[eé]/i,
+      /summary/i,
+      /parle[r]?\s+(moi\s+)?(de|du|d')/i,
+      /tell\s+me\s+about/i,
+      /qui\s+est/i,
+      /who\s+is/i,
+      /describe/i,
+      /d[eé]cri[st]/i,
+      /profil/i,
+    ],
+  },
+];
 
-Reponds UNIQUEMENT avec un objet JSON valide, sans markdown, sans explications.
-
-Format exact :
-{
-  "language": "fr",
-  "intent": "neighbors_by_polarity",
-  "entity": "Hari Seldon",
-  "entity_2": null,
-  "polarity": "ennemi",
-  "book": "paf",
-  "chapter": null
-}
-
-Question : `;
-
-async function parseIntent(apiKey, question, bookHint) {
-  const prompt = INTENT_PROMPT + question +
-    (bookHint && bookHint !== 'all' ? `\n(L'utilisateur a filtre sur le corpus : ${bookHint})` : '');
-
-  const raw = await callGemini(apiKey, prompt, 128);
-
-  try {
-    const clean  = raw.replace(/```json|```/g, '').trim();
-    const parsed = JSON.parse(clean);
-
-    // Enforce number type for chapter — Gemini sometimes returns a string
-    if (parsed.chapter !== null && parsed.chapter !== undefined) {
-      const n = Number(parsed.chapter);
-      parsed.chapter = isNaN(n) ? null : n;
-    }
-
-    // Enforce bookHint if user forced a filter
-    if (bookHint && bookHint !== 'all' && (!parsed.book || parsed.book === 'all')) {
-      parsed.book = bookHint;
-    }
-
-    return parsed;
-
-  } catch (parseErr) {
-    console.warn('[parseIntent] Gemini returned non-parseable JSON, using fallback. Raw:', raw.slice(0, 200));
-    return {
-      language: 'fr',
-      intent:   'character_summary',
-      entity:   null,
-      entity_2: null,
-      polarity: null,
-      book:     bookHint || 'all',
-      chapter:  null,
-    };
+/**
+ * Detect the book from the question text.
+ * Returns 'lca', 'paf', bookHint, or 'all'.
+ */
+function detectBook(text, bookHint) {
+  if (bookHint && bookHint !== 'all') return bookHint;
+  const lower = text.toLowerCase();
+  for (const [alias, book] of Object.entries(BOOK_ALIASES)) {
+    if (lower.includes(alias)) return book;
   }
+  return 'all';
 }
+
+/**
+ * Detect the query language (fr / en).
+ */
+function detectLanguage(text) {
+  const frWords = /\b(le|la|les|des|dans|est|sont|quels?|quelle|qui|de|du|un|une|avec|entre|plus)\b/i;
+  return frWords.test(text) ? 'fr' : 'en';
+}
+
+/**
+ * Detect polarity from the question text.
+ * Returns 'ami', 'ennemi', 'neutre', or null.
+ */
+function detectPolarity(text) {
+  for (const [label, pattern] of Object.entries(POLARITY_PATTERNS)) {
+    if (pattern.test(text)) return label;
+  }
+  return null;
+}
+
+/**
+ * Detect the chapter number if explicitly mentioned.
+ * Returns an integer or null.
+ */
+function detectChapter(text) {
+  const match = text.match(/\bchapitre[s]?\s+(\d+)\b|\bchapter\s+(\d+)\b|\bch\.?\s*(\d+)\b/i);
+  if (match) {
+    const raw = match[1] ?? match[2] ?? match[3];
+    const n = parseInt(raw, 10);
+    return isNaN(n) ? null : n;
+  }
+  return null;
+}
+
+/**
+ * Extract character entity names from the question.
+ * Returns [entity, entity_2] (may be null).
+ */
+function extractEntities(text) {
+  const lower = text.toLowerCase();
+  const found = [];
+
+  // Try known aliases first (longest match wins)
+  const sorted = Object.keys(ENTITY_ALIASES).sort((a, b) => b.length - a.length);
+  for (const alias of sorted) {
+    if (lower.includes(alias) && !found.includes(ENTITY_ALIASES[alias])) {
+      found.push(ENTITY_ALIASES[alias]);
+      if (found.length === 2) break;
+    }
+  }
+
+  return [found[0] ?? null, found[1] ?? null];
+}
+
+/**
+ * Detect the intent from the question text.
+ */
+function detectIntent(text, polarity, entity, entity_2) {
+  for (const { intent, patterns } of INTENT_PATTERNS) {
+    for (const pattern of patterns) {
+      if (pattern.test(text)) return intent;
+    }
+  }
+
+  // Fallback heuristics
+  if (entity_2) return 'relation_between_entities';
+  if (polarity)  return 'neighbors_by_polarity';
+  if (entity)    return 'character_summary';
+  return 'top_central_characters';
+}
+
+/**
+ * Rule-based intent parser — replaces the Gemini parseIntent call.
+ * Zero API calls, instant, deterministic.
+ */
+function parseIntent(question, bookHint) {
+  const book     = detectBook(question, bookHint);
+  const language = detectLanguage(question);
+  const polarity = detectPolarity(question);
+  const chapter  = detectChapter(question);
+  const [entity, entity_2] = extractEntities(question);
+  const intent   = detectIntent(question, polarity, entity, entity_2);
+
+  const result = { language, intent, entity, entity_2, polarity, book, chapter };
+  console.log('[parseIntent] rule-based result:', JSON.stringify(result));
+  return result;
+}
+
 
 // ─────────────────────────────────────────────────────────────────────────────
 // STEP 3 — Query engine (pure local data)
