@@ -15,7 +15,7 @@
  * ─────────────────────────────────────────────────────────────────────────────
  */
 
-import { parseIntentLocal } from '../lib/intent_parser.js';
+import { parseIntentLocal } from './intent_parser.js';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // ENTRY POINT
