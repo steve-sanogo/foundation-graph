@@ -551,7 +551,7 @@ async function generateAnswer(apiKey, question, intent, results) {
 
 async function callGemini(apiKey, prompt, maxTokens = 512) {
   const endpoint =
-    `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
   const body = {
     contents: [{ parts: [{ text: prompt }] }],
