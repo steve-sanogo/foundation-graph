@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Graphes de personnages — Asimov · Foundation</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<style>
+:root {
+  --bg:       #06080f;
+  --surface:  #0d1117;
+  --surface2: #131924;
+  --border:   #1e2d45;
+  --accent:   #c9a84c;
+  --accent2:  #4cc9c9;
+  --accent3:  #a84cc9;
+  --text:     #d4c9b0;
+  --muted:    #5a6a7e;
+  --node-lca: #c9a84c;
+  --node-paf: #4cc9c9;
+  --ami:      #4cc9a0;
+  --ennemi:   #c94c4c;
+  --neutre:   #5a6a7e;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Crimson Text', serif;
+  min-height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+body::before {
+  content:'';position:fixed;inset:0;
+  background-image:
+    radial-gradient(1px 1px at 10% 20%,rgba(201,168,76,.4) 0%,transparent 100%),
+    radial-gradient(1px 1px at 30% 70%,rgba(76,201,201,.3) 0%,transparent 100%),
+    radial-gradient(1px 1px at 50% 10%,rgba(201,168,76,.2) 0%,transparent 100%),
+    radial-gradient(1px 1px at 70% 50%,rgba(76,201,201,.25) 0%,transparent 100%),
+    radial-gradient(1px 1px at 90% 30%,rgba(201,168,76,.35) 0%,transparent 100%),
+    radial-gradient(1px 1px at 15% 85%,rgba(76,201,201,.2) 0%,transparent 100%),
+    radial-gradient(1px 1px at 55% 65%,rgba(201,168,76,.3) 0%,transparent 100%),
+    radial-gradient(1px 1px at 80% 80%,rgba(76,201,201,.15) 0%,transparent 100%),
+    radial-gradient(1px 1px at 40% 40%,rgba(255,255,255,.1) 0%,transparent 100%),
+    radial-gradient(1px 1px at 25% 55%,rgba(255,255,255,.08) 0%,transparent 100%),
+    radial-gradient(1px 1px at 65% 25%,rgba(255,255,255,.06) 0%,transparent 100%),
+    radial-gradient(1px 1px at 85% 60%,rgba(255,255,255,.07) 0%,transparent 100%);
+  pointer-events:none;z-index:0;
+}
+
+body::after {
+  content:'';position:fixed;inset:0;
+  background:
+    radial-gradient(ellipse 60% 40% at 15% 50%,rgba(201,168,76,.04) 0%,transparent 70%),
+    radial-gradient(ellipse 50% 60% at 85% 30%,rgba(76,201,201,.04) 0%,transparent 70%),
+    radial-gradient(ellipse 40% 30% at 50% 90%,rgba(168,76,201,.03) 0%,transparent 70%);
+  pointer-events:none;z-index:0;
+}
+
+/* ───── LAYOUT ───── */
+.app {
+  position:relative;z-index:1;
+  display:flex;flex-direction:column;
+  height:100vh;
+}
+
+/* ───── HEADER ───── */
+.header {
+  padding:16px 32px 14px;
+  border-bottom:1px solid var(--border);
+  background:rgba(6,8,15,.85);
+  backdrop-filter:blur(12px);
+  display:flex;align-items:center;gap:20px;
+  flex-shrink:0;
+}
+
+.header-title {
+  font-family:'Cinzel',serif;font-size:18px;font-weight:700;letter-spacing:.12em;
+  background:linear-gradient(135deg,var(--accent) 0%,#f0d080 50%,var(--accent) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  white-space:nowrap;
+}
+
+.header-sub {
+  font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.06em;
+}
+
+/* Mode tabs */
+.mode-tabs {
+  margin-left:auto;display:flex;gap:4px;
+  background:rgba(30,45,69,.4);border:1px solid var(--border);border-radius:6px;padding:3px;
+}
+
+.mode-tab {
+  padding:7px 18px;border:none;background:transparent;
+  font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);cursor:pointer;border-radius:4px;transition:all .2s ease;white-space:nowrap;
+}
+
+.mode-tab:hover{color:var(--text);}
+
+.mode-tab.active-explorer {
+  background:rgba(201,168,76,.15);color:var(--accent);
+  box-shadow:0 0 10px rgba(201,168,76,.1);
+}
+
+.mode-tab.active-ask {
+  background:rgba(76,201,201,.15);color:var(--accent2);
+  box-shadow:0 0 10px rgba(76,201,201,.1);
+}
+
+/* ───── BODY ───── */
+.body-area {
+  flex:1;overflow:hidden;display:flex;position:relative;
+}
+
+/* ────────────────────────────────────────────────
+   EXPLORER MODE
+   ──────────────────────────────────────────────── */
+#mode-explorer {
+  display:grid;
+  grid-template-columns:300px 1fr;
+  width:100%;height:100%;
+}
+
+.sidebar {
+  background:rgba(13,17,23,.85);border-right:1px solid var(--border);
+  backdrop-filter:blur(16px);padding:24px 20px;
+  display:flex;flex-direction:column;gap:28px;overflow-y:auto;
+}
+
+.control-section{display:flex;flex-direction:column;gap:10px;}
+
+.control-label {
+  font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted);padding-bottom:6px;border-bottom:1px solid var(--border);
+}
+
+.book-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+
+.book-tab {
+  padding:10px 8px;border:1px solid var(--border);background:transparent;
+  color:var(--muted);font-family:'Cinzel',serif;font-size:11px;letter-spacing:.1em;
+  cursor:pointer;border-radius:4px;transition:all .2s ease;text-align:center;
+}
+.book-tab:hover{border-color:var(--accent);color:var(--accent);}
+.book-tab.active-lca{background:rgba(201,168,76,.12);border-color:var(--accent);color:var(--accent);box-shadow:0 0 12px rgba(201,168,76,.15);}
+.book-tab.active-paf{background:rgba(76,201,201,.12);border-color:var(--accent2);color:var(--accent2);box-shadow:0 0 12px rgba(76,201,201,.15);}
+
+.book-tab-title{font-size:13px;font-weight:600;display:block;}
+.book-tab-subtitle{font-family:'Crimson Text',serif;font-size:10px;font-style:italic;opacity:.7;display:block;margin-top:2px;}
+
+.chapter-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:5px;}
+
+.chap-btn {
+  aspect-ratio:1;border:1px solid var(--border);background:transparent;
+  color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:11px;
+  cursor:pointer;border-radius:3px;transition:all .18s ease;
+  display:flex;align-items:center;justify-content:center;
+}
+.chap-btn:hover{border-color:var(--accent);color:var(--text);}
+.chap-btn.active-lca{background:rgba(201,168,76,.2);border-color:var(--accent);color:var(--accent);font-weight:600;box-shadow:0 0 8px rgba(201,168,76,.2);}
+.chap-btn.active-paf{background:rgba(76,201,201,.2);border-color:var(--accent2);color:var(--accent2);font-weight:600;box-shadow:0 0 8px rgba(76,201,201,.2);}
+
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+
+.stat-card{background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:10px 12px;}
+.stat-value{font-family:'Cinzel',serif;font-size:22px;font-weight:600;line-height:1;}
+.stat-label{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-top:3px;}
+
+.char-list{display:flex;flex-direction:column;gap:6px;}
+.char-row{display:flex;align-items:center;gap:8px;padding:5px 8px;border-radius:3px;background:var(--surface2);border:1px solid transparent;transition:border-color .15s;}
+.char-row:hover{border-color:var(--border);}
+.char-rank{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);width:14px;flex-shrink:0;}
+.char-bar-wrap{flex:1;height:3px;background:var(--border);border-radius:2px;overflow:hidden;}
+.char-bar{height:100%;border-radius:2px;transition:width .4s ease;}
+.char-name{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:120px;}
+.char-weight{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);flex-shrink:0;}
+
+/* Graph area */
+.graph-area{position:relative;overflow:hidden;background:transparent;}
+#graph-svg{width:100%;height:100%;}
+
+.node-circle{cursor:pointer;transition:filter .2s;}
+.node-circle:hover{filter:brightness(1.4);}
+.node-label{font-family:'Crimson Text',serif;font-size:12px;fill:var(--text);pointer-events:none;text-shadow:0 1px 4px rgba(0,0,0,.9);paint-order:stroke fill;stroke:rgba(6,8,15,.85);stroke-width:3px;stroke-linejoin:round;}
+.edge-line{pointer-events:none;}
+
+.tooltip {
+  position:absolute;background:rgba(13,17,23,.95);border:1px solid var(--border);
+  padding:10px 14px;border-radius:6px;pointer-events:none;opacity:0;transition:opacity .15s;
+  max-width:240px;backdrop-filter:blur(8px);z-index:100;
+}
+.tooltip.visible{opacity:1;}
+.tooltip-name{font-family:'Cinzel',serif;font-size:13px;font-weight:600;margin-bottom:5px;}
+.tooltip-aliases{font-size:11px;color:var(--muted);font-style:italic;line-height:1.4;margin-bottom:5px;}
+.tooltip-polarity{font-family:'JetBrains Mono',monospace;font-size:10px;margin-bottom:3px;}
+.tooltip-degree{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent2);}
+
+.chapter-overlay{position:absolute;bottom:24px;right:24px;text-align:right;pointer-events:none;}
+.chapter-id{font-family:'Cinzel',serif;font-size:42px;font-weight:700;opacity:.06;letter-spacing:.06em;line-height:1;}
+
+.loading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.08em;}
+.loading-ring{width:36px;height:36px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin 1s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+/* Polarity legend in Explorer */
+.polarity-legend{display:flex;flex-direction:column;gap:5px;}
+.pol-item{display:flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);}
+.pol-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+
+/* ────────────────────────────────────────────────
+   ASK THE GRAPH MODE
+   ──────────────────────────────────────────────── */
+#mode-ask {
+  display:none;
+  grid-template-columns:320px 1fr;
+  width:100%;height:100%;
+}
+
+.ask-sidebar {
+  background:rgba(13,17,23,.85);border-right:1px solid var(--border);
+  backdrop-filter:blur(16px);padding:24px 20px;
+  display:flex;flex-direction:column;gap:20px;overflow-y:auto;
+}
+
+.ask-input-area {
+  display:flex;flex-direction:column;gap:10px;
+}
+
+.ask-textarea {
+  width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:6px;
+  color:var(--text);font-family:'Crimson Text',serif;font-size:15px;
+  padding:12px 14px;resize:none;min-height:90px;line-height:1.5;
+  transition:border-color .2s;outline:none;
+}
+.ask-textarea:focus{border-color:var(--accent2);}
+.ask-textarea::placeholder{color:var(--muted);font-style:italic;}
+
+.ask-btn {
+  width:100%;padding:11px;border:1px solid var(--accent2);background:rgba(76,201,201,.1);
+  color:var(--accent2);font-family:'Cinzel',serif;font-size:12px;letter-spacing:.12em;
+  text-transform:uppercase;cursor:pointer;border-radius:4px;transition:all .2s ease;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.ask-btn:hover:not(:disabled){background:rgba(76,201,201,.2);box-shadow:0 0 16px rgba(76,201,201,.15);}
+.ask-btn:disabled{opacity:.4;cursor:not-allowed;}
+
+.ask-book-filter {
+  display:flex;flex-direction:column;gap:8px;
+}
+
+.book-filter-row {
+  display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;
+}
+
+.bf-btn {
+  padding:7px 4px;border:1px solid var(--border);background:transparent;
+  color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;
+  cursor:pointer;border-radius:3px;transition:all .18s;text-align:center;
+}
+.bf-btn:hover{border-color:var(--accent2);color:var(--text);}
+.bf-btn.active{background:rgba(76,201,201,.15);border-color:var(--accent2);color:var(--accent2);}
+
+.examples-list {
+  display:flex;flex-direction:column;gap:6px;
+}
+
+.example-chip {
+  padding:8px 12px;background:var(--surface2);border:1px solid var(--border);
+  border-radius:4px;font-family:'Crimson Text',serif;font-size:13px;color:var(--muted);
+  cursor:pointer;transition:all .18s;line-height:1.4;
+}
+.example-chip:hover{border-color:var(--accent2);color:var(--text);}
+
+/* Intent display */
+.intent-card {
+  background:var(--surface2);border:1px solid var(--border);border-radius:6px;
+  padding:12px 14px;display:none;
+}
+
+.intent-title {
+  font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted);margin-bottom:8px;
+}
+
+.intent-tags {
+  display:flex;flex-wrap:wrap;gap:5px;
+}
+
+.intent-tag {
+  padding:3px 8px;border-radius:3px;font-family:'JetBrains Mono',monospace;font-size:10px;
+  background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.25);color:var(--accent);
+}
+
+/* Ask main area */
+.ask-main {
+  display:flex;flex-direction:column;overflow:hidden;
+}
+
+.conversation-area {
+  flex:1;overflow-y:auto;padding:32px;
+  display:flex;flex-direction:column;gap:24px;
+}
+
+.conversation-empty {
+  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:20px;text-align:center;color:var(--muted);
+}
+
+.conversation-empty-icon {
+  width:64px;height:64px;border:1px solid var(--border);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;font-size:26px;
+  color:var(--border);
+}
+
+.conversation-empty-title {
+  font-family:'Cinzel',serif;font-size:16px;letter-spacing:.1em;opacity:.4;
+}
+
+.conversation-empty-sub {
+  font-family:'JetBrains Mono',monospace;font-size:11px;opacity:.3;max-width:320px;line-height:1.6;
+}
+
+/* Message bubbles */
+.msg-user, .msg-bot {
+  display:flex;flex-direction:column;gap:8px;max-width:760px;
+}
+
+.msg-user {align-items:flex-end;}
+.msg-bot  {align-items:flex-start;}
+
+.msg-user .msg-bubble {
+  background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.2);
+  border-radius:12px 12px 2px 12px;
+  padding:12px 18px;font-family:'Crimson Text',serif;font-size:16px;line-height:1.5;
+  max-width:100%;
+}
+
+.msg-bot .msg-bubble {
+  background:var(--surface2);border:1px solid var(--border);
+  border-radius:2px 12px 12px 12px;
+  padding:16px 20px;font-family:'Crimson Text',serif;font-size:16px;line-height:1.7;
+  max-width:100%;
+}
+
+.msg-meta {
+  font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);
+  padding:0 4px;
+}
+
+.msg-thinking {
+  display:flex;align-items:center;gap:10px;
+  background:var(--surface2);border:1px solid var(--border);
+  border-radius:2px 12px 12px 12px;
+  padding:14px 20px;
+}
+
+.thinking-dots {
+  display:flex;gap:5px;
+}
+
+.thinking-dot {
+  width:6px;height:6px;border-radius:50%;background:var(--accent2);
+  animation:bounce .9s infinite;
+}
+.thinking-dot:nth-child(2){animation-delay:.2s;}
+.thinking-dot:nth-child(3){animation-delay:.4s;}
+
+@keyframes bounce{0%,60%,100%{transform:translateY(0);}30%{transform:translateY(-6px);}}
+
+.thinking-text {
+  font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);
+}
+
+/* Bot response parts */
+.bot-section {
+  margin-bottom:10px;
+}
+
+.bot-book-tag {
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  margin-bottom:8px;
+}
+
+.bot-result-table {
+  width:100%;border-collapse:collapse;margin:8px 0;
+  font-family:'Crimson Text',serif;font-size:15px;
+}
+
+.bot-result-table th {
+  font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);padding:6px 12px;border-bottom:1px solid var(--border);text-align:left;
+}
+
+.bot-result-table td {
+  padding:7px 12px;border-bottom:1px solid rgba(30,45,69,.5);
+}
+
+.pol-badge {
+  display:inline-block;padding:2px 8px;border-radius:3px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.06em;
+}
+
+.pol-ami    {background:rgba(76,201,160,.15);color:var(--ami);border:1px solid rgba(76,201,160,.25);}
+.pol-ennemi {background:rgba(201,76,76,.15);color:var(--ennemi);border:1px solid rgba(201,76,76,.25);}
+.pol-neutre {background:rgba(90,106,126,.15);color:var(--muted);border:1px solid rgba(90,106,126,.25);}
+
+.bot-answer-text {
+  line-height:1.7;
+}
+
+.bot-error {
+  color:var(--ennemi);font-family:'JetBrains Mono',monospace;font-size:12px;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
+</style>
+</head>
+<body>
+
+<div class="app">
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-title">RÉSEAU DE PERSONNAGES</div>
+    <div class="header-sub">Cycle de Fondation · Isaac Asimov</div>
+    <div class="mode-tabs" style="margin-left:auto;">
+      <button class="mode-tab active-explorer" id="tab-explorer" onclick="setMode('explorer')">
+        ◈ Explorer
+      </button>
+      <button class="mode-tab" id="tab-ask" onclick="setMode('ask')">
+        ◎ Ask the Graph
+      </button>
+    </div>
+  </header>
+
+  <!-- BODY -->
+  <div class="body-area">
+
+    <!-- ═══════════════════════════════
+         EXPLORER MODE
+         ═══════════════════════════════ -->
+    <div id="mode-explorer">
+
+      <aside class="sidebar">
+        <div class="control-section">
+          <div class="control-label">Ouvrage</div>
+          <div class="book-tabs">
+            <button class="book-tab active-lca" data-book="lca" onclick="selectBook('lca')">
+              <span class="book-tab-title">LCA</span>
+              <span class="book-tab-subtitle">Les Cavernes d'Acier</span>
+            </button>
+            <button class="book-tab" data-book="paf" onclick="selectBook('paf')">
+              <span class="book-tab-title">PAF</span>
+              <span class="book-tab-subtitle">Prélude à Foundation</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="control-section">
+          <div class="control-label">Chapitre</div>
+          <div class="chapter-grid" id="chapter-grid"></div>
+        </div>
+
+        <div class="control-section">
+          <div class="control-label">Statistiques</div>
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-value" id="stat-nodes" style="color:var(--accent)">—</div>
+              <div class="stat-label">Personnages</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value" id="stat-edges" style="color:var(--accent2)">—</div>
+              <div class="stat-label">Liens</div>
+            </div>
+            <div class="stat-card" style="grid-column:1/-1;">
+              <div class="stat-value" id="stat-density" style="color:var(--accent3);font-size:18px">—</div>
+              <div class="stat-label">Poids total des interactions</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="control-section">
+          <div class="control-label">Polarité — légende</div>
+          <div class="polarity-legend">
+            <div class="pol-item"><div class="pol-dot" style="background:var(--ami)"></div>ami</div>
+            <div class="pol-item"><div class="pol-dot" style="background:var(--neutre)"></div>neutre</div>
+            <div class="pol-item"><div class="pol-dot" style="background:var(--ennemi)"></div>ennemi</div>
+          </div>
+        </div>
+
+        <div class="control-section">
+          <div class="control-label">Personnages principaux</div>
+          <div class="char-list" id="char-list">
+            <div style="font-size:12px;color:var(--muted);text-align:center;padding:12px 0;font-style:italic;">
+              Sélectionnez un chapitre
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <main class="graph-area">
+        <div class="loading" id="loading-state">
+          <div class="loading-ring"></div>
+          <div>Chargement des données…</div>
+        </div>
+        <svg id="graph-svg"></svg>
+        <div class="tooltip" id="tooltip"></div>
+        <div class="chapter-overlay">
+          <div class="chapter-id" id="chapter-id-display"></div>
+        </div>
+      </main>
+    </div>
+
+    <!-- ═══════════════════════════════
+         ASK THE GRAPH MODE
+         ═══════════════════════════════ -->
+    <div id="mode-ask">
+
+      <aside class="ask-sidebar">
+        <div class="control-section">
+          <div class="control-label">Votre question</div>
+          <div class="ask-input-area">
+            <textarea
+              class="ask-textarea"
+              id="ask-input"
+              placeholder="Ex : Quels sont les ennemis de Hari Seldon dans PAF ?"
+              rows="4"
+            ></textarea>
+            <button class="ask-btn" id="ask-btn" onclick="sendQuestion()">
+              <span id="ask-btn-text">Interroger le graphe</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="control-section">
+          <div class="control-label">Filtre ouvrage</div>
+          <div class="ask-book-filter">
+            <div class="book-filter-row">
+              <button class="bf-btn active" data-bf="all" onclick="setBookFilter('all')">Tous</button>
+              <button class="bf-btn" data-bf="lca" onclick="setBookFilter('lca')">LCA</button>
+              <button class="bf-btn" data-bf="paf" onclick="setBookFilter('paf')">PAF</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="control-section">
+          <div class="control-label">Exemples de questions</div>
+          <div class="examples-list" id="examples-list"></div>
+        </div>
+
+        <div class="intent-card" id="intent-card">
+          <div class="intent-title">Requête interprétée</div>
+          <div class="intent-tags" id="intent-tags"></div>
+        </div>
+      </aside>
+
+      <div class="ask-main">
+        <div class="conversation-area" id="conversation-area">
+          <div class="conversation-empty" id="conv-empty">
+            <div class="conversation-empty-icon">◎</div>
+            <div class="conversation-empty-title">ASK THE GRAPH</div>
+            <div class="conversation-empty-sub">
+              Interrogez le réseau de personnages en langage naturel,
+              en français ou en anglais.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// ════════════════════════════════════════════════════════════════════════════
+// GLOBAL STATE
+// ════════════════════════════════════════════════════════════════════════════
+
+let ALL_EDGES  = [];
+let ALL_NODES  = [];
+let currentBook    = 'lca';
+let currentChapter = null;
+let currentMode    = 'explorer';
+let askBookFilter  = 'all';
+let simulation     = null;
+
+const BOOK_META = {
+  lca: { name: "Les Cavernes d'Acier", color: '#c9a84c', colorFade: 'rgba(201,168,76,' },
+  paf: { name: "Prélude à Foundation",  color: '#4cc9c9', colorFade: 'rgba(76,201,201,' }
+};
+
+const POLARITY_COLORS = { ami: '#4cc9a0', neutre: '#5a6a7e', ennemi: '#c94c4c' };
+
+// ════════════════════════════════════════════════════════════════════════════
+// INIT — load flat JSON
+// ════════════════════════════════════════════════════════════════════════════
+
+async function init() {
+  try {
+    const [edgesRes, nodesRes] = await Promise.all([
+      fetch('./data/edges_flat.json'),
+      fetch('./data/nodes_flat.json')
+    ]);
+    ALL_EDGES = await edgesRes.json();
+    ALL_NODES = await nodesRes.json();
+
+    document.getElementById('loading-state').style.display = 'none';
+
+    // Draw empty state
+    document.getElementById('loading-state').innerHTML =
+      '<div>Sélectionnez un chapitre pour visualiser le graphe</div>';
+    document.getElementById('loading-state').style.display = 'flex';
+    document.getElementById('loading-state').querySelector('.loading-ring')?.remove();
+
+    selectBook('lca');
+    buildExamples();
+  } catch (e) {
+    document.getElementById('loading-state').innerHTML =
+      `<div style="color:var(--ennemi)">Erreur de chargement : ${e.message}</div>`;
+  }
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// MODE SWITCHER
+// ════════════════════════════════════════════════════════════════════════════
+
+function setMode(mode) {
+  currentMode = mode;
+  document.getElementById('mode-explorer').style.display = (mode === 'explorer') ? 'grid' : 'none';
+  document.getElementById('mode-ask').style.display      = (mode === 'ask')      ? 'grid' : 'none';
+
+  document.getElementById('tab-explorer').className = 'mode-tab' + (mode === 'explorer' ? ' active-explorer' : '');
+  document.getElementById('tab-ask').className      = 'mode-tab' + (mode === 'ask'      ? ' active-ask'      : '');
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// EXPLORER — book / chapter selection
+// ════════════════════════════════════════════════════════════════════════════
+
+function selectBook(book) {
+  currentBook    = book;
+  currentChapter = null;
+
+  document.querySelectorAll('.book-tab').forEach(t => {
+    t.className = 'book-tab';
+    if (t.dataset.book === book) t.classList.add(`active-${book}`);
+  });
+
+  buildChapterGrid();
+  clearGraph();
+  resetStats();
+}
+
+function buildChapterGrid() {
+  const chapters = [...new Set(
+    ALL_EDGES.filter(e => e.book === currentBook).map(e => e.chapter)
+  )].sort((a, b) => a - b);
+
+  const grid = document.getElementById('chapter-grid');
+  grid.innerHTML = '';
+  chapters.forEach(c => {
+    const btn = document.createElement('button');
+    btn.className = 'chap-btn';
+    btn.textContent = c;
+    btn.dataset.chapter = c;
+    btn.onclick = () => selectChapter(c);
+    grid.appendChild(btn);
+  });
+}
+
+function selectChapter(chap) {
+  currentChapter = chap;
+
+  document.querySelectorAll('.chap-btn').forEach(b => {
+    b.className = 'chap-btn';
+    if (parseInt(b.dataset.chapter) === chap) b.classList.add(`active-${currentBook}`);
+  });
+
+  const edges = ALL_EDGES.filter(e => e.book === currentBook && e.chapter === chap);
+
+  // Build node map from flat data
+  const nodeMap = {};
+  ALL_NODES.filter(n => n.book === currentBook && n.chapter === chap).forEach(n => {
+    nodeMap[n.id] = { id: n.id, label: n.label, aliases: n.aliases, degree: 0 };
+  });
+
+  // Compute degree from edges
+  edges.forEach(e => {
+    if (nodeMap[e.source]) nodeMap[e.source].degree += e.weight;
+    if (nodeMap[e.target]) nodeMap[e.target].degree += e.weight;
+  });
+
+  const nodes = Object.values(nodeMap);
+
+  // Convert edge source/target to object references for D3
+  const d3Edges = edges.map(e => ({
+    source: e.source,
+    target: e.target,
+    weight: e.weight,
+    polarity_label: e.polarity_label,
+    polarity_score: e.polarity_score,
+  }));
+
+  renderGraph(nodes, d3Edges);
+  updateStats(nodes, d3Edges);
+  updateCharList(nodes);
+
+  document.getElementById('chapter-id-display').textContent = `${currentBook.toUpperCase()}${chap}`;
+  document.getElementById('loading-state').style.display = 'none';
+}
+
+function resetStats() {
+  document.getElementById('stat-nodes').textContent   = '—';
+  document.getElementById('stat-edges').textContent   = '—';
+  document.getElementById('stat-density').textContent = '—';
+  document.getElementById('char-list').innerHTML =
+    '<div style="font-size:12px;color:var(--muted);text-align:center;padding:12px 0;font-style:italic;">Sélectionnez un chapitre</div>';
+  document.getElementById('chapter-id-display').textContent = '';
+}
+
+function updateStats(nodes, edges) {
+  document.getElementById('stat-nodes').textContent   = nodes.length;
+  document.getElementById('stat-edges').textContent   = edges.length;
+  document.getElementById('stat-density').textContent = edges.reduce((s, e) => s + e.weight, 0);
+}
+
+function updateCharList(nodes) {
+  const sorted  = [...nodes].sort((a, b) => b.degree - a.degree).slice(0, 7);
+  const maxDeg  = sorted[0]?.degree || 1;
+  const color   = BOOK_META[currentBook].color;
+
+  document.getElementById('char-list').innerHTML = sorted.map((n, i) => `
+    <div class="char-row">
+      <span class="char-rank">${i + 1}</span>
+      <div class="char-bar-wrap">
+        <div class="char-bar" style="width:${(n.degree / maxDeg * 100).toFixed(1)}%;background:${color}"></div>
+      </div>
+      <span class="char-name" style="color:${color}">${n.label}</span>
+      <span class="char-weight">${n.degree}</span>
+    </div>`).join('');
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// D3 GRAPH RENDERING
+// ════════════════════════════════════════════════════════════════════════════
+
+function clearGraph() {
+  const svg = d3.select('#graph-svg');
+  svg.selectAll('*').remove();
+  if (simulation) { simulation.stop(); simulation = null; }
+  const ls = document.getElementById('loading-state');
+  ls.style.display = 'flex';
+  ls.innerHTML = '<div>Sélectionnez un chapitre pour visualiser le graphe</div>';
+}
+
+function renderGraph(nodes, edges) {
+  const color     = BOOK_META[currentBook].color;
+  const colorFade = BOOK_META[currentBook].colorFade;
+  const svg       = d3.select('#graph-svg');
+  svg.selectAll('*').remove();
+
+  const W = svg.node().clientWidth  || 900;
+  const H = svg.node().clientHeight || 600;
+
+  const maxDeg    = Math.max(...nodes.map(n => n.degree), 1);
+  const maxWeight = Math.max(...edges.map(e => e.weight), 1);
+
+  const rScale = d3.scaleSqrt().domain([0, maxDeg]).range([5, 28]);
+  const wScale = d3.scaleLinear().domain([1, maxWeight]).range([0.5, 5]);
+
+  const g = svg.append('g');
+  const zoom = d3.zoom().scaleExtent([0.3, 5]).on('zoom', ev => g.attr('transform', ev.transform));
+  svg.call(zoom);
+
+  simulation = d3.forceSimulation(nodes)
+    .force('link',      d3.forceLink(edges).id(d => d.id).distance(d => 80 + (maxWeight - d.weight) * 3).strength(.7))
+    .force('charge',    d3.forceManyBody().strength(-200))
+    .force('center',    d3.forceCenter(W / 2, H / 2))
+    .force('collision', d3.forceCollide().radius(d => rScale(d.degree) + 8));
+
+  // Edge color by polarity
+  const link = g.append('g').selectAll('line').data(edges).join('line')
+    .attr('class', 'edge-line')
+    .attr('stroke-width', d => wScale(d.weight))
+    .attr('stroke', d => {
+      const c = POLARITY_COLORS[d.polarity_label] || POLARITY_COLORS.neutre;
+      const a = (0.15 + (d.weight / maxWeight) * 0.55).toFixed(2);
+      return c + (a < 1 ? `${Math.round(a * 255).toString(16).padStart(2,'0')}` : '');
+    })
+    .attr('stroke-opacity', d => 0.2 + (d.weight / maxWeight) * 0.6);
+
+  // Defs / glow filter
+  const defs = svg.append('defs');
+  const filter = defs.append('filter').attr('id', 'glow');
+  filter.append('feGaussianBlur').attr('stdDeviation', '3.5').attr('result', 'coloredBlur');
+  const feMerge = filter.append('feMerge');
+  feMerge.append('feMergeNode').attr('in', 'coloredBlur');
+  feMerge.append('feMergeNode').attr('in', 'SourceGraphic');
+
+  const nodeGroup = g.append('g').selectAll('g').data(nodes).join('g')
+    .attr('cursor', 'pointer')
+    .call(d3.drag()
+      .on('start', (ev, d) => { if (!ev.active) simulation.alphaTarget(.2).restart(); d.fx = d.x; d.fy = d.y; })
+      .on('drag',  (ev, d) => { d.fx = ev.x; d.fy = ev.y; })
+      .on('end',   (ev, d) => { if (!ev.active) simulation.alphaTarget(0); d.fx = null; d.fy = null; })
+    );
+
+  nodeGroup.append('circle')
+    .attr('r', d => rScale(d.degree) + 3)
+    .attr('fill',   `${colorFade}0.05)`)
+    .attr('stroke', `${colorFade}0.15)`)
+    .attr('stroke-width', 1);
+
+  nodeGroup.append('circle')
+    .attr('class', 'node-circle')
+    .attr('r',      d => rScale(d.degree))
+    .attr('fill',   d => d3.interpolateRgb('#2a1f08', color)(d.degree / maxDeg))
+    .attr('stroke', color)
+    .attr('stroke-width', 1.5)
+    .attr('filter', 'url(#glow)');
+
+  nodeGroup.append('text')
+    .attr('class', 'node-label')
+    .attr('dy', d => rScale(d.degree) + 14)
+    .attr('text-anchor', 'middle')
+    .text(d => d.label)
+    .style('font-size', d => d.degree > maxDeg * .5 ? '13px' : '11px');
+
+  const tooltip = document.getElementById('tooltip');
+
+  nodeGroup
+    .on('mouseover', (ev, d) => {
+      const aliases = d.aliases.filter(a => a !== d.label).join(', ');
+      // Find connected edges for polarity info
+      const connEdges = edges.filter(e =>
+        (e.source.id || e.source) === d.id || (e.target.id || e.target) === d.id
+      );
+      const polCount = { ami: 0, neutre: 0, ennemi: 0 };
+      connEdges.forEach(e => { if (e.polarity_label in polCount) polCount[e.polarity_label]++; });
+
+      tooltip.innerHTML = `
+        <div class="tooltip-name" style="color:${color}">${d.label}</div>
+        ${aliases ? `<div class="tooltip-aliases">${aliases}</div>` : ''}
+        <div class="tooltip-polarity">
+          <span style="color:var(--ami)">▲ ${polCount.ami}</span>
+          <span style="color:var(--muted);margin:0 6px">· ${polCount.neutre}</span>
+          <span style="color:var(--ennemi)">▼ ${polCount.ennemi}</span>
+        </div>
+        <div class="tooltip-degree">Poids total : ${d.degree}</div>`;
+      tooltip.classList.add('visible');
+
+      const connected = new Set([d.id]);
+      edges.forEach(e => {
+        const s = e.source.id || e.source, t = e.target.id || e.target;
+        if (s === d.id || t === d.id) { connected.add(s); connected.add(t); }
+      });
+      nodeGroup.style('opacity', n => connected.has(n.id) ? 1 : .15);
+      link.style('opacity', e => {
+        const s = e.source.id || e.source, t = e.target.id || e.target;
+        return (s === d.id || t === d.id) ? 1 : .03;
+      });
+    })
+    .on('mousemove', ev => {
+      const rect = document.querySelector('.graph-area').getBoundingClientRect();
+      tooltip.style.left = (ev.clientX - rect.left + 14) + 'px';
+      tooltip.style.top  = (ev.clientY - rect.top  - 10) + 'px';
+    })
+    .on('mouseout', () => {
+      tooltip.classList.remove('visible');
+      nodeGroup.style('opacity', 1);
+      link.style('opacity', null);
+    });
+
+  simulation.on('tick', () => {
+    link
+      .attr('x1', d => d.source.x).attr('y1', d => d.source.y)
+      .attr('x2', d => d.target.x).attr('y2', d => d.target.y);
+    nodeGroup.attr('transform', d => `translate(${d.x},${d.y})`);
+  });
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// ASK THE GRAPH
+// ════════════════════════════════════════════════════════════════════════════
+
+const EXAMPLE_QUESTIONS = [
+  "Quels sont les ennemis de Hari Seldon dans PAF ?",
+  "Who are Baley's allies in LCA?",
+  "Quelle est la relation entre Hari Seldon et Dors Venabili ?",
+  "Quels personnages sont les plus connectés dans LCA ?",
+  "What is the relationship between Daneel and Baley?",
+  "Donne-moi un résumé du personnage de Hummin.",
+];
+
+function buildExamples() {
+  const list = document.getElementById('examples-list');
+  EXAMPLE_QUESTIONS.forEach(q => {
+    const chip = document.createElement('div');
+    chip.className = 'example-chip';
+    chip.textContent = q;
+    chip.onclick = () => {
+      document.getElementById('ask-input').value = q;
+      document.getElementById('ask-input').focus();
+    };
+    list.appendChild(chip);
+  });
+}
+
+function setBookFilter(bf) {
+  askBookFilter = bf;
+  document.querySelectorAll('.bf-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.bf === bf);
+  });
+}
+
+// Enter key sends
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('ask-input').addEventListener('keydown', ev => {
+    if (ev.key === 'Enter' && (ev.ctrlKey || ev.metaKey)) sendQuestion();
+  });
+});
+
+async function sendQuestion() {
+  const input = document.getElementById('ask-input');
+  const question = input.value.trim();
+  if (!question) return;
+
+  const btn = document.getElementById('ask-btn');
+  btn.disabled = true;
+  document.getElementById('ask-btn-text').textContent = 'Analyse en cours…';
+  input.value = '';
+
+  const convArea = document.getElementById('conversation-area');
+
+  // Hide empty state
+  const empty = document.getElementById('conv-empty');
+  if (empty) { empty.style.display = 'none'; }
+
+  // User bubble
+  const userMsg = document.createElement('div');
+  userMsg.className = 'msg-user';
+  userMsg.innerHTML = `
+    <div class="msg-bubble">${escapeHtml(question)}</div>
+    <div class="msg-meta">${new Date().toLocaleTimeString('fr-FR', {hour:'2-digit',minute:'2-digit'})}</div>`;
+  convArea.appendChild(userMsg);
+
+  // Thinking bubble
+  const thinkMsg = document.createElement('div');
+  thinkMsg.className = 'msg-bot';
+  thinkMsg.innerHTML = `
+    <div class="msg-thinking">
+      <div class="thinking-dots">
+        <div class="thinking-dot"></div>
+        <div class="thinking-dot"></div>
+        <div class="thinking-dot"></div>
+      </div>
+      <div class="thinking-text">Interrogation du graphe…</div>
+    </div>`;
+  convArea.appendChild(thinkMsg);
+  convArea.scrollTop = convArea.scrollHeight;
+
+  try {
+    const resp = await fetch('/api/query', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ question, book: askBookFilter })
+    });
+
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+    const data = await resp.json();
+
+    // Replace thinking with real answer
+    thinkMsg.remove();
+    renderBotMessage(convArea, data);
+
+    // Show intent card if available
+    if (data.intent) showIntent(data.intent);
+
+  } catch (err) {
+    thinkMsg.remove();
+    const errMsg = document.createElement('div');
+    errMsg.className = 'msg-bot';
+    errMsg.innerHTML = `
+      <div class="msg-bubble">
+        <div class="bot-error">Erreur : ${escapeHtml(err.message)}</div>
+      </div>`;
+    convArea.appendChild(errMsg);
+  }
+
+  btn.disabled = false;
+  document.getElementById('ask-btn-text').textContent = 'Interroger le graphe';
+  convArea.scrollTop = convArea.scrollHeight;
+}
+
+function renderBotMessage(convArea, data) {
+  const msgEl = document.createElement('div');
+  msgEl.className = 'msg-bot';
+
+  let html = '<div class="msg-bubble">';
+
+  // Main text answer
+  if (data.answer) {
+    html += `<div class="bot-answer-text">${formatAnswer(data.answer)}</div>`;
+  }
+
+  // Structured results table if present
+  if (data.results && data.results.length > 0) {
+    html += renderResultTable(data.results, data.intent);
+  }
+
+  html += '</div>';
+  html += `<div class="msg-meta">${new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})}</div>`;
+
+  msgEl.innerHTML = html;
+  convArea.appendChild(msgEl);
+}
+
+function renderResultTable(results, intent) {
+  if (!results.length) return '';
+
+  // Group by book if multi-book
+  const books = [...new Set(results.map(r => r.book).filter(Boolean))];
+  let html = '';
+
+  books.forEach(book => {
+    const bookResults = results.filter(r => r.book === book);
+    const bmeta = BOOK_META[book] || { name: book, color: '#c9a84c' };
+    html += `<div class="bot-section" style="margin-top:12px;">`;
+    if (books.length > 1) {
+      html += `<div class="bot-book-tag">
+        <div class="pol-dot" style="background:${bmeta.color}"></div>
+        <span style="color:${bmeta.color}">${book.toUpperCase()}</span>
+      </div>`;
+    }
+    html += buildTable(bookResults, intent);
+    html += '</div>';
+  });
+
+  return html;
+}
+
+function buildTable(rows, intent) {
+  if (!rows.length) return '';
+  const intname = intent?.intent || '';
+
+  // Determine columns
+  let cols = [];
+  if (intname === 'neighbors_by_polarity') {
+    cols = [
+      { key: 'entity',  label: 'Personnage' },
+      { key: 'polarity_label', label: 'Relation' },
+      { key: 'weight',  label: 'Poids' },
+      { key: 'chapter', label: 'Chapitre(s)' },
+    ];
+  } else if (intname === 'top_central_characters') {
+    cols = [
+      { key: 'rank',   label: '#' },
+      { key: 'entity', label: 'Personnage' },
+      { key: 'degree', label: 'Degré total' },
+      { key: 'chapter_count', label: 'Chapitres' },
+    ];
+  } else if (intname === 'relation_between_entities') {
+    cols = [
+      { key: 'chapter',       label: 'Chapitre' },
+      { key: 'polarity_label', label: 'Relation' },
+      { key: 'weight',        label: 'Poids' },
+    ];
+  } else {
+    // Generic: render whatever keys are present
+    if (!rows.length) return '';
+    cols = Object.keys(rows[0]).map(k => ({ key: k, label: k }));
+  }
+
+  let html = '<table class="bot-result-table"><thead><tr>';
+  cols.forEach(c => { html += `<th>${c.label}</th>`; });
+  html += '</tr></thead><tbody>';
+
+  rows.forEach(r => {
+    html += '<tr>';
+    cols.forEach(c => {
+      let val = r[c.key] ?? '—';
+      if (c.key === 'polarity_label') {
+        val = `<span class="pol-badge pol-${val}">${val}</span>`;
+      }
+      html += `<td>${val}</td>`;
+    });
+    html += '</tr>';
+  });
+
+  html += '</tbody></table>';
+  return html;
+}
+
+function showIntent(intent) {
+  const card = document.getElementById('intent-card');
+  const tags = document.getElementById('intent-tags');
+  card.style.display = 'block';
+  tags.innerHTML = '';
+
+  const fields = [
+    { k: 'intent',   v: intent.intent },
+    { k: 'book',     v: intent.book },
+    { k: 'entity',   v: intent.entity },
+    { k: 'entity_2', v: intent.entity_2 },
+    { k: 'polarity', v: intent.polarity },
+    { k: 'chapter',  v: intent.chapter },
+    { k: 'lang',     v: intent.language },
+  ];
+  fields.filter(f => f.v).forEach(f => {
+    const tag = document.createElement('span');
+    tag.className = 'intent-tag';
+    tag.textContent = `${f.k}: ${f.v}`;
+    tags.appendChild(tag);
+  });
+}
+
+function formatAnswer(text) {
+  // Convert basic markdown-like line breaks and bold
+  return escapeHtml(text)
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\n/g, '<br>');
+}
+
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// BOOT
+// ════════════════════════════════════════════════════════════════════════════
+
+init();
+</script>
+</body>
+</html>

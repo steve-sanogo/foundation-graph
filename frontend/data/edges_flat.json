@@ -1,0 +1,6338 @@
+[
+  {
+    "book": "lca",
+    "chapter": 0,
+    "source": "Enderby",
+    "target": "Baley",
+    "weight": 6,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "JULIUS ENDERBY",
+      "Enderby",
+      "Julius"
+    ],
+    "target_aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 0,
+    "source": "Enderby",
+    "target": "Jacques",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "JULIUS ENDERBY",
+      "Enderby",
+      "Julius"
+    ],
+    "target_aliases": [
+      "Jacques"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 0,
+    "source": "Sammy",
+    "target": "Vince",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "R. Sammy",
+      "Sammy"
+    ],
+    "target_aliases": [
+      "Vince Barrett",
+      "Barrett",
+      "Vince"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 0,
+    "source": "Sammy",
+    "target": "Simpson",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "R. Sammy",
+      "Sammy"
+    ],
+    "target_aliases": [
+      "Simpson"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 0,
+    "source": "Baley",
+    "target": "Jacques",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ],
+    "target_aliases": [
+      "Jacques"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 0,
+    "source": "Baley",
+    "target": "Paul",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ],
+    "target_aliases": [
+      "Paul"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 0,
+    "source": "Jacques",
+    "target": "Paul",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Jacques"
+    ],
+    "target_aliases": [
+      "Paul"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 1,
+    "source": "Daneel",
+    "target": "Baley",
+    "weight": 8,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "R. Daneel Olivaw",
+      "Daneel Olivaw",
+      "R. Daneel",
+      "Daneel",
+      "Olivaw"
+    ],
+    "target_aliases": [
+      "Elijah Baley",
+      "Elijah",
+      "Baley",
+      "Lije"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 1,
+    "source": "Baley",
+    "target": "Enderby",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Elijah Baley",
+      "Elijah",
+      "Baley",
+      "Lije"
+    ],
+    "target_aliases": [
+      "Julius Enderby",
+      "Enderby",
+      "Julius"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 2,
+    "source": "Daneel",
+    "target": "Baley",
+    "weight": 3,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "R. Daneel",
+      "Daneel",
+      "Olivaw"
+    ],
+    "target_aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 2,
+    "source": "Baley",
+    "target": "Boris",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ],
+    "target_aliases": [
+      "Boris"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 3,
+    "source": "Bentley",
+    "target": "Daneel",
+    "weight": 6,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Bentley Baley",
+      "Bentley"
+    ],
+    "target_aliases": [
+      "Daneel Olivaw",
+      "M. Olivaw",
+      "R. Daneel",
+      "Daneel",
+      "Olivaw"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 3,
+    "source": "Bentley",
+    "target": "Baley",
+    "weight": 10,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Bentley Baley",
+      "Bentley"
+    ],
+    "target_aliases": [
+      "Lije Baley",
+      "Elijah",
+      "Baley",
+      "Lije"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 3,
+    "source": "Bentley",
+    "target": "Ben",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Bentley Baley",
+      "Bentley"
+    ],
+    "target_aliases": [
+      "Ben"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 3,
+    "source": "Daneel",
+    "target": "Baley",
+    "weight": 12,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Daneel Olivaw",
+      "M. Olivaw",
+      "R. Daneel",
+      "Daneel",
+      "Olivaw"
+    ],
+    "target_aliases": [
+      "Lije Baley",
+      "Elijah",
+      "Baley",
+      "Lije"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 3,
+    "source": "Daneel",
+    "target": "Ben",
+    "weight": 5,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Daneel Olivaw",
+      "M. Olivaw",
+      "R. Daneel",
+      "Daneel",
+      "Olivaw"
+    ],
+    "target_aliases": [
+      "Ben"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 3,
+    "source": "Daneel",
+    "target": "Jessie",
+    "weight": 7,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Daneel Olivaw",
+      "M. Olivaw",
+      "R. Daneel",
+      "Daneel",
+      "Olivaw"
+    ],
+    "target_aliases": [
+      "Jessie"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 3,
+    "source": "Julius Enderby",
+    "target": "Baley",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Julius Enderby"
+    ],
+    "target_aliases": [
+      "Lije Baley",
+      "Elijah",
+      "Baley",
+      "Lije"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 3,
+    "source": "Julius Enderby",
+    "target": "Jessie",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Julius Enderby"
+    ],
+    "target_aliases": [
+      "Jessie"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 3,
+    "source": "Baley",
+    "target": "Ben",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Lije Baley",
+      "Elijah",
+      "Baley",
+      "Lije"
+    ],
+    "target_aliases": [
+      "Ben"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 3,
+    "source": "Baley",
+    "target": "Elie",
+    "weight": 3,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Lije Baley",
+      "Elijah",
+      "Baley",
+      "Lije"
+    ],
+    "target_aliases": [
+      "Elie"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 3,
+    "source": "Baley",
+    "target": "Jessie",
+    "weight": 4,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Lije Baley",
+      "Elijah",
+      "Baley",
+      "Lije"
+    ],
+    "target_aliases": [
+      "Jessie"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 3,
+    "source": "Baal",
+    "target": "Elie",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Baal"
+    ],
+    "target_aliases": [
+      "Elie"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 3,
+    "source": "Elie",
+    "target": "Jessie",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Elie"
+    ],
+    "target_aliases": [
+      "Jessie"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 3,
+    "source": "Jesreel",
+    "target": "Jéhoram",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Jesreel"
+    ],
+    "target_aliases": [
+      "Jéhoram"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 4,
+    "source": "Dr Sarton",
+    "target": "Daneel",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Dr Sarton"
+    ],
+    "target_aliases": [
+      "R. Daneel",
+      "Daneel",
+      "Olivaw"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 4,
+    "source": "Dr Sarton",
+    "target": "Baley",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Dr Sarton"
+    ],
+    "target_aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 4,
+    "source": "Enderby",
+    "target": "Baley",
+    "weight": 3,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Julius Enderby",
+      "Enderby",
+      "Julius"
+    ],
+    "target_aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 4,
+    "source": "Daneel",
+    "target": "Baley",
+    "weight": 7,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "R. Daneel",
+      "Daneel",
+      "Olivaw"
+    ],
+    "target_aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 5,
+    "source": "Daneel",
+    "target": "Baley",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "R. Daneel Olivaw",
+      "Daneel",
+      "Olivaw"
+    ],
+    "target_aliases": [
+      "Elijah Baley",
+      "Elijah",
+      "Baley",
+      "Lije"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 5,
+    "source": "Baley",
+    "target": "Enderby",
+    "weight": 5,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Elijah Baley",
+      "Elijah",
+      "Baley",
+      "Lije"
+    ],
+    "target_aliases": [
+      "Julius Enderby",
+      "Enderby",
+      "Julius"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 6,
+    "source": "Daneel",
+    "target": "Baley",
+    "weight": 13,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "R. Daneel Olivaw",
+      "Daneel Olivaw",
+      "R. Daneel",
+      "Daneel",
+      "Olivaw"
+    ],
+    "target_aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 6,
+    "source": "Daneel",
+    "target": "Enderby",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "R. Daneel Olivaw",
+      "Daneel Olivaw",
+      "R. Daneel",
+      "Daneel",
+      "Olivaw"
+    ],
+    "target_aliases": [
+      "Enderby",
+      "Julius"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 6,
+    "source": "Daneel",
+    "target": "Fastolfe",
+    "weight": 3,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "R. Daneel Olivaw",
+      "Daneel Olivaw",
+      "R. Daneel",
+      "Daneel",
+      "Olivaw"
+    ],
+    "target_aliases": [
+      "Fastolfe"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 6,
+    "source": "Dr Sarton",
+    "target": "Baley",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Dr Sarton"
+    ],
+    "target_aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 6,
+    "source": "Dr Sarton",
+    "target": "Enderby",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Dr Sarton"
+    ],
+    "target_aliases": [
+      "Enderby",
+      "Julius"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 6,
+    "source": "Dr Sarton",
+    "target": "Fastolfe",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Dr Sarton"
+    ],
+    "target_aliases": [
+      "Fastolfe"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 6,
+    "source": "Baley",
+    "target": "Enderby",
+    "weight": 4,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ],
+    "target_aliases": [
+      "Enderby",
+      "Julius"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 6,
+    "source": "Baley",
+    "target": "Fastolfe",
+    "weight": 5,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ],
+    "target_aliases": [
+      "Fastolfe"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 6,
+    "source": "Enderby",
+    "target": "Fastolfe",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Enderby",
+      "Julius"
+    ],
+    "target_aliases": [
+      "Fastolfe"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 7,
+    "source": "Daneel",
+    "target": "Dr Sarton",
+    "weight": 4,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Daneel Olivaw",
+      "R. Daneel",
+      "Daneel",
+      "Olivaw"
+    ],
+    "target_aliases": [
+      "Dr Sarton"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 7,
+    "source": "Daneel",
+    "target": "Baley",
+    "weight": 11,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Daneel Olivaw",
+      "R. Daneel",
+      "Daneel",
+      "Olivaw"
+    ],
+    "target_aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 7,
+    "source": "Daneel",
+    "target": "Enderby",
+    "weight": 8,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Daneel Olivaw",
+      "R. Daneel",
+      "Daneel",
+      "Olivaw"
+    ],
+    "target_aliases": [
+      "Enderby",
+      "Julius"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 7,
+    "source": "Daneel",
+    "target": "Fastolfe",
+    "weight": 9,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Daneel Olivaw",
+      "R. Daneel",
+      "Daneel",
+      "Olivaw"
+    ],
+    "target_aliases": [
+      "Fastolfe"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 7,
+    "source": "Dr Sarton",
+    "target": "Baley",
+    "weight": 4,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Dr Sarton"
+    ],
+    "target_aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 7,
+    "source": "Dr Sarton",
+    "target": "Enderby",
+    "weight": 6,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Dr Sarton"
+    ],
+    "target_aliases": [
+      "Enderby",
+      "Julius"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 7,
+    "source": "Dr Sarton",
+    "target": "Fastolfe",
+    "weight": 3,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Dr Sarton"
+    ],
+    "target_aliases": [
+      "Fastolfe"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 7,
+    "source": "Baley",
+    "target": "Enderby",
+    "weight": 6,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ],
+    "target_aliases": [
+      "Enderby",
+      "Julius"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 7,
+    "source": "Baley",
+    "target": "Fastolfe",
+    "weight": 8,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ],
+    "target_aliases": [
+      "Fastolfe"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 7,
+    "source": "Enderby",
+    "target": "Fastolfe",
+    "weight": 6,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Enderby",
+      "Julius"
+    ],
+    "target_aliases": [
+      "Fastolfe"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 8,
+    "source": "Fastolfe",
+    "target": "Daneel",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Dr Fastolfe",
+      "Fastolfe"
+    ],
+    "target_aliases": [
+      "R. Daneel",
+      "Daneel",
+      "Olivaw"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 8,
+    "source": "Fastolfe",
+    "target": "Baley",
+    "weight": 9,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Dr Fastolfe",
+      "Fastolfe"
+    ],
+    "target_aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 8,
+    "source": "Daneel",
+    "target": "Baley",
+    "weight": 4,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "R. Daneel",
+      "Daneel",
+      "Olivaw"
+    ],
+    "target_aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 9,
+    "source": "Fastolfe",
+    "target": "Baley",
+    "weight": 2,
+    "polarity_label": "ami",
+    "polarity_score": 1.0,
+    "source_aliases": [
+      "Dr Fastolfe",
+      "Fastolfe"
+    ],
+    "target_aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 9,
+    "source": "Fastolfe",
+    "target": "Bentley",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Dr Fastolfe",
+      "Fastolfe"
+    ],
+    "target_aliases": [
+      "Bentley Baley",
+      "Bentley"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 9,
+    "source": "Dr Sarton",
+    "target": "Baley",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Dr Sarton"
+    ],
+    "target_aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 9,
+    "source": "Dr Sarton",
+    "target": "Enderby",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Dr Sarton"
+    ],
+    "target_aliases": [
+      "Enderby",
+      "Julius"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 9,
+    "source": "Daneel",
+    "target": "Baley",
+    "weight": 8,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "R. Daneel",
+      "Daneel",
+      "Olivaw"
+    ],
+    "target_aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 9,
+    "source": "Daneel",
+    "target": "Jessie",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "R. Daneel",
+      "Daneel",
+      "Olivaw"
+    ],
+    "target_aliases": [
+      "Jessie"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 9,
+    "source": "Baley",
+    "target": "Enderby",
+    "weight": 3,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ],
+    "target_aliases": [
+      "Enderby",
+      "Julius"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 9,
+    "source": "Baley",
+    "target": "Jessie",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ],
+    "target_aliases": [
+      "Jessie"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 10,
+    "source": "Baley",
+    "target": "Daneel",
+    "weight": 11,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Elijah Baley",
+      "Elijah",
+      "Baley",
+      "Lije"
+    ],
+    "target_aliases": [
+      "R. Daneel",
+      "Daneel",
+      "Olivaw"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 10,
+    "source": "Baley",
+    "target": "Ben",
+    "weight": 3,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Elijah Baley",
+      "Elijah",
+      "Baley",
+      "Lije"
+    ],
+    "target_aliases": [
+      "Ben"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 10,
+    "source": "Baley",
+    "target": "Jessie",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Elijah Baley",
+      "Elijah",
+      "Baley",
+      "Lije"
+    ],
+    "target_aliases": [
+      "Jessie"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 11,
+    "source": "A. Gerrigel",
+    "target": "Daneel",
+    "weight": 3,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "A. Gerrigel",
+      "Gerrigel"
+    ],
+    "target_aliases": [
+      "R. Daneel",
+      "Daneel",
+      "Olivaw"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 11,
+    "source": "A. Gerrigel",
+    "target": "Baley",
+    "weight": 5,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "A. Gerrigel",
+      "Gerrigel"
+    ],
+    "target_aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 11,
+    "source": "Francis Clousarr",
+    "target": "Baley",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Francis Clousarr"
+    ],
+    "target_aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 11,
+    "source": "Paul Gerhard",
+    "target": "Baley",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Paul Gerhard"
+    ],
+    "target_aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 11,
+    "source": "Daneel",
+    "target": "Baley",
+    "weight": 5,
+    "polarity_label": "ennemi",
+    "polarity_score": -1.0,
+    "source_aliases": [
+      "R. Daneel",
+      "Daneel",
+      "Olivaw"
+    ],
+    "target_aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 11,
+    "source": "Sammy",
+    "target": "Baley",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "R. Sammy",
+      "Sammy"
+    ],
+    "target_aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 11,
+    "source": "Baley",
+    "target": "Enderby",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ],
+    "target_aliases": [
+      "Enderby",
+      "Julius"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 12,
+    "source": "Dr Fastolfe",
+    "target": "Enderby",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Dr Fastolfe"
+    ],
+    "target_aliases": [
+      "Julius Enderby",
+      "Enderby",
+      "Julius"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 12,
+    "source": "Dr Fastolfe",
+    "target": "Daneel",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Dr Fastolfe"
+    ],
+    "target_aliases": [
+      "R. Daneel",
+      "Daneel",
+      "Olivaw"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 12,
+    "source": "Dr Sarton",
+    "target": "Enderby",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Dr Sarton"
+    ],
+    "target_aliases": [
+      "Julius Enderby",
+      "Enderby",
+      "Julius"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 12,
+    "source": "Dr Sarton",
+    "target": "Baley",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Dr Sarton"
+    ],
+    "target_aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 12,
+    "source": "Enderby",
+    "target": "Daneel",
+    "weight": 5,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Julius Enderby",
+      "Enderby",
+      "Julius"
+    ],
+    "target_aliases": [
+      "R. Daneel",
+      "Daneel",
+      "Olivaw"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 12,
+    "source": "Enderby",
+    "target": "Baley",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Julius Enderby",
+      "Enderby",
+      "Julius"
+    ],
+    "target_aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 12,
+    "source": "Daneel",
+    "target": "Baley",
+    "weight": 5,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "R. Daneel",
+      "Daneel",
+      "Olivaw"
+    ],
+    "target_aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 12,
+    "source": "Daneel",
+    "target": "Gerrigel",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "R. Daneel",
+      "Daneel",
+      "Olivaw"
+    ],
+    "target_aliases": [
+      "Gerrigel"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 12,
+    "source": "Sammy",
+    "target": "Vince",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "R. Sammy",
+      "Sammy"
+    ],
+    "target_aliases": [
+      "Vince Barrett",
+      "Barrett",
+      "Vince"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 12,
+    "source": "Sammy",
+    "target": "Baley",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "R. Sammy",
+      "Sammy"
+    ],
+    "target_aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 12,
+    "source": "Sammy",
+    "target": "Norris",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "R. Sammy",
+      "Sammy"
+    ],
+    "target_aliases": [
+      "Norris"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 12,
+    "source": "Vince",
+    "target": "Baley",
+    "weight": 4,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Vince Barrett",
+      "Barrett",
+      "Vince"
+    ],
+    "target_aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 12,
+    "source": "Vince",
+    "target": "Norris",
+    "weight": 4,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Vince Barrett",
+      "Barrett",
+      "Vince"
+    ],
+    "target_aliases": [
+      "Norris"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 12,
+    "source": "Baley",
+    "target": "Gerrigel",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ],
+    "target_aliases": [
+      "Gerrigel"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 12,
+    "source": "Baley",
+    "target": "Norris",
+    "weight": 6,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ],
+    "target_aliases": [
+      "Norris"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 12,
+    "source": "Norris",
+    "target": "Phil",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Norris"
+    ],
+    "target_aliases": [
+      "Phil"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 13,
+    "source": "Francis Clousarr",
+    "target": "Daneel",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Francis Clousarr"
+    ],
+    "target_aliases": [
+      "R. Daneel",
+      "Daneel",
+      "Olivaw"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 13,
+    "source": "Francis Clousarr",
+    "target": "Baley",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Francis Clousarr"
+    ],
+    "target_aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 13,
+    "source": "Jane Myers",
+    "target": "Elisabeth",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Jane Myers"
+    ],
+    "target_aliases": [
+      "Elisabeth"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 13,
+    "source": "Joseph Klemin",
+    "target": "Baley",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Joseph Klemin",
+      "Klemin"
+    ],
+    "target_aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 13,
+    "source": "Daneel",
+    "target": "Baley",
+    "weight": 10,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "R. Daneel",
+      "Daneel",
+      "Olivaw"
+    ],
+    "target_aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 13,
+    "source": "Baley",
+    "target": "Bentley",
+    "weight": 1,
+    "polarity_label": "ennemi",
+    "polarity_score": -1.0,
+    "source_aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ],
+    "target_aliases": [
+      "Bentley Baley",
+      "Bentley"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 14,
+    "source": "Dr Fastolfe",
+    "target": "Baley",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Dr Fastolfe"
+    ],
+    "target_aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 14,
+    "source": "Clousarr",
+    "target": "Daneel",
+    "weight": 10,
+    "polarity_label": "ami",
+    "polarity_score": 1.0,
+    "source_aliases": [
+      "Francis Clousarr",
+      "M. Clousarr",
+      "Clousarr"
+    ],
+    "target_aliases": [
+      "R. Daneel",
+      "Daneel",
+      "Olivaw"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 14,
+    "source": "Clousarr",
+    "target": "Baley",
+    "weight": 10,
+    "polarity_label": "ami",
+    "polarity_score": 1.0,
+    "source_aliases": [
+      "Francis Clousarr",
+      "M. Clousarr",
+      "Clousarr"
+    ],
+    "target_aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 14,
+    "source": "Daneel",
+    "target": "Baley",
+    "weight": 8,
+    "polarity_label": "ami",
+    "polarity_score": 1.0,
+    "source_aliases": [
+      "R. Daneel",
+      "Daneel",
+      "Olivaw"
+    ],
+    "target_aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 14,
+    "source": "Sammy",
+    "target": "Baley",
+    "weight": 3,
+    "polarity_label": "ennemi",
+    "polarity_score": -1.0,
+    "source_aliases": [
+      "R. Sammy",
+      "Sammy"
+    ],
+    "target_aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 14,
+    "source": "Baley",
+    "target": "Enderby",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ],
+    "target_aliases": [
+      "Enderby",
+      "Julius"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 15,
+    "source": "Gerrigel",
+    "target": "Daneel",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Docteur Gerrigel",
+      "Gerrigel"
+    ],
+    "target_aliases": [
+      "R. Daneel",
+      "Daneel",
+      "Olivaw"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 15,
+    "source": "Gerrigel",
+    "target": "Baley",
+    "weight": 3,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Docteur Gerrigel",
+      "Gerrigel"
+    ],
+    "target_aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 15,
+    "source": "Gerrigel",
+    "target": "Enderby",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Docteur Gerrigel",
+      "Gerrigel"
+    ],
+    "target_aliases": [
+      "Enderby",
+      "Julius"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 15,
+    "source": "Daneel",
+    "target": "Sammy",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "R. Daneel",
+      "Daneel",
+      "Olivaw"
+    ],
+    "target_aliases": [
+      "R. Sammy",
+      "Sammy"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 15,
+    "source": "Daneel",
+    "target": "Baley",
+    "weight": 10,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "R. Daneel",
+      "Daneel",
+      "Olivaw"
+    ],
+    "target_aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 15,
+    "source": "Daneel",
+    "target": "Clousarr",
+    "weight": 8,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "R. Daneel",
+      "Daneel",
+      "Olivaw"
+    ],
+    "target_aliases": [
+      "Clousarr"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 15,
+    "source": "Daneel",
+    "target": "Enderby",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "R. Daneel",
+      "Daneel",
+      "Olivaw"
+    ],
+    "target_aliases": [
+      "Enderby",
+      "Julius"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 15,
+    "source": "Sammy",
+    "target": "Baley",
+    "weight": 5,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "R. Sammy",
+      "Sammy"
+    ],
+    "target_aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 15,
+    "source": "Sammy",
+    "target": "Clousarr",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "R. Sammy",
+      "Sammy"
+    ],
+    "target_aliases": [
+      "Clousarr"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 15,
+    "source": "Sammy",
+    "target": "Enderby",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "R. Sammy",
+      "Sammy"
+    ],
+    "target_aliases": [
+      "Enderby",
+      "Julius"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 15,
+    "source": "Baley",
+    "target": "Clousarr",
+    "weight": 5,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ],
+    "target_aliases": [
+      "Clousarr"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 15,
+    "source": "Baley",
+    "target": "Enderby",
+    "weight": 5,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ],
+    "target_aliases": [
+      "Enderby",
+      "Julius"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 16,
+    "source": "Sarton",
+    "target": "Baley",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Dr Sarton",
+      "Sarton"
+    ],
+    "target_aliases": [
+      "Elijah Baley",
+      "Elijah",
+      "Baley",
+      "Lije"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 16,
+    "source": "Sarton",
+    "target": "Daneel",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Dr Sarton",
+      "Sarton"
+    ],
+    "target_aliases": [
+      "R. Daneel",
+      "Daneel",
+      "Olivaw"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 16,
+    "source": "Baley",
+    "target": "Francis Clousarr",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Elijah Baley",
+      "Elijah",
+      "Baley",
+      "Lije"
+    ],
+    "target_aliases": [
+      "Francis Clousarr"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 16,
+    "source": "Baley",
+    "target": "Daneel",
+    "weight": 8,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Elijah Baley",
+      "Elijah",
+      "Baley",
+      "Lije"
+    ],
+    "target_aliases": [
+      "R. Daneel",
+      "Daneel",
+      "Olivaw"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 16,
+    "source": "Baley",
+    "target": "Sammy",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Elijah Baley",
+      "Elijah",
+      "Baley",
+      "Lije"
+    ],
+    "target_aliases": [
+      "R. Sammy",
+      "Sammy"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 16,
+    "source": "Baley",
+    "target": "Enderby",
+    "weight": 3,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Elijah Baley",
+      "Elijah",
+      "Baley",
+      "Lije"
+    ],
+    "target_aliases": [
+      "Enderby",
+      "Julius"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 16,
+    "source": "Francis Clousarr",
+    "target": "Sammy",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Francis Clousarr"
+    ],
+    "target_aliases": [
+      "R. Sammy",
+      "Sammy"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 16,
+    "source": "Daneel",
+    "target": "Sammy",
+    "weight": 1,
+    "polarity_label": "ennemi",
+    "polarity_score": -1.0,
+    "source_aliases": [
+      "R. Daneel",
+      "Daneel",
+      "Olivaw"
+    ],
+    "target_aliases": [
+      "R. Sammy",
+      "Sammy"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 16,
+    "source": "Daneel",
+    "target": "Enderby",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "R. Daneel",
+      "Daneel",
+      "Olivaw"
+    ],
+    "target_aliases": [
+      "Enderby",
+      "Julius"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 17,
+    "source": "Dr Fastolfe",
+    "target": "Daneel",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Dr Fastolfe"
+    ],
+    "target_aliases": [
+      "R. Daneel",
+      "Daneel",
+      "Olivaw"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 17,
+    "source": "Sarton",
+    "target": "Enderby",
+    "weight": 10,
+    "polarity_label": "ennemi",
+    "polarity_score": -1.0,
+    "source_aliases": [
+      "Dr Sarton",
+      "Sarton"
+    ],
+    "target_aliases": [
+      "Julius Enderby",
+      "Enderby",
+      "Julius"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 17,
+    "source": "Sarton",
+    "target": "Daneel",
+    "weight": 13,
+    "polarity_label": "ennemi",
+    "polarity_score": -1.0,
+    "source_aliases": [
+      "Dr Sarton",
+      "Sarton"
+    ],
+    "target_aliases": [
+      "R. Daneel",
+      "Daneel",
+      "Olivaw"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 17,
+    "source": "Sarton",
+    "target": "Sammy",
+    "weight": 5,
+    "polarity_label": "ennemi",
+    "polarity_score": -1.0,
+    "source_aliases": [
+      "Dr Sarton",
+      "Sarton"
+    ],
+    "target_aliases": [
+      "R. Sammy",
+      "Sammy"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 17,
+    "source": "Sarton",
+    "target": "Baley",
+    "weight": 5,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Dr Sarton",
+      "Sarton"
+    ],
+    "target_aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 17,
+    "source": "Sarton",
+    "target": "Clousarr",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Dr Sarton",
+      "Sarton"
+    ],
+    "target_aliases": [
+      "Clousarr"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 17,
+    "source": "Enderby",
+    "target": "Daneel",
+    "weight": 3,
+    "polarity_label": "ennemi",
+    "polarity_score": -1.0,
+    "source_aliases": [
+      "Julius Enderby",
+      "Enderby",
+      "Julius"
+    ],
+    "target_aliases": [
+      "R. Daneel",
+      "Daneel",
+      "Olivaw"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 17,
+    "source": "Enderby",
+    "target": "Sammy",
+    "weight": 1,
+    "polarity_label": "ennemi",
+    "polarity_score": -1.0,
+    "source_aliases": [
+      "Julius Enderby",
+      "Enderby",
+      "Julius"
+    ],
+    "target_aliases": [
+      "R. Sammy",
+      "Sammy"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 17,
+    "source": "Enderby",
+    "target": "Baley",
+    "weight": 5,
+    "polarity_label": "ennemi",
+    "polarity_score": -1.0,
+    "source_aliases": [
+      "Julius Enderby",
+      "Enderby",
+      "Julius"
+    ],
+    "target_aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 17,
+    "source": "Enderby",
+    "target": "Clousarr",
+    "weight": 3,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Julius Enderby",
+      "Enderby",
+      "Julius"
+    ],
+    "target_aliases": [
+      "Clousarr"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 17,
+    "source": "Daneel",
+    "target": "Sammy",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "R. Daneel",
+      "Daneel",
+      "Olivaw"
+    ],
+    "target_aliases": [
+      "R. Sammy",
+      "Sammy"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 17,
+    "source": "Daneel",
+    "target": "Baley",
+    "weight": 5,
+    "polarity_label": "ennemi",
+    "polarity_score": -1.0,
+    "source_aliases": [
+      "R. Daneel",
+      "Daneel",
+      "Olivaw"
+    ],
+    "target_aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 17,
+    "source": "Daneel",
+    "target": "Jessie",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "R. Daneel",
+      "Daneel",
+      "Olivaw"
+    ],
+    "target_aliases": [
+      "Jessie"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 17,
+    "source": "Sammy",
+    "target": "Baley",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "R. Sammy",
+      "Sammy"
+    ],
+    "target_aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 17,
+    "source": "Baley",
+    "target": "Clousarr",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ],
+    "target_aliases": [
+      "Clousarr"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 17,
+    "source": "Baley",
+    "target": "Jessie",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ],
+    "target_aliases": [
+      "Jessie"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 17,
+    "source": "Clousarr",
+    "target": "Jessie",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Clousarr"
+    ],
+    "target_aliases": [
+      "Jessie"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 0,
+    "source": "Alban Wellis",
+    "target": "Demerzel",
+    "weight": 4,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Lieutenant Alban Wellis",
+      "Alban Wellis",
+      "Lieutenant",
+      "Wellis"
+    ],
+    "target_aliases": [
+      "Eto Demerzel",
+      "Demerzel"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 0,
+    "source": "Alban Wellis",
+    "target": "Hari Seldon",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Lieutenant Alban Wellis",
+      "Alban Wellis",
+      "Lieutenant",
+      "Wellis"
+    ],
+    "target_aliases": [
+      "Hari Seldon",
+      "Seldon"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 0,
+    "source": "Alban Wellis",
+    "target": "Cléon",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Lieutenant Alban Wellis",
+      "Alban Wellis",
+      "Lieutenant",
+      "Wellis"
+    ],
+    "target_aliases": [
+      "L'Empereur",
+      "l’Empereur",
+      "Empereur",
+      "Cléon"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 0,
+    "source": "CLÉON Ier",
+    "target": "Demerzel",
+    "weight": 5,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "CLÉON Ier",
+      "Cléon"
+    ],
+    "target_aliases": [
+      "Eto Demerzel",
+      "Demerzel"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 0,
+    "source": "CLÉON Ier",
+    "target": "Hari Seldon",
+    "weight": 11,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "CLÉON Ier",
+      "Cléon"
+    ],
+    "target_aliases": [
+      "Hari Seldon",
+      "Seldon"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 0,
+    "source": "CLÉON Ier",
+    "target": "Cléon",
+    "weight": 12,
+    "polarity_label": "ami",
+    "polarity_score": 1.0,
+    "source_aliases": [
+      "CLÉON Ier",
+      "Cléon"
+    ],
+    "target_aliases": [
+      "L'Empereur",
+      "l’Empereur",
+      "Empereur",
+      "Cléon"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 0,
+    "source": "Demerzel",
+    "target": "Hari Seldon",
+    "weight": 5,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Eto Demerzel",
+      "Demerzel"
+    ],
+    "target_aliases": [
+      "Hari Seldon",
+      "Seldon"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 0,
+    "source": "Demerzel",
+    "target": "Cléon",
+    "weight": 7,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Eto Demerzel",
+      "Demerzel"
+    ],
+    "target_aliases": [
+      "L'Empereur",
+      "l’Empereur",
+      "Empereur",
+      "Cléon"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 0,
+    "source": "Demerzel",
+    "target": "Hummin",
+    "weight": 3,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Eto Demerzel",
+      "Demerzel"
+    ],
+    "target_aliases": [
+      "Hummin"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 0,
+    "source": "Hari Seldon",
+    "target": "Cléon",
+    "weight": 18,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Hari Seldon",
+      "Seldon"
+    ],
+    "target_aliases": [
+      "L'Empereur",
+      "l’Empereur",
+      "Empereur",
+      "Cléon"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 0,
+    "source": "Hari Seldon",
+    "target": "Hummin",
+    "weight": 3,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Hari Seldon",
+      "Seldon"
+    ],
+    "target_aliases": [
+      "Hummin"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 1,
+    "source": "Hari Seldon",
+    "target": "Alem",
+    "weight": 5,
+    "polarity_label": "ennemi",
+    "polarity_score": -1.0,
+    "source_aliases": [
+      "Hari Seldon",
+      "Seldon"
+    ],
+    "target_aliases": [
+      "Alem"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 1,
+    "source": "Hari Seldon",
+    "target": "Demerzel",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Hari Seldon",
+      "Seldon"
+    ],
+    "target_aliases": [
+      "Demerzel"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 1,
+    "source": "Hari Seldon",
+    "target": "Hummin",
+    "weight": 20,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Hari Seldon",
+      "Seldon"
+    ],
+    "target_aliases": [
+      "Hummin"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 1,
+    "source": "Hari Seldon",
+    "target": "Marbie",
+    "weight": 3,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Hari Seldon",
+      "Seldon"
+    ],
+    "target_aliases": [
+      "Marbie"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 1,
+    "source": "Alem",
+    "target": "Hummin",
+    "weight": 6,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Alem"
+    ],
+    "target_aliases": [
+      "Hummin"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 1,
+    "source": "Alem",
+    "target": "Marbie",
+    "weight": 5,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Alem"
+    ],
+    "target_aliases": [
+      "Marbie"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 1,
+    "source": "Hummin",
+    "target": "Marbie",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Hummin"
+    ],
+    "target_aliases": [
+      "Marbie"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 2,
+    "source": "Chetter Hummin",
+    "target": "Hari Seldon",
+    "weight": 9,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Chetter Hummin",
+      "Hummin"
+    ],
+    "target_aliases": [
+      "Hari Seldon",
+      "Seldon"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 2,
+    "source": "Hari Seldon",
+    "target": "Demerzel",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Hari Seldon",
+      "Seldon"
+    ],
+    "target_aliases": [
+      "Demerzel"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 2,
+    "source": "Hari Seldon",
+    "target": "Cléon",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Hari Seldon",
+      "Seldon"
+    ],
+    "target_aliases": [
+      "L'Empereur",
+      "l’Empereur",
+      "Empereur",
+      "Cléon"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 2,
+    "source": "Hari Seldon",
+    "target": "Strelitzia",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Hari Seldon",
+      "Seldon"
+    ],
+    "target_aliases": [
+      "Strelitzia"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 2,
+    "source": "Hari Seldon",
+    "target": "Suaverose",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Hari Seldon",
+      "Seldon"
+    ],
+    "target_aliases": [
+      "Suaverose"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 2,
+    "source": "Demerzel",
+    "target": "Cléon",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Demerzel"
+    ],
+    "target_aliases": [
+      "L'Empereur",
+      "l’Empereur",
+      "Empereur",
+      "Cléon"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 2,
+    "source": "Strelitzia",
+    "target": "Suaverose",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Strelitzia"
+    ],
+    "target_aliases": [
+      "Suaverose"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 3,
+    "source": "Chetter",
+    "target": "Dors",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Chetter Hummin",
+      "Chetter",
+      "Hummin"
+    ],
+    "target_aliases": [
+      "Dors Venabili",
+      "Venabili",
+      "Dors"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 3,
+    "source": "Chetter",
+    "target": "Hari Seldon",
+    "weight": 7,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Chetter Hummin",
+      "Chetter",
+      "Hummin"
+    ],
+    "target_aliases": [
+      "docteur Seldon",
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 3,
+    "source": "Dors",
+    "target": "Hari Seldon",
+    "weight": 5,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Dors Venabili",
+      "Venabili",
+      "Dors"
+    ],
+    "target_aliases": [
+      "docteur Seldon",
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 3,
+    "source": "Dors",
+    "target": "Cinna",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Dors Venabili",
+      "Venabili",
+      "Dors"
+    ],
+    "target_aliases": [
+      "Cinna"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 3,
+    "source": "Hari Seldon",
+    "target": "Cinna",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "docteur Seldon",
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ],
+    "target_aliases": [
+      "Cinna"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 3,
+    "source": "Hari Seldon",
+    "target": "Cléon",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "docteur Seldon",
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ],
+    "target_aliases": [
+      "L'Empereur",
+      "l’Empereur",
+      "Empereur",
+      "Cléon"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 3,
+    "source": "Hari Seldon",
+    "target": "Demerzel",
+    "weight": 3,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "docteur Seldon",
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ],
+    "target_aliases": [
+      "Demerzel"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 3,
+    "source": "Cléon",
+    "target": "Demerzel",
+    "weight": 10,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "L'Empereur",
+      "l’Empereur",
+      "Empereur",
+      "Cléon"
+    ],
+    "target_aliases": [
+      "Demerzel"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 4,
+    "source": "Dors",
+    "target": "Hari Seldon",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Dors Venabili",
+      "Dors"
+    ],
+    "target_aliases": [
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 4,
+    "source": "Dors",
+    "target": "Kiangtow Randa",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Dors Venabili",
+      "Dors"
+    ],
+    "target_aliases": [
+      "Kiangtow Randa",
+      "Randa"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 4,
+    "source": "Dors",
+    "target": "Lisung",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Dors Venabili",
+      "Dors"
+    ],
+    "target_aliases": [
+      "Lisung"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 4,
+    "source": "Hari Seldon",
+    "target": "Jenarr Leggen",
+    "weight": 4,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ],
+    "target_aliases": [
+      "docteur Leggen",
+      "Jenarr Leggen",
+      "Leggen"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 4,
+    "source": "Hari Seldon",
+    "target": "Kiangtow Randa",
+    "weight": 5,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ],
+    "target_aliases": [
+      "Kiangtow Randa",
+      "Randa"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 4,
+    "source": "Hari Seldon",
+    "target": "Clowzia",
+    "weight": 4,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ],
+    "target_aliases": [
+      "Clowzia"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 4,
+    "source": "Hari Seldon",
+    "target": "Hummin",
+    "weight": 4,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ],
+    "target_aliases": [
+      "Hummin"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 4,
+    "source": "Hari Seldon",
+    "target": "Lisung",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ],
+    "target_aliases": [
+      "Lisung"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 4,
+    "source": "Jenarr Leggen",
+    "target": "Clowzia",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "docteur Leggen",
+      "Jenarr Leggen",
+      "Leggen"
+    ],
+    "target_aliases": [
+      "Clowzia"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 4,
+    "source": "Kiangtow Randa",
+    "target": "Lisung",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Kiangtow Randa",
+      "Randa"
+    ],
+    "target_aliases": [
+      "Lisung"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 5,
+    "source": "Dors Venabili",
+    "target": "Hari Seldon",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "docteur Venabili",
+      "Dors Venabili",
+      "Maîtresse",
+      "Venabili"
+    ],
+    "target_aliases": [
+      "docteur Seldon",
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 5,
+    "source": "Dors Venabili",
+    "target": "Leggen",
+    "weight": 4,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "docteur Venabili",
+      "Dors Venabili",
+      "Maîtresse",
+      "Venabili"
+    ],
+    "target_aliases": [
+      "docteur Leggen",
+      "Jenarr Leggen",
+      "Jenarr",
+      "Leggen"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 5,
+    "source": "Dors Venabili",
+    "target": "Benastra",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "docteur Venabili",
+      "Dors Venabili",
+      "Maîtresse",
+      "Venabili"
+    ],
+    "target_aliases": [
+      "Benastra"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 5,
+    "source": "Hari Seldon",
+    "target": "Leggen",
+    "weight": 11,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "docteur Seldon",
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ],
+    "target_aliases": [
+      "docteur Leggen",
+      "Jenarr Leggen",
+      "Jenarr",
+      "Leggen"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 5,
+    "source": "Hari Seldon",
+    "target": "Benastra",
+    "weight": 3,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "docteur Seldon",
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ],
+    "target_aliases": [
+      "Benastra"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 5,
+    "source": "Hari Seldon",
+    "target": "Clowzia",
+    "weight": 3,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "docteur Seldon",
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ],
+    "target_aliases": [
+      "Clowzia"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 5,
+    "source": "Leggen",
+    "target": "Benastra",
+    "weight": 5,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "docteur Leggen",
+      "Jenarr Leggen",
+      "Jenarr",
+      "Leggen"
+    ],
+    "target_aliases": [
+      "Benastra"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 5,
+    "source": "Leggen",
+    "target": "Clowzia",
+    "weight": 3,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "docteur Leggen",
+      "Jenarr Leggen",
+      "Jenarr",
+      "Leggen"
+    ],
+    "target_aliases": [
+      "Clowzia"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 6,
+    "source": "Damiano Nord",
+    "target": "Leggen",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Damiano Nord"
+    ],
+    "target_aliases": [
+      "docteur Leggen",
+      "Jenarr",
+      "Leggen"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 6,
+    "source": "Damiano Nord",
+    "target": "Ziggoreth",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Damiano Nord"
+    ],
+    "target_aliases": [
+      "Ziggoreth"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 6,
+    "source": "Dors Venabili",
+    "target": "Hari Seldon",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Dors Venabili",
+      "Maîtresse"
+    ],
+    "target_aliases": [
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 6,
+    "source": "Demerzel",
+    "target": "Hari Seldon",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Eto Demerzel",
+      "Demerzel"
+    ],
+    "target_aliases": [
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 6,
+    "source": "Demerzel",
+    "target": "Hummin",
+    "weight": 4,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Eto Demerzel",
+      "Demerzel"
+    ],
+    "target_aliases": [
+      "Hummin"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 6,
+    "source": "Hari Seldon",
+    "target": "Leggen",
+    "weight": 5,
+    "polarity_label": "ennemi",
+    "polarity_score": -1.0,
+    "source_aliases": [
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ],
+    "target_aliases": [
+      "docteur Leggen",
+      "Jenarr",
+      "Leggen"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 6,
+    "source": "Hari Seldon",
+    "target": "Cléon",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ],
+    "target_aliases": [
+      "L'Empereur",
+      "l’Empereur",
+      "Empereur",
+      "Cléon"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 6,
+    "source": "Hari Seldon",
+    "target": "Hummin",
+    "weight": 9,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ],
+    "target_aliases": [
+      "Hummin"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 6,
+    "source": "Hari Seldon",
+    "target": "Randa",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ],
+    "target_aliases": [
+      "Randa"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 6,
+    "source": "Leggen",
+    "target": "Hummin",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "docteur Leggen",
+      "Jenarr",
+      "Leggen"
+    ],
+    "target_aliases": [
+      "Hummin"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 6,
+    "source": "Leggen",
+    "target": "Ziggoreth",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "docteur Leggen",
+      "Jenarr",
+      "Leggen"
+    ],
+    "target_aliases": [
+      "Ziggoreth"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 6,
+    "source": "Hummin",
+    "target": "Randa",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Hummin"
+    ],
+    "target_aliases": [
+      "Randa"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 7,
+    "source": "Chetter Hummin",
+    "target": "Endor Levanian",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Chetter Hummin",
+      "Hummin"
+    ],
+    "target_aliases": [
+      "Endor Levanian",
+      "Levanian"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 7,
+    "source": "Dors Venabili",
+    "target": "Hari Seldon",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Dors Venabili",
+      "Maîtresse"
+    ],
+    "target_aliases": [
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 7,
+    "source": "Endor Levanian",
+    "target": "Hari Seldon",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Endor Levanian",
+      "Levanian"
+    ],
+    "target_aliases": [
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 7,
+    "source": "Hari Seldon",
+    "target": "Cinna",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ],
+    "target_aliases": [
+      "Cinna"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 7,
+    "source": "Hari Seldon",
+    "target": "Clowzia",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ],
+    "target_aliases": [
+      "Clowzia"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 7,
+    "source": "Hari Seldon",
+    "target": "Grisnuage",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ],
+    "target_aliases": [
+      "Grisnuage"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 8,
+    "source": "Chetter Hummin",
+    "target": "Hari Seldon",
+    "weight": 3,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Chetter Hummin",
+      "Hummin"
+    ],
+    "target_aliases": [
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 8,
+    "source": "Chetter Hummin",
+    "target": "Dors",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Chetter Hummin",
+      "Hummin"
+    ],
+    "target_aliases": [
+      "Dors"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 8,
+    "source": "Hari Seldon",
+    "target": "Dors",
+    "weight": 14,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ],
+    "target_aliases": [
+      "Dors"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 8,
+    "source": "Hari Seldon",
+    "target": "Grisnuage",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ],
+    "target_aliases": [
+      "Grisnuage"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 8,
+    "source": "Dors",
+    "target": "Grisnuage",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Dors"
+    ],
+    "target_aliases": [
+      "Grisnuage"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 9,
+    "source": "Dors Venabili",
+    "target": "Hari Seldon",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Dors Venabili",
+      "Maîtresse"
+    ],
+    "target_aliases": [
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 10,
+    "source": "Dors Venabili",
+    "target": "Hari Seldon",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Dors Venabili",
+      "Maîtresse"
+    ],
+    "target_aliases": [
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 10,
+    "source": "Dors Venabili",
+    "target": "Cinna",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Dors Venabili",
+      "Maîtresse"
+    ],
+    "target_aliases": [
+      "Cinna"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 10,
+    "source": "Hari Seldon",
+    "target": "Mycélium Soixante-douze",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ],
+    "target_aliases": [
+      "Mycélium Soixante-douze"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 10,
+    "source": "Hari Seldon",
+    "target": "Cinna",
+    "weight": 3,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ],
+    "target_aliases": [
+      "Cinna"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 10,
+    "source": "Hari Seldon",
+    "target": "Hummin",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ],
+    "target_aliases": [
+      "Hummin"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 10,
+    "source": "Mycélium Soixante-douze",
+    "target": "Lissauer",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Mycélium Soixante-douze"
+    ],
+    "target_aliases": [
+      "Lissauer"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 10,
+    "source": "Mycélium Soixante-douze",
+    "target": "Novigor",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Mycélium Soixante-douze"
+    ],
+    "target_aliases": [
+      "Novigor"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 10,
+    "source": "Lissauer",
+    "target": "Novigor",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Lissauer"
+    ],
+    "target_aliases": [
+      "Novigor"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 11,
+    "source": "Dors Venabili",
+    "target": "Hari Seldon",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "docteur Venabili",
+      "Dors Venabili",
+      "Maîtresse",
+      "Venabili"
+    ],
+    "target_aliases": [
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 11,
+    "source": "Dors Venabili",
+    "target": "Hummin",
+    "weight": 3,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "docteur Venabili",
+      "Dors Venabili",
+      "Maîtresse",
+      "Venabili"
+    ],
+    "target_aliases": [
+      "Hummin"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 11,
+    "source": "Hari Seldon",
+    "target": "Mycélium Soixante-douze",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ],
+    "target_aliases": [
+      "Mycélium Soixante-douze"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 11,
+    "source": "Hari Seldon",
+    "target": "Chetter",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ],
+    "target_aliases": [
+      "Chetter"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 11,
+    "source": "Hari Seldon",
+    "target": "Hummin",
+    "weight": 12,
+    "polarity_label": "ami",
+    "polarity_score": 1.0,
+    "source_aliases": [
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ],
+    "target_aliases": [
+      "Hummin"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 11,
+    "source": "Bendar",
+    "target": "Wendome",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Bendar"
+    ],
+    "target_aliases": [
+      "Wendome"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 11,
+    "source": "Chetter",
+    "target": "Hummin",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Chetter"
+    ],
+    "target_aliases": [
+      "Hummin"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 12,
+    "source": "Dors Venabili",
+    "target": "Hano Lindor",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Maîtresse Venabili",
+      "Dors Venabili",
+      "Maîtresse",
+      "Venabili"
+    ],
+    "target_aliases": [
+      "Hano Lindor",
+      "Lindor"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 12,
+    "source": "Dors Venabili",
+    "target": "Hari Seldon",
+    "weight": 9,
+    "polarity_label": "ami",
+    "polarity_score": 1.0,
+    "source_aliases": [
+      "Maîtresse Venabili",
+      "Dors Venabili",
+      "Maîtresse",
+      "Venabili"
+    ],
+    "target_aliases": [
+      "docteur Seldon",
+      "Maître Seldon",
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 12,
+    "source": "Dors Venabili",
+    "target": "Tisalver",
+    "weight": 16,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Maîtresse Venabili",
+      "Dors Venabili",
+      "Maîtresse",
+      "Venabili"
+    ],
+    "target_aliases": [
+      "Maîtresse Tisalver",
+      "Tisalver"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 12,
+    "source": "Hano Lindor",
+    "target": "Hari Seldon",
+    "weight": 3,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Hano Lindor",
+      "Lindor"
+    ],
+    "target_aliases": [
+      "docteur Seldon",
+      "Maître Seldon",
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 12,
+    "source": "Hano Lindor",
+    "target": "Tisalver",
+    "weight": 3,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Hano Lindor",
+      "Lindor"
+    ],
+    "target_aliases": [
+      "Maîtresse Tisalver",
+      "Tisalver"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 12,
+    "source": "Hari Seldon",
+    "target": "Tisalver",
+    "weight": 21,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "docteur Seldon",
+      "Maître Seldon",
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ],
+    "target_aliases": [
+      "Maîtresse Tisalver",
+      "Tisalver"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 12,
+    "source": "Hari Seldon",
+    "target": "Amaryl",
+    "weight": 8,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "docteur Seldon",
+      "Maître Seldon",
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ],
+    "target_aliases": [
+      "Amaryl"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 12,
+    "source": "Hari Seldon",
+    "target": "Casilia",
+    "weight": 6,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "docteur Seldon",
+      "Maître Seldon",
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ],
+    "target_aliases": [
+      "Casilia"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 12,
+    "source": "Hari Seldon",
+    "target": "Cléon",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "docteur Seldon",
+      "Maître Seldon",
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ],
+    "target_aliases": [
+      "L'Empereur",
+      "l’Empereur",
+      "Empereur",
+      "Cléon"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 12,
+    "source": "Hari Seldon",
+    "target": "Hummin",
+    "weight": 5,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "docteur Seldon",
+      "Maître Seldon",
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ],
+    "target_aliases": [
+      "Hummin"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 12,
+    "source": "Tisalver",
+    "target": "Casilia",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Maîtresse Tisalver",
+      "Tisalver"
+    ],
+    "target_aliases": [
+      "Casilia"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 12,
+    "source": "Tisalver",
+    "target": "Cléon",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Maîtresse Tisalver",
+      "Tisalver"
+    ],
+    "target_aliases": [
+      "L'Empereur",
+      "l’Empereur",
+      "Empereur",
+      "Cléon"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 12,
+    "source": "Cléon",
+    "target": "Demerzel",
+    "weight": 12,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "L'Empereur",
+      "l’Empereur",
+      "Empereur",
+      "Cléon"
+    ],
+    "target_aliases": [
+      "Demerzel"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 13,
+    "source": "Chetter Hummin",
+    "target": "Hari Seldon",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Chetter Hummin",
+      "Hummin"
+    ],
+    "target_aliases": [
+      "Maître Seldon",
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 13,
+    "source": "Chetter Hummin",
+    "target": "Demerzel",
+    "weight": 2,
+    "polarity_label": "ami",
+    "polarity_score": 1.0,
+    "source_aliases": [
+      "Chetter Hummin",
+      "Hummin"
+    ],
+    "target_aliases": [
+      "Demerzel"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 13,
+    "source": "Dors Venabili",
+    "target": "Hari Seldon",
+    "weight": 5,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Maîtresse Venabili",
+      "Dors Venabili",
+      "Maîtresse"
+    ],
+    "target_aliases": [
+      "Maître Seldon",
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 13,
+    "source": "Dors Venabili",
+    "target": "Mère",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Maîtresse Venabili",
+      "Dors Venabili",
+      "Maîtresse"
+    ],
+    "target_aliases": [
+      "Mère Rittah",
+      "Rittah",
+      "Mère"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 13,
+    "source": "Dors Venabili",
+    "target": "Cinna",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Maîtresse Venabili",
+      "Dors Venabili",
+      "Maîtresse"
+    ],
+    "target_aliases": [
+      "Cinna"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 13,
+    "source": "Dors Venabili",
+    "target": "Tisalver",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Maîtresse Venabili",
+      "Dors Venabili",
+      "Maîtresse"
+    ],
+    "target_aliases": [
+      "Tisalver"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 13,
+    "source": "Hari Seldon",
+    "target": "Mère",
+    "weight": 14,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Maître Seldon",
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ],
+    "target_aliases": [
+      "Mère Rittah",
+      "Rittah",
+      "Mère"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 13,
+    "source": "Hari Seldon",
+    "target": "Bouge",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Maître Seldon",
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ],
+    "target_aliases": [
+      "Bouge"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 13,
+    "source": "Hari Seldon",
+    "target": "Casilia",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Maître Seldon",
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ],
+    "target_aliases": [
+      "Casilia"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 13,
+    "source": "Hari Seldon",
+    "target": "Cinna",
+    "weight": 3,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Maître Seldon",
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ],
+    "target_aliases": [
+      "Cinna"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 13,
+    "source": "Hari Seldon",
+    "target": "Marron",
+    "weight": 4,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Maître Seldon",
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ],
+    "target_aliases": [
+      "Marron"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 13,
+    "source": "Hari Seldon",
+    "target": "Raych",
+    "weight": 3,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Maître Seldon",
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ],
+    "target_aliases": [
+      "Raych"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 13,
+    "source": "Hari Seldon",
+    "target": "Tisalver",
+    "weight": 11,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Maître Seldon",
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ],
+    "target_aliases": [
+      "Tisalver"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 13,
+    "source": "Mère",
+    "target": "Cinna",
+    "weight": 3,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Mère Rittah",
+      "Rittah",
+      "Mère"
+    ],
+    "target_aliases": [
+      "Cinna"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 13,
+    "source": "Mère",
+    "target": "Raych",
+    "weight": 8,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Mère Rittah",
+      "Rittah",
+      "Mère"
+    ],
+    "target_aliases": [
+      "Raych"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 13,
+    "source": "Yugo Amaryl",
+    "target": "Demerzel",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Yugo Amaryl"
+    ],
+    "target_aliases": [
+      "Demerzel"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 13,
+    "source": "Casilia",
+    "target": "Tisalver",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Casilia"
+    ],
+    "target_aliases": [
+      "Tisalver"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 13,
+    "source": "Nân",
+    "target": "Raych",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Nân"
+    ],
+    "target_aliases": [
+      "Raych"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 14,
+    "source": "Dors Venabili",
+    "target": "Hari Seldon",
+    "weight": 4,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Maîtresse Venabili",
+      "Dors Venabili",
+      "Maîtresse",
+      "Venabili"
+    ],
+    "target_aliases": [
+      "Hari Seldon",
+      "Seldon"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 14,
+    "source": "Dors Venabili",
+    "target": "Tisalver",
+    "weight": 10,
+    "polarity_label": "ennemi",
+    "polarity_score": -1.0,
+    "source_aliases": [
+      "Maîtresse Venabili",
+      "Dors Venabili",
+      "Maîtresse",
+      "Venabili"
+    ],
+    "target_aliases": [
+      "Maîtresse Tisalver",
+      "Maître Tisalver",
+      "Tisalver"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 14,
+    "source": "Dors Venabili",
+    "target": "Raych",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Maîtresse Venabili",
+      "Dors Venabili",
+      "Maîtresse",
+      "Venabili"
+    ],
+    "target_aliases": [
+      "Raych"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 14,
+    "source": "Hari Seldon",
+    "target": "Davan",
+    "weight": 8,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Hari Seldon",
+      "Seldon"
+    ],
+    "target_aliases": [
+      "Maître Davan",
+      "Davan"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 14,
+    "source": "Hari Seldon",
+    "target": "Tisalver",
+    "weight": 3,
+    "polarity_label": "ennemi",
+    "polarity_score": -1.0,
+    "source_aliases": [
+      "Hari Seldon",
+      "Seldon"
+    ],
+    "target_aliases": [
+      "Maîtresse Tisalver",
+      "Maître Tisalver",
+      "Tisalver"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 14,
+    "source": "Hari Seldon",
+    "target": "Amaryl",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Hari Seldon",
+      "Seldon"
+    ],
+    "target_aliases": [
+      "Yugo Amaryl",
+      "Amaryl"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 14,
+    "source": "Hari Seldon",
+    "target": "Demerzel",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Hari Seldon",
+      "Seldon"
+    ],
+    "target_aliases": [
+      "Demerzel"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 14,
+    "source": "Hari Seldon",
+    "target": "Hummin",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Hari Seldon",
+      "Seldon"
+    ],
+    "target_aliases": [
+      "Hummin"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 14,
+    "source": "Hari Seldon",
+    "target": "Raych",
+    "weight": 6,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Hari Seldon",
+      "Seldon"
+    ],
+    "target_aliases": [
+      "Raych"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 14,
+    "source": "Davan",
+    "target": "Amaryl",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Maître Davan",
+      "Davan"
+    ],
+    "target_aliases": [
+      "Yugo Amaryl",
+      "Amaryl"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 14,
+    "source": "Davan",
+    "target": "Hummin",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Maître Davan",
+      "Davan"
+    ],
+    "target_aliases": [
+      "Hummin"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 14,
+    "source": "Davan",
+    "target": "Raych",
+    "weight": 5,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Maître Davan",
+      "Davan"
+    ],
+    "target_aliases": [
+      "Raych"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 15,
+    "source": "Hari Seldon",
+    "target": "Dors Venabili",
+    "weight": 7,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Hari Seldon d'Hélicon",
+      "Maître Seldon",
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ],
+    "target_aliases": [
+      "Dors Venabili",
+      "Maîtresse"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 15,
+    "source": "Hari Seldon",
+    "target": "Lanel Russ",
+    "weight": 12,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Hari Seldon d'Hélicon",
+      "Maître Seldon",
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ],
+    "target_aliases": [
+      "Lanel Russ",
+      "Russ"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 15,
+    "source": "Hari Seldon",
+    "target": "Tisalver",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Hari Seldon d'Hélicon",
+      "Maître Seldon",
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ],
+    "target_aliases": [
+      "Maîtresse Tisalver",
+      "Tisalver"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 15,
+    "source": "Hari Seldon",
+    "target": "Astinwald",
+    "weight": 6,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Hari Seldon d'Hélicon",
+      "Maître Seldon",
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ],
+    "target_aliases": [
+      "Astinwald"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 15,
+    "source": "Hari Seldon",
+    "target": "Cinna",
+    "weight": 6,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Hari Seldon d'Hélicon",
+      "Maître Seldon",
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ],
+    "target_aliases": [
+      "Cinna"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 15,
+    "source": "Hari Seldon",
+    "target": "Davan",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Hari Seldon d'Hélicon",
+      "Maître Seldon",
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ],
+    "target_aliases": [
+      "Davan"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 15,
+    "source": "Hari Seldon",
+    "target": "Cléon",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Hari Seldon d'Hélicon",
+      "Maître Seldon",
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ],
+    "target_aliases": [
+      "L'Empereur",
+      "l’Empereur",
+      "Empereur",
+      "Cléon"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 15,
+    "source": "Hari Seldon",
+    "target": "Gebore",
+    "weight": 4,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Hari Seldon d'Hélicon",
+      "Maître Seldon",
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ],
+    "target_aliases": [
+      "Gebore"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 15,
+    "source": "Hari Seldon",
+    "target": "Raych",
+    "weight": 9,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Hari Seldon d'Hélicon",
+      "Maître Seldon",
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ],
+    "target_aliases": [
+      "Raych"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 15,
+    "source": "Dors Venabili",
+    "target": "Lanel Russ",
+    "weight": 4,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Dors Venabili",
+      "Maîtresse"
+    ],
+    "target_aliases": [
+      "Lanel Russ",
+      "Russ"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 15,
+    "source": "Dors Venabili",
+    "target": "Tisalver",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Dors Venabili",
+      "Maîtresse"
+    ],
+    "target_aliases": [
+      "Maîtresse Tisalver",
+      "Tisalver"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 15,
+    "source": "Dors Venabili",
+    "target": "Cinna",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Dors Venabili",
+      "Maîtresse"
+    ],
+    "target_aliases": [
+      "Cinna"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 15,
+    "source": "Lanel Russ",
+    "target": "Tisalver",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Lanel Russ",
+      "Russ"
+    ],
+    "target_aliases": [
+      "Maîtresse Tisalver",
+      "Tisalver"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 15,
+    "source": "Lanel Russ",
+    "target": "Astinwald",
+    "weight": 6,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Lanel Russ",
+      "Russ"
+    ],
+    "target_aliases": [
+      "Astinwald"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 15,
+    "source": "Lanel Russ",
+    "target": "Cinna",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Lanel Russ",
+      "Russ"
+    ],
+    "target_aliases": [
+      "Cinna"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 15,
+    "source": "Lanel Russ",
+    "target": "Gebore",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Lanel Russ",
+      "Russ"
+    ],
+    "target_aliases": [
+      "Gebore"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 15,
+    "source": "Lanel Russ",
+    "target": "Raych",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Lanel Russ",
+      "Russ"
+    ],
+    "target_aliases": [
+      "Raych"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 15,
+    "source": "Tisalver",
+    "target": "Casilia",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Maîtresse Tisalver",
+      "Tisalver"
+    ],
+    "target_aliases": [
+      "Casilia"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 15,
+    "source": "Tisalver",
+    "target": "Cléon",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Maîtresse Tisalver",
+      "Tisalver"
+    ],
+    "target_aliases": [
+      "L'Empereur",
+      "l’Empereur",
+      "Empereur",
+      "Cléon"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 15,
+    "source": "Tisalver",
+    "target": "Raych",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Maîtresse Tisalver",
+      "Tisalver"
+    ],
+    "target_aliases": [
+      "Raych"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 15,
+    "source": "Astinwald",
+    "target": "Gebore",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Astinwald"
+    ],
+    "target_aliases": [
+      "Gebore"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 15,
+    "source": "Astinwald",
+    "target": "Raych",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Astinwald"
+    ],
+    "target_aliases": [
+      "Raych"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 15,
+    "source": "Cléon",
+    "target": "Hummin",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "L'Empereur",
+      "l’Empereur",
+      "Empereur",
+      "Cléon"
+    ],
+    "target_aliases": [
+      "Hummin"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 15,
+    "source": "Cléon",
+    "target": "Raych",
+    "weight": 3,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "L'Empereur",
+      "l’Empereur",
+      "Empereur",
+      "Cléon"
+    ],
+    "target_aliases": [
+      "Raych"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 16,
+    "source": "Maire",
+    "target": "Hari Seldon",
+    "weight": 5,
+    "polarity_label": "ennemi",
+    "polarity_score": -1.0,
+    "source_aliases": [
+      "madame le Maire ‖",
+      "madame le Maire",
+      "Maire"
+    ],
+    "target_aliases": [
+      "docteur Seldon",
+      "Maître Seldon",
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 16,
+    "source": "Maire",
+    "target": "Mannix",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "madame le Maire ‖",
+      "madame le Maire",
+      "Maire"
+    ],
+    "target_aliases": [
+      "Mannix IV de Kan",
+      "Mannix IV",
+      "Mannix"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 16,
+    "source": "Maire",
+    "target": "Rachelle",
+    "weight": 4,
+    "polarity_label": "ennemi",
+    "polarity_score": -1.0,
+    "source_aliases": [
+      "madame le Maire ‖",
+      "madame le Maire",
+      "Maire"
+    ],
+    "target_aliases": [
+      "Rachelle"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 16,
+    "source": "Maire",
+    "target": "Raych",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "madame le Maire ‖",
+      "madame le Maire",
+      "Maire"
+    ],
+    "target_aliases": [
+      "Raych"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 16,
+    "source": "Dors Venabili",
+    "target": "Hari Seldon",
+    "weight": 5,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "docteur Dors Venabili",
+      "Dors Venabili",
+      "Maîtresse",
+      "Venabili"
+    ],
+    "target_aliases": [
+      "docteur Seldon",
+      "Maître Seldon",
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 16,
+    "source": "Dors Venabili",
+    "target": "Rachelle",
+    "weight": 3,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "docteur Dors Venabili",
+      "Dors Venabili",
+      "Maîtresse",
+      "Venabili"
+    ],
+    "target_aliases": [
+      "Rachelle"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 16,
+    "source": "Dors Venabili",
+    "target": "Raych",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "docteur Dors Venabili",
+      "Dors Venabili",
+      "Maîtresse",
+      "Venabili"
+    ],
+    "target_aliases": [
+      "Raych"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 16,
+    "source": "Chetter Hummin",
+    "target": "Hari Seldon",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Chetter Hummin",
+      "Hummin"
+    ],
+    "target_aliases": [
+      "docteur Seldon",
+      "Maître Seldon",
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 16,
+    "source": "Chetter Hummin",
+    "target": "Rachelle",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Chetter Hummin",
+      "Hummin"
+    ],
+    "target_aliases": [
+      "Rachelle"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 16,
+    "source": "Emmer Thalus",
+    "target": "Hari Seldon",
+    "weight": 5,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Emmer Thalus",
+      "Thalus"
+    ],
+    "target_aliases": [
+      "docteur Seldon",
+      "Maître Seldon",
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 16,
+    "source": "Emmer Thalus",
+    "target": "Yugo Amaryl",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Emmer Thalus",
+      "Thalus"
+    ],
+    "target_aliases": [
+      "Yugo Amaryl"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 16,
+    "source": "Emmer Thalus",
+    "target": "Davan",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Emmer Thalus",
+      "Thalus"
+    ],
+    "target_aliases": [
+      "Davan"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 16,
+    "source": "Emmer Thalus",
+    "target": "Raych",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Emmer Thalus",
+      "Thalus"
+    ],
+    "target_aliases": [
+      "Raych"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 16,
+    "source": "Hari Seldon",
+    "target": "Mannix",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "docteur Seldon",
+      "Maître Seldon",
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ],
+    "target_aliases": [
+      "Mannix IV de Kan",
+      "Mannix IV",
+      "Mannix"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 16,
+    "source": "Hari Seldon",
+    "target": "Davan",
+    "weight": 6,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "docteur Seldon",
+      "Maître Seldon",
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ],
+    "target_aliases": [
+      "Davan"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 16,
+    "source": "Hari Seldon",
+    "target": "Rachelle",
+    "weight": 12,
+    "polarity_label": "ennemi",
+    "polarity_score": -1.0,
+    "source_aliases": [
+      "docteur Seldon",
+      "Maître Seldon",
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ],
+    "target_aliases": [
+      "Rachelle"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 16,
+    "source": "Hari Seldon",
+    "target": "Raych",
+    "weight": 15,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "docteur Seldon",
+      "Maître Seldon",
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ],
+    "target_aliases": [
+      "Raych"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 16,
+    "source": "Davan",
+    "target": "Raych",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Davan"
+    ],
+    "target_aliases": [
+      "Raych"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 16,
+    "source": "Cléon",
+    "target": "Rachelle",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "L'Empereur",
+      "l’Empereur",
+      "Empereur",
+      "Cléon"
+    ],
+    "target_aliases": [
+      "Rachelle"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 16,
+    "source": "Rachelle",
+    "target": "Raych",
+    "weight": 6,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Rachelle"
+    ],
+    "target_aliases": [
+      "Raych"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 17,
+    "source": "Madame le Maire",
+    "target": "Dors Venabili",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Madame le Maire",
+      "madame Maire"
+    ],
+    "target_aliases": [
+      "Dors Venabili",
+      "Maîtresse",
+      "Venabili"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 17,
+    "source": "Madame le Maire",
+    "target": "Hari Seldon",
+    "weight": 3,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Madame le Maire",
+      "madame Maire"
+    ],
+    "target_aliases": [
+      "Maître Seldon",
+      "Hari Seldon",
+      "Seldon"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 17,
+    "source": "Madame le Maire",
+    "target": "Maire",
+    "weight": 5,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Madame le Maire",
+      "madame Maire"
+    ],
+    "target_aliases": [
+      "madame le Maire ‖",
+      "Maire"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 17,
+    "source": "Madame le Maire",
+    "target": "Raych",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Madame le Maire",
+      "madame Maire"
+    ],
+    "target_aliases": [
+      "Raych"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 17,
+    "source": "Madame le Maire",
+    "target": "Thalus",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Madame le Maire",
+      "madame Maire"
+    ],
+    "target_aliases": [
+      "Thalus"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 17,
+    "source": "Chetter Hummin",
+    "target": "Dors Venabili",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Chetter Hummin",
+      "Hummin"
+    ],
+    "target_aliases": [
+      "Dors Venabili",
+      "Maîtresse",
+      "Venabili"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 17,
+    "source": "Chetter Hummin",
+    "target": "Hari Seldon",
+    "weight": 8,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Chetter Hummin",
+      "Hummin"
+    ],
+    "target_aliases": [
+      "Maître Seldon",
+      "Hari Seldon",
+      "Seldon"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 17,
+    "source": "Chetter Hummin",
+    "target": "Rachelle",
+    "weight": 5,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Chetter Hummin",
+      "Hummin"
+    ],
+    "target_aliases": [
+      "Rachelle Ire",
+      "Rachelle"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 17,
+    "source": "Chetter Hummin",
+    "target": "Demerzel",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Chetter Hummin",
+      "Hummin"
+    ],
+    "target_aliases": [
+      "Demerzel"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 17,
+    "source": "Chetter Hummin",
+    "target": "Raych",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Chetter Hummin",
+      "Hummin"
+    ],
+    "target_aliases": [
+      "Raych"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 17,
+    "source": "Dors Venabili",
+    "target": "Mannix",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Dors Venabili",
+      "Maîtresse",
+      "Venabili"
+    ],
+    "target_aliases": [
+      "Mannix IV de Kan",
+      "Mannix IV",
+      "Mannix"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 17,
+    "source": "Dors Venabili",
+    "target": "Hari Seldon",
+    "weight": 3,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Dors Venabili",
+      "Maîtresse",
+      "Venabili"
+    ],
+    "target_aliases": [
+      "Maître Seldon",
+      "Hari Seldon",
+      "Seldon"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 17,
+    "source": "Dors Venabili",
+    "target": "Rachelle",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Dors Venabili",
+      "Maîtresse",
+      "Venabili"
+    ],
+    "target_aliases": [
+      "Rachelle Ire",
+      "Rachelle"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 17,
+    "source": "Dors Venabili",
+    "target": "Demerzel",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Dors Venabili",
+      "Maîtresse",
+      "Venabili"
+    ],
+    "target_aliases": [
+      "Demerzel"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 17,
+    "source": "Dors Venabili",
+    "target": "Maire",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Dors Venabili",
+      "Maîtresse",
+      "Venabili"
+    ],
+    "target_aliases": [
+      "madame le Maire ‖",
+      "Maire"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 17,
+    "source": "Dors Venabili",
+    "target": "Raych",
+    "weight": 4,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Dors Venabili",
+      "Maîtresse",
+      "Venabili"
+    ],
+    "target_aliases": [
+      "Raych"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 17,
+    "source": "Mannix",
+    "target": "Hari Seldon",
+    "weight": 4,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Mannix IV de Kan",
+      "Mannix IV",
+      "Mannix"
+    ],
+    "target_aliases": [
+      "Maître Seldon",
+      "Hari Seldon",
+      "Seldon"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 17,
+    "source": "Mannix",
+    "target": "Rachelle",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Mannix IV de Kan",
+      "Mannix IV",
+      "Mannix"
+    ],
+    "target_aliases": [
+      "Rachelle Ire",
+      "Rachelle"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 17,
+    "source": "Mannix",
+    "target": "Maire",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Mannix IV de Kan",
+      "Mannix IV",
+      "Mannix"
+    ],
+    "target_aliases": [
+      "madame le Maire ‖",
+      "Maire"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 17,
+    "source": "Mannix",
+    "target": "Raych",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Mannix IV de Kan",
+      "Mannix IV",
+      "Mannix"
+    ],
+    "target_aliases": [
+      "Raych"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 17,
+    "source": "Hari Seldon",
+    "target": "Rachelle",
+    "weight": 7,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Maître Seldon",
+      "Hari Seldon",
+      "Seldon"
+    ],
+    "target_aliases": [
+      "Rachelle Ire",
+      "Rachelle"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 17,
+    "source": "Hari Seldon",
+    "target": "Cléon",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Maître Seldon",
+      "Hari Seldon",
+      "Seldon"
+    ],
+    "target_aliases": [
+      "L'Empereur",
+      "l’Empereur",
+      "Empereur",
+      "Cléon"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 17,
+    "source": "Hari Seldon",
+    "target": "Demerzel",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Maître Seldon",
+      "Hari Seldon",
+      "Seldon"
+    ],
+    "target_aliases": [
+      "Demerzel"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 17,
+    "source": "Hari Seldon",
+    "target": "Hari",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Maître Seldon",
+      "Hari Seldon",
+      "Seldon"
+    ],
+    "target_aliases": [
+      "Hari"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 17,
+    "source": "Hari Seldon",
+    "target": "Maire",
+    "weight": 3,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Maître Seldon",
+      "Hari Seldon",
+      "Seldon"
+    ],
+    "target_aliases": [
+      "madame le Maire ‖",
+      "Maire"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 17,
+    "source": "Hari Seldon",
+    "target": "Raych",
+    "weight": 9,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Maître Seldon",
+      "Hari Seldon",
+      "Seldon"
+    ],
+    "target_aliases": [
+      "Raych"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 17,
+    "source": "Rachelle",
+    "target": "Cléon",
+    "weight": 3,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Rachelle Ire",
+      "Rachelle"
+    ],
+    "target_aliases": [
+      "L'Empereur",
+      "l’Empereur",
+      "Empereur",
+      "Cléon"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 17,
+    "source": "Rachelle",
+    "target": "Demerzel",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Rachelle Ire",
+      "Rachelle"
+    ],
+    "target_aliases": [
+      "Demerzel"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 17,
+    "source": "Rachelle",
+    "target": "Raych",
+    "weight": 4,
+    "polarity_label": "ami",
+    "polarity_score": 1.0,
+    "source_aliases": [
+      "Rachelle Ire",
+      "Rachelle"
+    ],
+    "target_aliases": [
+      "Raych"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 17,
+    "source": "Cléon",
+    "target": "Demerzel",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "L'Empereur",
+      "l’Empereur",
+      "Empereur",
+      "Cléon"
+    ],
+    "target_aliases": [
+      "Demerzel"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 17,
+    "source": "Maire",
+    "target": "Raych",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "madame le Maire ‖",
+      "Maire"
+    ],
+    "target_aliases": [
+      "Raych"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 17,
+    "source": "Maire",
+    "target": "Thalus",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "madame le Maire ‖",
+      "Maire"
+    ],
+    "target_aliases": [
+      "Thalus"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 18,
+    "source": "Mannix",
+    "target": "Maire",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Mannix IV de Kan",
+      "Mannix"
+    ],
+    "target_aliases": [
+      "madame le Maire ‖",
+      "Maire"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 18,
+    "source": "Mannix",
+    "target": "Rachelle",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Mannix IV de Kan",
+      "Mannix"
+    ],
+    "target_aliases": [
+      "Rachelle"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 18,
+    "source": "Hari Seldon",
+    "target": "Raych",
+    "weight": 3,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ],
+    "target_aliases": [
+      "Raych Seldon",
+      "Raych"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 18,
+    "source": "Hari Seldon",
+    "target": "Daneel",
+    "weight": 6,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ],
+    "target_aliases": [
+      "Daneel",
+      "Olivaw"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 18,
+    "source": "Hari Seldon",
+    "target": "Dors",
+    "weight": 12,
+    "polarity_label": "ennemi",
+    "polarity_score": -1.0,
+    "source_aliases": [
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ],
+    "target_aliases": [
+      "Dors"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 18,
+    "source": "Hari Seldon",
+    "target": "Hummin",
+    "weight": 5,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ],
+    "target_aliases": [
+      "Hummin"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 18,
+    "source": "Raych",
+    "target": "Yugo Amaryl",
+    "weight": 2,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Raych Seldon",
+      "Raych"
+    ],
+    "target_aliases": [
+      "Yugo Amaryl"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 18,
+    "source": "Raych",
+    "target": "Dors",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Raych Seldon",
+      "Raych"
+    ],
+    "target_aliases": [
+      "Dors"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 18,
+    "source": "Daneel",
+    "target": "Dors",
+    "weight": 3,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Daneel",
+      "Olivaw"
+    ],
+    "target_aliases": [
+      "Dors"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 18,
+    "source": "Daneel",
+    "target": "Hummin",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Daneel",
+      "Olivaw"
+    ],
+    "target_aliases": [
+      "Hummin"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 18,
+    "source": "Dors",
+    "target": "Hummin",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Dors"
+    ],
+    "target_aliases": [
+      "Hummin"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 18,
+    "source": "Dors",
+    "target": "Maire",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Dors"
+    ],
+    "target_aliases": [
+      "madame le Maire ‖",
+      "Maire"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 18,
+    "source": "Dors",
+    "target": "Rachelle",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "Dors"
+    ],
+    "target_aliases": [
+      "Rachelle"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 18,
+    "source": "Maire",
+    "target": "Rachelle",
+    "weight": 1,
+    "polarity_label": "neutre",
+    "polarity_score": 0.0,
+    "source_aliases": [
+      "madame le Maire ‖",
+      "Maire"
+    ],
+    "target_aliases": [
+      "Rachelle"
+    ]
+  }
+]

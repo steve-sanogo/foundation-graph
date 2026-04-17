@@ -1,0 +1,2508 @@
+[
+  {
+    "book": "lca",
+    "chapter": 0,
+    "id": "Enderby",
+    "label": "JULIUS ENDERBY",
+    "aliases": [
+      "JULIUS ENDERBY",
+      "Enderby",
+      "Julius"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 0,
+    "id": "Sammy",
+    "label": "R. Sammy",
+    "aliases": [
+      "R. Sammy",
+      "Sammy"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 0,
+    "id": "Vince",
+    "label": "Vince Barrett",
+    "aliases": [
+      "Vince Barrett",
+      "Barrett",
+      "Vince"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 0,
+    "id": "Baley",
+    "label": "Elijah",
+    "aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 0,
+    "id": "Jacques",
+    "label": "Jacques",
+    "aliases": [
+      "Jacques"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 0,
+    "id": "Paul",
+    "label": "Paul",
+    "aliases": [
+      "Paul"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 0,
+    "id": "Simpson",
+    "label": "Simpson",
+    "aliases": [
+      "Simpson"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 1,
+    "id": "Daneel",
+    "label": "R. Daneel Olivaw",
+    "aliases": [
+      "R. Daneel Olivaw",
+      "Daneel Olivaw",
+      "R. Daneel",
+      "Daneel",
+      "Olivaw"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 1,
+    "id": "Baley",
+    "label": "Elijah Baley",
+    "aliases": [
+      "Elijah Baley",
+      "Elijah",
+      "Baley",
+      "Lije"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 1,
+    "id": "Enderby",
+    "label": "Julius Enderby",
+    "aliases": [
+      "Julius Enderby",
+      "Enderby",
+      "Julius"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 2,
+    "id": "Daneel",
+    "label": "R. Daneel",
+    "aliases": [
+      "R. Daneel",
+      "Daneel",
+      "Olivaw"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 2,
+    "id": "Baley",
+    "label": "Elijah",
+    "aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 2,
+    "id": "Boris",
+    "label": "Boris",
+    "aliases": [
+      "Boris"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 3,
+    "id": "Bentley",
+    "label": "Bentley Baley",
+    "aliases": [
+      "Bentley Baley",
+      "Bentley"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 3,
+    "id": "Daneel",
+    "label": "Daneel Olivaw",
+    "aliases": [
+      "Daneel Olivaw",
+      "M. Olivaw",
+      "R. Daneel",
+      "Daneel",
+      "Olivaw"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 3,
+    "id": "Julius Enderby",
+    "label": "Julius Enderby",
+    "aliases": [
+      "Julius Enderby"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 3,
+    "id": "Baley",
+    "label": "Lije Baley",
+    "aliases": [
+      "Lije Baley",
+      "Elijah",
+      "Baley",
+      "Lije"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 3,
+    "id": "Baal",
+    "label": "Baal",
+    "aliases": [
+      "Baal"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 3,
+    "id": "Ben",
+    "label": "Ben",
+    "aliases": [
+      "Ben"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 3,
+    "id": "Elie",
+    "label": "Elie",
+    "aliases": [
+      "Elie"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 3,
+    "id": "Jesreel",
+    "label": "Jesreel",
+    "aliases": [
+      "Jesreel"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 3,
+    "id": "Jessie",
+    "label": "Jessie",
+    "aliases": [
+      "Jessie"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 3,
+    "id": "Jéhoram",
+    "label": "Jéhoram",
+    "aliases": [
+      "Jéhoram"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 4,
+    "id": "Dr Sarton",
+    "label": "Dr Sarton",
+    "aliases": [
+      "Dr Sarton"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 4,
+    "id": "Enderby",
+    "label": "Julius Enderby",
+    "aliases": [
+      "Julius Enderby",
+      "Enderby",
+      "Julius"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 4,
+    "id": "Daneel",
+    "label": "R. Daneel",
+    "aliases": [
+      "R. Daneel",
+      "Daneel",
+      "Olivaw"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 4,
+    "id": "Baley",
+    "label": "Elijah",
+    "aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 5,
+    "id": "Daneel",
+    "label": "R. Daneel Olivaw",
+    "aliases": [
+      "R. Daneel Olivaw",
+      "Daneel",
+      "Olivaw"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 5,
+    "id": "Baley",
+    "label": "Elijah Baley",
+    "aliases": [
+      "Elijah Baley",
+      "Elijah",
+      "Baley",
+      "Lije"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 5,
+    "id": "Enderby",
+    "label": "Julius Enderby",
+    "aliases": [
+      "Julius Enderby",
+      "Enderby",
+      "Julius"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 6,
+    "id": "Daneel",
+    "label": "R. Daneel Olivaw",
+    "aliases": [
+      "R. Daneel Olivaw",
+      "Daneel Olivaw",
+      "R. Daneel",
+      "Daneel",
+      "Olivaw"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 6,
+    "id": "Dr Sarton",
+    "label": "Dr Sarton",
+    "aliases": [
+      "Dr Sarton"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 6,
+    "id": "Baley",
+    "label": "Elijah",
+    "aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 6,
+    "id": "Enderby",
+    "label": "Enderby",
+    "aliases": [
+      "Enderby",
+      "Julius"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 6,
+    "id": "Fastolfe",
+    "label": "Fastolfe",
+    "aliases": [
+      "Fastolfe"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 7,
+    "id": "Daneel",
+    "label": "Daneel Olivaw",
+    "aliases": [
+      "Daneel Olivaw",
+      "R. Daneel",
+      "Daneel",
+      "Olivaw"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 7,
+    "id": "Dr Sarton",
+    "label": "Dr Sarton",
+    "aliases": [
+      "Dr Sarton"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 7,
+    "id": "Baley",
+    "label": "Elijah",
+    "aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 7,
+    "id": "Enderby",
+    "label": "Enderby",
+    "aliases": [
+      "Enderby",
+      "Julius"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 7,
+    "id": "Fastolfe",
+    "label": "Fastolfe",
+    "aliases": [
+      "Fastolfe"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 8,
+    "id": "Fastolfe",
+    "label": "Dr Fastolfe",
+    "aliases": [
+      "Dr Fastolfe",
+      "Fastolfe"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 8,
+    "id": "Daneel",
+    "label": "R. Daneel",
+    "aliases": [
+      "R. Daneel",
+      "Daneel",
+      "Olivaw"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 8,
+    "id": "Baley",
+    "label": "Elijah",
+    "aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 9,
+    "id": "Fastolfe",
+    "label": "Dr Fastolfe",
+    "aliases": [
+      "Dr Fastolfe",
+      "Fastolfe"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 9,
+    "id": "Dr Sarton",
+    "label": "Dr Sarton",
+    "aliases": [
+      "Dr Sarton"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 9,
+    "id": "Daneel",
+    "label": "R. Daneel",
+    "aliases": [
+      "R. Daneel",
+      "Daneel",
+      "Olivaw"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 9,
+    "id": "Baley",
+    "label": "Elijah",
+    "aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 9,
+    "id": "Bentley",
+    "label": "Bentley Baley",
+    "aliases": [
+      "Bentley Baley",
+      "Bentley"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 9,
+    "id": "Enderby",
+    "label": "Enderby",
+    "aliases": [
+      "Enderby",
+      "Julius"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 9,
+    "id": "Jessie",
+    "label": "Jessie",
+    "aliases": [
+      "Jessie"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 10,
+    "id": "Baley",
+    "label": "Elijah Baley",
+    "aliases": [
+      "Elijah Baley",
+      "Elijah",
+      "Baley",
+      "Lije"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 10,
+    "id": "Daneel",
+    "label": "R. Daneel",
+    "aliases": [
+      "R. Daneel",
+      "Daneel",
+      "Olivaw"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 10,
+    "id": "Ben",
+    "label": "Ben",
+    "aliases": [
+      "Ben"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 10,
+    "id": "Jessie",
+    "label": "Jessie",
+    "aliases": [
+      "Jessie"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 11,
+    "id": "A. Gerrigel",
+    "label": "A. Gerrigel",
+    "aliases": [
+      "A. Gerrigel",
+      "Gerrigel"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 11,
+    "id": "Francis Clousarr",
+    "label": "Francis Clousarr",
+    "aliases": [
+      "Francis Clousarr"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 11,
+    "id": "Paul Gerhard",
+    "label": "Paul Gerhard",
+    "aliases": [
+      "Paul Gerhard"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 11,
+    "id": "Daneel",
+    "label": "R. Daneel",
+    "aliases": [
+      "R. Daneel",
+      "Daneel",
+      "Olivaw"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 11,
+    "id": "Sammy",
+    "label": "R. Sammy",
+    "aliases": [
+      "R. Sammy",
+      "Sammy"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 11,
+    "id": "Baley",
+    "label": "Elijah",
+    "aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 11,
+    "id": "Enderby",
+    "label": "Enderby",
+    "aliases": [
+      "Enderby",
+      "Julius"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 12,
+    "id": "Dr Fastolfe",
+    "label": "Dr Fastolfe",
+    "aliases": [
+      "Dr Fastolfe"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 12,
+    "id": "Dr Sarton",
+    "label": "Dr Sarton",
+    "aliases": [
+      "Dr Sarton"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 12,
+    "id": "Enderby",
+    "label": "Julius Enderby",
+    "aliases": [
+      "Julius Enderby",
+      "Enderby",
+      "Julius"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 12,
+    "id": "Daneel",
+    "label": "R. Daneel",
+    "aliases": [
+      "R. Daneel",
+      "Daneel",
+      "Olivaw"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 12,
+    "id": "Sammy",
+    "label": "R. Sammy",
+    "aliases": [
+      "R. Sammy",
+      "Sammy"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 12,
+    "id": "Vince",
+    "label": "Vince Barrett",
+    "aliases": [
+      "Vince Barrett",
+      "Barrett",
+      "Vince"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 12,
+    "id": "Baley",
+    "label": "Elijah",
+    "aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 12,
+    "id": "Gerrigel",
+    "label": "Gerrigel",
+    "aliases": [
+      "Gerrigel"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 12,
+    "id": "Norris",
+    "label": "Norris",
+    "aliases": [
+      "Norris"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 12,
+    "id": "Phil",
+    "label": "Phil",
+    "aliases": [
+      "Phil"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 13,
+    "id": "Francis Clousarr",
+    "label": "Francis Clousarr",
+    "aliases": [
+      "Francis Clousarr"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 13,
+    "id": "Jane Myers",
+    "label": "Jane Myers",
+    "aliases": [
+      "Jane Myers"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 13,
+    "id": "Joseph Klemin",
+    "label": "Joseph Klemin",
+    "aliases": [
+      "Joseph Klemin",
+      "Klemin"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 13,
+    "id": "Daneel",
+    "label": "R. Daneel",
+    "aliases": [
+      "R. Daneel",
+      "Daneel",
+      "Olivaw"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 13,
+    "id": "Baley",
+    "label": "Elijah",
+    "aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 13,
+    "id": "Bentley",
+    "label": "Bentley Baley",
+    "aliases": [
+      "Bentley Baley",
+      "Bentley"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 13,
+    "id": "Elisabeth",
+    "label": "Elisabeth",
+    "aliases": [
+      "Elisabeth"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 14,
+    "id": "Dr Fastolfe",
+    "label": "Dr Fastolfe",
+    "aliases": [
+      "Dr Fastolfe"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 14,
+    "id": "Clousarr",
+    "label": "Francis Clousarr",
+    "aliases": [
+      "Francis Clousarr",
+      "M. Clousarr",
+      "Clousarr"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 14,
+    "id": "Daneel",
+    "label": "R. Daneel",
+    "aliases": [
+      "R. Daneel",
+      "Daneel",
+      "Olivaw"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 14,
+    "id": "Sammy",
+    "label": "R. Sammy",
+    "aliases": [
+      "R. Sammy",
+      "Sammy"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 14,
+    "id": "Baley",
+    "label": "Elijah",
+    "aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 14,
+    "id": "Enderby",
+    "label": "Enderby",
+    "aliases": [
+      "Enderby",
+      "Julius"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 15,
+    "id": "Gerrigel",
+    "label": "Docteur Gerrigel",
+    "aliases": [
+      "Docteur Gerrigel",
+      "Gerrigel"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 15,
+    "id": "Daneel",
+    "label": "R. Daneel",
+    "aliases": [
+      "R. Daneel",
+      "Daneel",
+      "Olivaw"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 15,
+    "id": "Sammy",
+    "label": "R. Sammy",
+    "aliases": [
+      "R. Sammy",
+      "Sammy"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 15,
+    "id": "Baley",
+    "label": "Elijah",
+    "aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 15,
+    "id": "Clousarr",
+    "label": "Clousarr",
+    "aliases": [
+      "Clousarr"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 15,
+    "id": "Enderby",
+    "label": "Enderby",
+    "aliases": [
+      "Enderby",
+      "Julius"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 16,
+    "id": "Sarton",
+    "label": "Dr Sarton",
+    "aliases": [
+      "Dr Sarton",
+      "Sarton"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 16,
+    "id": "Baley",
+    "label": "Elijah Baley",
+    "aliases": [
+      "Elijah Baley",
+      "Elijah",
+      "Baley",
+      "Lije"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 16,
+    "id": "Francis Clousarr",
+    "label": "Francis Clousarr",
+    "aliases": [
+      "Francis Clousarr"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 16,
+    "id": "Daneel",
+    "label": "R. Daneel",
+    "aliases": [
+      "R. Daneel",
+      "Daneel",
+      "Olivaw"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 16,
+    "id": "Sammy",
+    "label": "R. Sammy",
+    "aliases": [
+      "R. Sammy",
+      "Sammy"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 16,
+    "id": "Enderby",
+    "label": "Enderby",
+    "aliases": [
+      "Enderby",
+      "Julius"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 17,
+    "id": "Dr Fastolfe",
+    "label": "Dr Fastolfe",
+    "aliases": [
+      "Dr Fastolfe"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 17,
+    "id": "Sarton",
+    "label": "Dr Sarton",
+    "aliases": [
+      "Dr Sarton",
+      "Sarton"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 17,
+    "id": "Enderby",
+    "label": "Julius Enderby",
+    "aliases": [
+      "Julius Enderby",
+      "Enderby",
+      "Julius"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 17,
+    "id": "Daneel",
+    "label": "R. Daneel",
+    "aliases": [
+      "R. Daneel",
+      "Daneel",
+      "Olivaw"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 17,
+    "id": "Sammy",
+    "label": "R. Sammy",
+    "aliases": [
+      "R. Sammy",
+      "Sammy"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 17,
+    "id": "Baley",
+    "label": "Elijah",
+    "aliases": [
+      "Elijah",
+      "Baley",
+      "Lije"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 17,
+    "id": "Clousarr",
+    "label": "Clousarr",
+    "aliases": [
+      "Clousarr"
+    ]
+  },
+  {
+    "book": "lca",
+    "chapter": 17,
+    "id": "Jessie",
+    "label": "Jessie",
+    "aliases": [
+      "Jessie"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 0,
+    "id": "Alban Wellis",
+    "label": "Lieutenant Alban Wellis",
+    "aliases": [
+      "Lieutenant Alban Wellis",
+      "Alban Wellis",
+      "Lieutenant",
+      "Wellis"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 0,
+    "id": "CLÉON Ier",
+    "label": "CLÉON Ier",
+    "aliases": [
+      "CLÉON Ier",
+      "Cléon"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 0,
+    "id": "Demerzel",
+    "label": "Eto Demerzel",
+    "aliases": [
+      "Eto Demerzel",
+      "Demerzel"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 0,
+    "id": "Hari Seldon",
+    "label": "Hari Seldon",
+    "aliases": [
+      "Hari Seldon",
+      "Seldon"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 0,
+    "id": "Cléon",
+    "label": "L'Empereur",
+    "aliases": [
+      "L'Empereur",
+      "l’Empereur",
+      "Empereur",
+      "Cléon"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 0,
+    "id": "Hummin",
+    "label": "Hummin",
+    "aliases": [
+      "Hummin"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 1,
+    "id": "Hari Seldon",
+    "label": "Hari Seldon",
+    "aliases": [
+      "Hari Seldon",
+      "Seldon"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 1,
+    "id": "Alem",
+    "label": "Alem",
+    "aliases": [
+      "Alem"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 1,
+    "id": "Demerzel",
+    "label": "Demerzel",
+    "aliases": [
+      "Demerzel"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 1,
+    "id": "Hummin",
+    "label": "Hummin",
+    "aliases": [
+      "Hummin"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 1,
+    "id": "Marbie",
+    "label": "Marbie",
+    "aliases": [
+      "Marbie"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 2,
+    "id": "Chetter Hummin",
+    "label": "Chetter Hummin",
+    "aliases": [
+      "Chetter Hummin",
+      "Hummin"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 2,
+    "id": "Hari Seldon",
+    "label": "Hari Seldon",
+    "aliases": [
+      "Hari Seldon",
+      "Seldon"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 2,
+    "id": "Demerzel",
+    "label": "Demerzel",
+    "aliases": [
+      "Demerzel"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 2,
+    "id": "Cléon",
+    "label": "L'Empereur",
+    "aliases": [
+      "L'Empereur",
+      "l’Empereur",
+      "Empereur",
+      "Cléon"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 2,
+    "id": "Strelitzia",
+    "label": "Strelitzia",
+    "aliases": [
+      "Strelitzia"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 2,
+    "id": "Suaverose",
+    "label": "Suaverose",
+    "aliases": [
+      "Suaverose"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 3,
+    "id": "Chetter",
+    "label": "Chetter Hummin",
+    "aliases": [
+      "Chetter Hummin",
+      "Chetter",
+      "Hummin"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 3,
+    "id": "Dors",
+    "label": "Dors Venabili",
+    "aliases": [
+      "Dors Venabili",
+      "Venabili",
+      "Dors"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 3,
+    "id": "Hari Seldon",
+    "label": "docteur Seldon",
+    "aliases": [
+      "docteur Seldon",
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 3,
+    "id": "Cinna",
+    "label": "Cinna",
+    "aliases": [
+      "Cinna"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 3,
+    "id": "Cléon",
+    "label": "L'Empereur",
+    "aliases": [
+      "L'Empereur",
+      "l’Empereur",
+      "Empereur",
+      "Cléon"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 3,
+    "id": "Demerzel",
+    "label": "Demerzel",
+    "aliases": [
+      "Demerzel"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 4,
+    "id": "Dors",
+    "label": "Dors Venabili",
+    "aliases": [
+      "Dors Venabili",
+      "Dors"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 4,
+    "id": "Hari Seldon",
+    "label": "Hari Seldon",
+    "aliases": [
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 4,
+    "id": "Jenarr Leggen",
+    "label": "docteur Leggen",
+    "aliases": [
+      "docteur Leggen",
+      "Jenarr Leggen",
+      "Leggen"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 4,
+    "id": "Kiangtow Randa",
+    "label": "Kiangtow Randa",
+    "aliases": [
+      "Kiangtow Randa",
+      "Randa"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 4,
+    "id": "Clowzia",
+    "label": "Clowzia",
+    "aliases": [
+      "Clowzia"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 4,
+    "id": "Hummin",
+    "label": "Hummin",
+    "aliases": [
+      "Hummin"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 4,
+    "id": "Lisung",
+    "label": "Lisung",
+    "aliases": [
+      "Lisung"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 5,
+    "id": "Dors Venabili",
+    "label": "docteur Venabili",
+    "aliases": [
+      "docteur Venabili",
+      "Dors Venabili",
+      "Maîtresse",
+      "Venabili"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 5,
+    "id": "Hari Seldon",
+    "label": "docteur Seldon",
+    "aliases": [
+      "docteur Seldon",
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 5,
+    "id": "Leggen",
+    "label": "docteur Leggen",
+    "aliases": [
+      "docteur Leggen",
+      "Jenarr Leggen",
+      "Jenarr",
+      "Leggen"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 5,
+    "id": "Benastra",
+    "label": "Benastra",
+    "aliases": [
+      "Benastra"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 5,
+    "id": "Clowzia",
+    "label": "Clowzia",
+    "aliases": [
+      "Clowzia"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 6,
+    "id": "Damiano Nord",
+    "label": "Damiano Nord",
+    "aliases": [
+      "Damiano Nord"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 6,
+    "id": "Dors Venabili",
+    "label": "Dors Venabili",
+    "aliases": [
+      "Dors Venabili",
+      "Maîtresse"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 6,
+    "id": "Demerzel",
+    "label": "Eto Demerzel",
+    "aliases": [
+      "Eto Demerzel",
+      "Demerzel"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 6,
+    "id": "Hari Seldon",
+    "label": "Hari Seldon",
+    "aliases": [
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 6,
+    "id": "Leggen",
+    "label": "docteur Leggen",
+    "aliases": [
+      "docteur Leggen",
+      "Jenarr",
+      "Leggen"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 6,
+    "id": "Cléon",
+    "label": "L'Empereur",
+    "aliases": [
+      "L'Empereur",
+      "l’Empereur",
+      "Empereur",
+      "Cléon"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 6,
+    "id": "Hummin",
+    "label": "Hummin",
+    "aliases": [
+      "Hummin"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 6,
+    "id": "Randa",
+    "label": "Randa",
+    "aliases": [
+      "Randa"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 6,
+    "id": "Ziggoreth",
+    "label": "Ziggoreth",
+    "aliases": [
+      "Ziggoreth"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 7,
+    "id": "Chetter Hummin",
+    "label": "Chetter Hummin",
+    "aliases": [
+      "Chetter Hummin",
+      "Hummin"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 7,
+    "id": "Dors Venabili",
+    "label": "Dors Venabili",
+    "aliases": [
+      "Dors Venabili",
+      "Maîtresse"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 7,
+    "id": "Endor Levanian",
+    "label": "Endor Levanian",
+    "aliases": [
+      "Endor Levanian",
+      "Levanian"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 7,
+    "id": "Hari Seldon",
+    "label": "Hari Seldon",
+    "aliases": [
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 7,
+    "id": "Cinna",
+    "label": "Cinna",
+    "aliases": [
+      "Cinna"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 7,
+    "id": "Clowzia",
+    "label": "Clowzia",
+    "aliases": [
+      "Clowzia"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 7,
+    "id": "Grisnuage",
+    "label": "Grisnuage",
+    "aliases": [
+      "Grisnuage"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 8,
+    "id": "Chetter Hummin",
+    "label": "Chetter Hummin",
+    "aliases": [
+      "Chetter Hummin",
+      "Hummin"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 8,
+    "id": "Hari Seldon",
+    "label": "Hari Seldon",
+    "aliases": [
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 8,
+    "id": "Dors",
+    "label": "Dors",
+    "aliases": [
+      "Dors"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 8,
+    "id": "Grisnuage",
+    "label": "Grisnuage",
+    "aliases": [
+      "Grisnuage"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 9,
+    "id": "Dors Venabili",
+    "label": "Dors Venabili",
+    "aliases": [
+      "Dors Venabili",
+      "Maîtresse"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 9,
+    "id": "Hari Seldon",
+    "label": "Hari Seldon",
+    "aliases": [
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 10,
+    "id": "Dors Venabili",
+    "label": "Dors Venabili",
+    "aliases": [
+      "Dors Venabili",
+      "Maîtresse"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 10,
+    "id": "Hari Seldon",
+    "label": "Hari Seldon",
+    "aliases": [
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 10,
+    "id": "Mycélium Soixante-douze",
+    "label": "Mycélium Soixante-douze",
+    "aliases": [
+      "Mycélium Soixante-douze"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 10,
+    "id": "Cinna",
+    "label": "Cinna",
+    "aliases": [
+      "Cinna"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 10,
+    "id": "Hummin",
+    "label": "Hummin",
+    "aliases": [
+      "Hummin"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 10,
+    "id": "Lissauer",
+    "label": "Lissauer",
+    "aliases": [
+      "Lissauer"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 10,
+    "id": "Novigor",
+    "label": "Novigor",
+    "aliases": [
+      "Novigor"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 11,
+    "id": "Dors Venabili",
+    "label": "docteur Venabili",
+    "aliases": [
+      "docteur Venabili",
+      "Dors Venabili",
+      "Maîtresse",
+      "Venabili"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 11,
+    "id": "Hari Seldon",
+    "label": "Hari Seldon",
+    "aliases": [
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 11,
+    "id": "Mycélium Soixante-douze",
+    "label": "Mycélium Soixante-douze",
+    "aliases": [
+      "Mycélium Soixante-douze"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 11,
+    "id": "Bendar",
+    "label": "Bendar",
+    "aliases": [
+      "Bendar"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 11,
+    "id": "Chetter",
+    "label": "Chetter",
+    "aliases": [
+      "Chetter"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 11,
+    "id": "Hummin",
+    "label": "Hummin",
+    "aliases": [
+      "Hummin"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 11,
+    "id": "Wendome",
+    "label": "Wendome",
+    "aliases": [
+      "Wendome"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 12,
+    "id": "Dors Venabili",
+    "label": "Maîtresse Venabili",
+    "aliases": [
+      "Maîtresse Venabili",
+      "Dors Venabili",
+      "Maîtresse",
+      "Venabili"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 12,
+    "id": "Hano Lindor",
+    "label": "Hano Lindor",
+    "aliases": [
+      "Hano Lindor",
+      "Lindor"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 12,
+    "id": "Hari Seldon",
+    "label": "docteur Seldon",
+    "aliases": [
+      "docteur Seldon",
+      "Maître Seldon",
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 12,
+    "id": "Tisalver",
+    "label": "Maîtresse Tisalver",
+    "aliases": [
+      "Maîtresse Tisalver",
+      "Tisalver"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 12,
+    "id": "Amaryl",
+    "label": "Amaryl",
+    "aliases": [
+      "Amaryl"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 12,
+    "id": "Casilia",
+    "label": "Casilia",
+    "aliases": [
+      "Casilia"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 12,
+    "id": "Cléon",
+    "label": "L'Empereur",
+    "aliases": [
+      "L'Empereur",
+      "l’Empereur",
+      "Empereur",
+      "Cléon"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 12,
+    "id": "Demerzel",
+    "label": "Demerzel",
+    "aliases": [
+      "Demerzel"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 12,
+    "id": "Hummin",
+    "label": "Hummin",
+    "aliases": [
+      "Hummin"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 13,
+    "id": "Chetter Hummin",
+    "label": "Chetter Hummin",
+    "aliases": [
+      "Chetter Hummin",
+      "Hummin"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 13,
+    "id": "Dors Venabili",
+    "label": "Maîtresse Venabili",
+    "aliases": [
+      "Maîtresse Venabili",
+      "Dors Venabili",
+      "Maîtresse"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 13,
+    "id": "Hari Seldon",
+    "label": "Maître Seldon",
+    "aliases": [
+      "Maître Seldon",
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 13,
+    "id": "Mère",
+    "label": "Mère Rittah",
+    "aliases": [
+      "Mère Rittah",
+      "Rittah",
+      "Mère"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 13,
+    "id": "Yugo Amaryl",
+    "label": "Yugo Amaryl",
+    "aliases": [
+      "Yugo Amaryl"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 13,
+    "id": "Bouge",
+    "label": "Bouge",
+    "aliases": [
+      "Bouge"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 13,
+    "id": "Casilia",
+    "label": "Casilia",
+    "aliases": [
+      "Casilia"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 13,
+    "id": "Cinna",
+    "label": "Cinna",
+    "aliases": [
+      "Cinna"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 13,
+    "id": "Demerzel",
+    "label": "Demerzel",
+    "aliases": [
+      "Demerzel"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 13,
+    "id": "Marron",
+    "label": "Marron",
+    "aliases": [
+      "Marron"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 13,
+    "id": "Nân",
+    "label": "Nân",
+    "aliases": [
+      "Nân"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 13,
+    "id": "Raych",
+    "label": "Raych",
+    "aliases": [
+      "Raych"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 13,
+    "id": "Tisalver",
+    "label": "Tisalver",
+    "aliases": [
+      "Tisalver"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 14,
+    "id": "Dors Venabili",
+    "label": "Maîtresse Venabili",
+    "aliases": [
+      "Maîtresse Venabili",
+      "Dors Venabili",
+      "Maîtresse",
+      "Venabili"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 14,
+    "id": "Hari Seldon",
+    "label": "Hari Seldon",
+    "aliases": [
+      "Hari Seldon",
+      "Seldon"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 14,
+    "id": "Davan",
+    "label": "Maître Davan",
+    "aliases": [
+      "Maître Davan",
+      "Davan"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 14,
+    "id": "Tisalver",
+    "label": "Maîtresse Tisalver",
+    "aliases": [
+      "Maîtresse Tisalver",
+      "Maître Tisalver",
+      "Tisalver"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 14,
+    "id": "Amaryl",
+    "label": "Yugo Amaryl",
+    "aliases": [
+      "Yugo Amaryl",
+      "Amaryl"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 14,
+    "id": "Demerzel",
+    "label": "Demerzel",
+    "aliases": [
+      "Demerzel"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 14,
+    "id": "Hummin",
+    "label": "Hummin",
+    "aliases": [
+      "Hummin"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 14,
+    "id": "Raych",
+    "label": "Raych",
+    "aliases": [
+      "Raych"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 15,
+    "id": "Hari Seldon",
+    "label": "Hari Seldon d'Hélicon",
+    "aliases": [
+      "Hari Seldon d'Hélicon",
+      "Maître Seldon",
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 15,
+    "id": "Dors Venabili",
+    "label": "Dors Venabili",
+    "aliases": [
+      "Dors Venabili",
+      "Maîtresse"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 15,
+    "id": "Lanel Russ",
+    "label": "Lanel Russ",
+    "aliases": [
+      "Lanel Russ",
+      "Russ"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 15,
+    "id": "Tisalver",
+    "label": "Maîtresse Tisalver",
+    "aliases": [
+      "Maîtresse Tisalver",
+      "Tisalver"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 15,
+    "id": "Astinwald",
+    "label": "Astinwald",
+    "aliases": [
+      "Astinwald"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 15,
+    "id": "Casilia",
+    "label": "Casilia",
+    "aliases": [
+      "Casilia"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 15,
+    "id": "Cinna",
+    "label": "Cinna",
+    "aliases": [
+      "Cinna"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 15,
+    "id": "Davan",
+    "label": "Davan",
+    "aliases": [
+      "Davan"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 15,
+    "id": "Cléon",
+    "label": "L'Empereur",
+    "aliases": [
+      "L'Empereur",
+      "l’Empereur",
+      "Empereur",
+      "Cléon"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 15,
+    "id": "Gebore",
+    "label": "Gebore",
+    "aliases": [
+      "Gebore"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 15,
+    "id": "Hummin",
+    "label": "Hummin",
+    "aliases": [
+      "Hummin"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 15,
+    "id": "Raych",
+    "label": "Raych",
+    "aliases": [
+      "Raych"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 16,
+    "id": "Maire",
+    "label": "madame le Maire ‖",
+    "aliases": [
+      "madame le Maire ‖",
+      "madame le Maire",
+      "Maire"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 16,
+    "id": "Dors Venabili",
+    "label": "docteur Dors Venabili",
+    "aliases": [
+      "docteur Dors Venabili",
+      "Dors Venabili",
+      "Maîtresse",
+      "Venabili"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 16,
+    "id": "Chetter Hummin",
+    "label": "Chetter Hummin",
+    "aliases": [
+      "Chetter Hummin",
+      "Hummin"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 16,
+    "id": "Emmer Thalus",
+    "label": "Emmer Thalus",
+    "aliases": [
+      "Emmer Thalus",
+      "Thalus"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 16,
+    "id": "Hari Seldon",
+    "label": "docteur Seldon",
+    "aliases": [
+      "docteur Seldon",
+      "Maître Seldon",
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 16,
+    "id": "Mannix",
+    "label": "Mannix IV de Kan",
+    "aliases": [
+      "Mannix IV de Kan",
+      "Mannix IV",
+      "Mannix"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 16,
+    "id": "Yugo Amaryl",
+    "label": "Yugo Amaryl",
+    "aliases": [
+      "Yugo Amaryl"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 16,
+    "id": "Davan",
+    "label": "Davan",
+    "aliases": [
+      "Davan"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 16,
+    "id": "Cléon",
+    "label": "L'Empereur",
+    "aliases": [
+      "L'Empereur",
+      "l’Empereur",
+      "Empereur",
+      "Cléon"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 16,
+    "id": "Rachelle",
+    "label": "Rachelle",
+    "aliases": [
+      "Rachelle"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 16,
+    "id": "Raych",
+    "label": "Raych",
+    "aliases": [
+      "Raych"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 17,
+    "id": "Madame le Maire",
+    "label": "Madame le Maire",
+    "aliases": [
+      "Madame le Maire",
+      "madame Maire"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 17,
+    "id": "Chetter Hummin",
+    "label": "Chetter Hummin",
+    "aliases": [
+      "Chetter Hummin",
+      "Hummin"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 17,
+    "id": "Dors Venabili",
+    "label": "Dors Venabili",
+    "aliases": [
+      "Dors Venabili",
+      "Maîtresse",
+      "Venabili"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 17,
+    "id": "Mannix",
+    "label": "Mannix IV de Kan",
+    "aliases": [
+      "Mannix IV de Kan",
+      "Mannix IV",
+      "Mannix"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 17,
+    "id": "Hari Seldon",
+    "label": "Maître Seldon",
+    "aliases": [
+      "Maître Seldon",
+      "Hari Seldon",
+      "Seldon"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 17,
+    "id": "Rachelle",
+    "label": "Rachelle Ire",
+    "aliases": [
+      "Rachelle Ire",
+      "Rachelle"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 17,
+    "id": "Cléon",
+    "label": "L'Empereur",
+    "aliases": [
+      "L'Empereur",
+      "l’Empereur",
+      "Empereur",
+      "Cléon"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 17,
+    "id": "Demerzel",
+    "label": "Demerzel",
+    "aliases": [
+      "Demerzel"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 17,
+    "id": "Hari",
+    "label": "Hari",
+    "aliases": [
+      "Hari"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 17,
+    "id": "Maire",
+    "label": "madame le Maire ‖",
+    "aliases": [
+      "madame le Maire ‖",
+      "Maire"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 17,
+    "id": "Raych",
+    "label": "Raych",
+    "aliases": [
+      "Raych"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 17,
+    "id": "Thalus",
+    "label": "Thalus",
+    "aliases": [
+      "Thalus"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 18,
+    "id": "Mannix",
+    "label": "Mannix IV de Kan",
+    "aliases": [
+      "Mannix IV de Kan",
+      "Mannix"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 18,
+    "id": "Hari Seldon",
+    "label": "Hari Seldon",
+    "aliases": [
+      "Hari Seldon",
+      "Seldon",
+      "Hari"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 18,
+    "id": "Raych",
+    "label": "Raych Seldon",
+    "aliases": [
+      "Raych Seldon",
+      "Raych"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 18,
+    "id": "Yugo Amaryl",
+    "label": "Yugo Amaryl",
+    "aliases": [
+      "Yugo Amaryl"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 18,
+    "id": "Daneel",
+    "label": "Daneel",
+    "aliases": [
+      "Daneel",
+      "Olivaw"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 18,
+    "id": "Dors",
+    "label": "Dors",
+    "aliases": [
+      "Dors"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 18,
+    "id": "Hummin",
+    "label": "Hummin",
+    "aliases": [
+      "Hummin"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 18,
+    "id": "Maire",
+    "label": "madame le Maire ‖",
+    "aliases": [
+      "madame le Maire ‖",
+      "Maire"
+    ]
+  },
+  {
+    "book": "paf",
+    "chapter": 18,
+    "id": "Rachelle",
+    "label": "Rachelle",
+    "aliases": [
+      "Rachelle"
+    ]
+  }
+]
