@@ -976,7 +976,12 @@ async function sendQuestion() {
       body: JSON.stringify({ question, book: askBookFilter })
     });
 
-    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+    if (!resp.ok) {
+      // Read the actual error body from the server instead of just the status code
+      const errBody = await resp.json().catch(() => null);
+      const errMsg  = errBody?.error || `HTTP ${resp.status}`;
+      throw new Error(errMsg);
+    }
     const data = await resp.json();
 
     // Replace thinking with real answer

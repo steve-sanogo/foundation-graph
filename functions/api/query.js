@@ -42,10 +42,12 @@ export async function onRequestPost(context) {
     console.log('[query] intent:', JSON.stringify(intent));
 
     // ── Step 2: Load flat data ───────────────────────────────────────────────
+    // Use the Cloudflare ASSETS binding when available (Pages Functions native).
+    // Falls back to a regular HTTP fetch for local dev (wrangler pages dev).
     const origin = new URL(request.url).origin;
     const [edgesData, nodesData] = await Promise.all([
-      fetchJson(`${origin}/data/edges_flat.json`),
-      fetchJson(`${origin}/data/nodes_flat.json`),
+      fetchAsset(context, `${origin}/data/edges_flat.json`),
+      fetchAsset(context, `${origin}/data/nodes_flat.json`),
     ]);
 
     if (!Array.isArray(edgesData) || !Array.isArray(nodesData)) {
@@ -591,6 +593,33 @@ async function fetchJson(url) {
     throw new Error(`Failed to fetch ${url}: HTTP ${resp.status}`);
   }
   return resp.json();
+}
+
+/**
+ * Fetch a static asset, preferring the Cloudflare ASSETS binding when available.
+ * The ASSETS binding (context.env.ASSETS) is the correct Cloudflare-native way
+ * to read Pages static assets from a Pages Function without a network roundtrip.
+ * Falls back to a plain HTTP fetch for local development.
+ */
+async function fetchAsset(context, url) {
+  if (context.env && context.env.ASSETS) {
+    let resp;
+    try {
+      resp = await context.env.ASSETS.fetch(new Request(url));
+    } catch (err) {
+      throw new Error(`ASSETS fetch failed for ${url}: ${err.message}`);
+    }
+    if (!resp.ok) {
+      throw new Error(
+        `Static asset not found via ASSETS binding: ${url} (HTTP ${resp.status}). ` +
+        'Check that the data/ directory is included in your Pages deployment.'
+      );
+    }
+    return resp.json();
+  }
+
+  // Local dev fallback — no ASSETS binding available
+  return fetchJson(url);
 }
 
 function jsonResponse(body, status, extraHeaders = {}) {
