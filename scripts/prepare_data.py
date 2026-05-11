@@ -12,6 +12,10 @@ Two input modes:
 Output (always):
   frontend/data/edges_flat.json
   frontend/data/nodes_flat.json
+
+Note: Isolated nodes (nodes that do not appear as source or target in any edge)
+are KEPT in the output for later visualization. A diagnostic message reports
+how many isolated nodes were detected per chapter.
 """
 
 import argparse
@@ -29,7 +33,12 @@ NS = "http://graphml.graphdrawing.org/xmlns"
 # ──────────────────────────────────────────────────────────────────────────────
 
 def parse_graphml_string(xml_str: str, book: str, chapter: int):
-    """Return (nodes_list, edges_list) from a raw GraphML string."""
+    """Return (nodes_list, edges_list) from a raw GraphML string.
+
+    All nodes are kept, including isolated ones (nodes that never appear as
+    source or target in an edge). A console message reports the count of
+    isolated nodes detected per chapter.
+    """
     # Handle HTML entities that may be present
     try:
         root = ET.fromstring(xml_str)
@@ -60,7 +69,7 @@ def parse_graphml_string(xml_str: str, book: str, chapter: int):
     if graph_el is None:
         return [], []
 
-    # Nodes
+    # ── Step 1: collect node aliases ──────────────────────────────────────────
     node_aliases = {}   # node_id → [alias, ...]
     for node_el in graph_el.findall(f"{{{NS}}}node"):
         nid = node_el.get("id")
@@ -74,21 +83,14 @@ def parse_graphml_string(xml_str: str, book: str, chapter: int):
                     aliases.insert(0, nid)
         node_aliases[nid] = aliases
 
-    nodes = []
-    for nid, aliases in node_aliases.items():
-        nodes.append({
-            "book": book,
-            "chapter": chapter,
-            "id": nid,
-            "label": aliases[0] if aliases else nid,
-            "aliases": aliases,
-        })
-
-    # Edges
+    # ── Step 2: parse edges and track connected node ids (for diagnostics) ────
+    connected_node_ids = set()
     edges = []
     for edge_el in graph_el.findall(f"{{{NS}}}edge"):
         src = edge_el.get("source")
         tgt = edge_el.get("target")
+        connected_node_ids.add(src)
+        connected_node_ids.add(tgt)
         rec = {
             "book": book,
             "chapter": chapter,
@@ -116,6 +118,22 @@ def parse_graphml_string(xml_str: str, book: str, chapter: int):
             elif attr == "polarity_label":
                 rec["polarity_label"] = val
         edges.append(rec)
+
+    # ── Step 3: build node list — ALL nodes kept, including isolated ones ─────
+    nodes = []
+    for nid, aliases in node_aliases.items():
+        nodes.append({
+            "book": book,
+            "chapter": chapter,
+            "id": nid,
+            "label": aliases[0] if aliases else nid,
+            "aliases": aliases,
+        })
+
+    # Diagnostic: report isolated nodes kept (informative only, no filtering)
+    isolated_count = sum(1 for nid in node_aliases if nid not in connected_node_ids)
+    if isolated_count > 0:
+        print(f"  [INFO] {book} chapter {chapter}: {isolated_count} isolated node(s) kept")
 
     return nodes, edges
 
