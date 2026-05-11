@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Graphes de personnages — Asimov</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<style>
+  :root {
+    --bg: #06080f;
+    --surface: #0d1117;
+    --surface2: #131924;
+    --border: #1e2d45;
+    --accent: #c9a84c;
+    --accent2: #4cc9c9;
+    --accent3: #a84cc9;
+    --text: #d4c9b0;
+    --muted: #5a6a7e;
+    --node-lca: #c9a84c;
+    --node-paf: #4cc9c9;
+    --edge: rgba(180, 160, 100, 0.3);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Crimson Text', serif;
+    min-height: 100vh;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Star field background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: 
+      radial-gradient(1px 1px at 10% 20%, rgba(201,168,76,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 30% 70%, rgba(76,201,201,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 50% 10%, rgba(201,168,76,0.2) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 50%, rgba(76,201,201,0.25) 0%, transparent 100%),
+      radial-gradient(1px 1px at 90% 30%, rgba(201,168,76,0.35) 0%, transparent 100%),
+      radial-gradient(1px 1px at 15% 85%, rgba(76,201,201,0.2) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 65%, rgba(201,168,76,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 80% 80%, rgba(76,201,201,0.15) 0%, transparent 100%),
+      radial-gradient(1px 1px at 40% 40%, rgba(255,255,255,0.1) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 55%, rgba(255,255,255,0.08) 0%, transparent 100%),
+      radial-gradient(1px 1px at 65% 25%, rgba(255,255,255,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 85% 60%, rgba(255,255,255,0.07) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Nebula glow */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse 60% 40% at 15% 50%, rgba(201,168,76,0.04) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 60% at 85% 30%, rgba(76,201,201,0.04) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 30% at 50% 90%, rgba(168,76,201,0.03) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .layout {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    grid-template-rows: auto 1fr;
+    height: 100vh;
+  }
+
+  /* HEADER */
+  .header {
+    grid-column: 1 / -1;
+    padding: 18px 32px 16px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(6,8,15,0.8);
+    backdrop-filter: blur(12px);
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+  }
+
+  .header-title {
+    font-family: 'Cinzel', serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    background: linear-gradient(135deg, var(--accent) 0%, #f0d080 50%, var(--accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .header-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+
+  /* SIDEBAR */
+  .sidebar {
+    background: rgba(13,17,23,0.85);
+    border-right: 1px solid var(--border);
+    backdrop-filter: blur(16px);
+    padding: 24px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    overflow-y: auto;
+  }
+
+  .control-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .control-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* Book selector */
+  .book-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .book-tab {
+    padding: 10px 8px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    text-align: center;
+  }
+
+  .book-tab:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .book-tab.active-lca {
+    background: rgba(201,168,76,0.12);
+    border-color: var(--accent);
+    color: var(--accent);
+    box-shadow: 0 0 12px rgba(201,168,76,0.15);
+  }
+
+  .book-tab.active-paf {
+    background: rgba(76,201,201,0.12);
+    border-color: var(--accent2);
+    color: var(--accent2);
+    box-shadow: 0 0 12px rgba(76,201,201,0.15);
+  }
+
+  .book-tab-title {
+    font-size: 13px;
+    font-weight: 600;
+    display: block;
+  }
+
+  .book-tab-subtitle {
+    font-family: 'Crimson Text', serif;
+    font-size: 10px;
+    font-style: italic;
+    opacity: 0.7;
+    display: block;
+    margin-top: 2px;
+  }
+
+  /* Chapter selector */
+  .chapter-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 5px;
+  }
+
+  .chap-btn {
+    aspect-ratio: 1;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: all 0.18s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .chap-btn:hover {
+    border-color: var(--accent);
+    color: var(--text);
+  }
+
+  .chap-btn.active-lca {
+    background: rgba(201,168,76,0.2);
+    border-color: var(--accent);
+    color: var(--accent);
+    font-weight: 600;
+    box-shadow: 0 0 8px rgba(201,168,76,0.2);
+  }
+
+  .chap-btn.active-paf {
+    background: rgba(76,201,201,0.2);
+    border-color: var(--accent2);
+    color: var(--accent2);
+    font-weight: 600;
+    box-shadow: 0 0 8px rgba(76,201,201,0.2);
+  }
+
+  /* Stats panel */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .stat-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 10px 12px;
+  }
+
+  .stat-value {
+    font-family: 'Cinzel', serif;
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 3px;
+  }
+
+  /* Top characters */
+  .char-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .char-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 8px;
+    border-radius: 3px;
+    background: var(--surface2);
+    border: 1px solid transparent;
+    transition: border-color 0.15s;
+  }
+
+  .char-row:hover {
+    border-color: var(--border);
+  }
+
+  .char-rank {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--muted);
+    width: 14px;
+    flex-shrink: 0;
+  }
+
+  .char-bar-wrap {
+    flex: 1;
+    height: 3px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .char-bar {
+    height: 100%;
+    border-radius: 2px;
+    transition: width 0.4s ease;
+  }
+
+  .char-name {
+    font-size: 13px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 120px;
+  }
+
+  .char-weight {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    flex-shrink: 0;
+  }
+
+  /* GRAPH AREA */
+  .graph-area {
+    position: relative;
+    overflow: hidden;
+    background: transparent;
+  }
+
+  #graph-svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .node-circle {
+    cursor: pointer;
+    transition: filter 0.2s;
+  }
+
+  .node-circle:hover {
+    filter: brightness(1.4);
+  }
+
+  .node-label {
+    font-family: 'Crimson Text', serif;
+    font-size: 12px;
+    fill: var(--text);
+    pointer-events: none;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.9);
+    paint-order: stroke fill;
+    stroke: rgba(6,8,15,0.85);
+    stroke-width: 3px;
+    stroke-linejoin: round;
+  }
+
+  .edge-line {
+    stroke: rgba(201,168,76,0.25);
+    pointer-events: none;
+  }
+
+  /* Tooltip */
+  .tooltip {
+    position: absolute;
+    background: rgba(13,17,23,0.95);
+    border: 1px solid var(--border);
+    padding: 10px 14px;
+    border-radius: 6px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.15s;
+    max-width: 220px;
+    backdrop-filter: blur(8px);
+    z-index: 100;
+  }
+
+  .tooltip.visible { opacity: 1; }
+
+  .tooltip-name {
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+
+  .tooltip-aliases {
+    font-size: 11px;
+    color: var(--muted);
+    font-style: italic;
+    line-height: 1.4;
+    margin-bottom: 5px;
+  }
+
+  .tooltip-degree {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--accent2);
+  }
+
+  /* Chapter title overlay */
+  .chapter-overlay {
+    position: absolute;
+    bottom: 24px;
+    right: 24px;
+    text-align: right;
+    pointer-events: none;
+  }
+
+  .chapter-id {
+    font-family: 'Cinzel', serif;
+    font-size: 42px;
+    font-weight: 700;
+    opacity: 0.06;
+    letter-spacing: 0.06em;
+    line-height: 1;
+  }
+
+  /* Loading state */
+  .loading {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 16px;
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+  }
+
+  .loading-ring {
+    width: 36px;
+    height: 36px;
+    border: 2px solid var(--border);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  /* Legend */
+  .legend {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 4px;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+  }
+
+  .legend-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+
+  .empty-state {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    color: var(--muted);
+  }
+
+  .empty-state-icon {
+    font-size: 48px;
+    opacity: 0.2;
+  }
+
+  .empty-state-text {
+    font-family: 'Cinzel', serif;
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    opacity: 0.4;
+  }
+</style>
+</head>
+<body>
+
+<div class="layout">
+  <header class="header">
+    <div class="header-title">RÉSEAU DE PERSONNAGES</div>
+    <div class="header-sub">Co-occurrences par chapitre · Isaac Asimov</div>
+    <div style="margin-left:auto;" class="legend">
+      <div class="legend-item">
+        <div class="legend-dot" style="background:var(--node-lca)"></div>
+        <span>Les Cavernes d'Acier</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:var(--node-paf)"></div>
+        <span>Prélude à Foundation</span>
+      </div>
+    </div>
+  </header>
+
+  <aside class="sidebar">
+    <div class="control-section">
+      <div class="control-label">Ouvrage</div>
+      <div class="book-tabs">
+        <button class="book-tab active-lca" data-book="lca" onclick="selectBook('lca')">
+          <span class="book-tab-title">LCA</span>
+          <span class="book-tab-subtitle">Les Cavernes d'Acier</span>
+        </button>
+        <button class="book-tab" data-book="paf" onclick="selectBook('paf')">
+          <span class="book-tab-title">PAF</span>
+          <span class="book-tab-subtitle">Prélude à Foundation</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="control-section">
+      <div class="control-label">Chapitre</div>
+      <div class="chapter-grid" id="chapter-grid"></div>
+    </div>
+
+    <div class="control-section">
+      <div class="control-label">Statistiques</div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-value" id="stat-nodes" style="color:var(--accent)">—</div>
+          <div class="stat-label">Personnages</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="stat-edges" style="color:var(--accent2)">—</div>
+          <div class="stat-label">Liens</div>
+        </div>
+        <div class="stat-card" style="grid-column: 1 / -1;">
+          <div class="stat-value" id="stat-density" style="color:var(--accent3); font-size:18px">—</div>
+          <div class="stat-label">Poids total des interactions</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="control-section">
+      <div class="control-label">Personnages principaux</div>
+      <div class="char-list" id="char-list">
+        <div style="font-size:12px;color:var(--muted);text-align:center;padding:12px 0;font-style:italic;">
+          Sélectionnez un chapitre
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="graph-area">
+    <div class="loading" id="loading-state">
+      <div>Sélectionnez un chapitre pour visualiser le graphe</div>
+    </div>
+    <svg id="graph-svg"></svg>
+    <div class="tooltip" id="tooltip"></div>
+    <div class="chapter-overlay">
+      <div class="chapter-id" id="chapter-id-display"></div>
+    </div>
+  </main>
+</div>
+
+<script>
+// ============================================================
+// EMBEDDED DATA
+// ============================================================
+const GRAPH_DATA = {"lca":{"0":"<graphml xmlns=\"http://graphml.graphdrawing.org/xmlns\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd\">  <key id=\"d3\" for=\"edge\" attr.name=\"polarity_label\" attr.type=\"string\" />  <key id=\"d2\" for=\"edge\" attr.name=\"polarity_score\" attr.type=\"double\" />  <key id=\"d1\" for=\"edge\" attr.name=\"weight\" attr.type=\"long\" />  <key id=\"d0\" for=\"node\" attr.name=\"names\" attr.type=\"string\" />  <graph edgedefault=\"undirected\">    <node id=\"Roj Nemennuh Sarton\">      <data key=\"d0\">Roj Nemennuh Sarton</data>    </node>    <node id=\"Enderby\">      <data key=\"d0\">JULIUS ENDERBY;Enderby;Julius</data>    </node>    <node id=\"Sammy\">      <data key=\"d0\">R. Sammy;Sammy</data>    </node>    <node id=\"Robot Daneel\">      <data key=\"d0\">Robot Daneel</data>    </node>    <node id=\"Vince\">      <data key=\"d0\">Vince Barrett;Barrett;Vince</data>    </node>    <node id=\"Baley\">      <data key=\"d0\">Elijah;Baley;Lije</data>    </node>    <node id=\"Jacques\">      <data key=\"d0\">Jacques</data>    </node>    <node id=\"Jessie\">      <data key=\"d0\">Jessie</data>    </node>    <node id=\"Paul\">      <data key=\"d0\">Paul</data>    </node>    <node id=\"Simpson\">      <data key=\"d0\">Simpson</data>    </node>    <edge source=\"Enderby\" target=\"Baley\">      <data key=\"d1\">6</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Sammy\" target=\"Vince\">      <data key=\"d1\">2</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Sammy\" target=\"Simpson\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Baley\" target=\"Jacques\">      <data key=\"d1\">2</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Baley\" target=\"Paul\">      <data key=\"d1\">2</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Jacques\" target=\"Paul\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>  </graph></graphml>","1":"<graphml xmlns=\"http://graphml.graphdrawing.org/xmlns\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd\">  <key id=\"d3\" for=\"edge\" attr.name=\"polarity_label\" attr.type=\"string\" />  <key id=\"d2\" for=\"edge\" attr.name=\"polarity_score\" attr.type=\"double\" />  <key id=\"d1\" for=\"edge\" attr.name=\"weight\" attr.type=\"long\" />  <key id=\"d0\" for=\"node\" attr.name=\"names\" attr.type=\"string\" />  <graph edgedefault=\"undirected\">    <node id=\"Daneel\">      <data key=\"d0\">R. Daneel Olivaw;Daneel Olivaw;R. Daneel;Daneel;Olivaw</data>    </node>    <node id=\"Baley\">      <data key=\"d0\">Elijah Baley;Elijah;Baley;Lije</data>    </node>    <node id=\"Enderby\">      <data key=\"d0\">Julius Enderby;Enderby;Julius</data>    </node>    <node id=\"R. Sammy\">      <data key=\"d0\">R. Sammy</data>    </node>    <edge source=\"Daneel\" target=\"Baley\">      <data key=\"d1\">5</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Baley\" target=\"Enderby\">      <data key=\"d1\">2</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>  </graph></graphml>","2":"<graphml xmlns=\"http://graphml.graphdrawing.org/xmlns\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd\">  <key id=\"d3\" for=\"edge\" attr.name=\"polarity_label\" attr.type=\"string\" />  <key id=\"d2\" for=\"edge\" attr.name=\"polarity_score\" attr.type=\"double\" />  <key id=\"d1\" for=\"edge\" attr.name=\"weight\" attr.type=\"long\" />  <key id=\"d0\" for=\"node\" attr.name=\"names\" attr.type=\"string\" />  <graph edgedefault=\"undirected\">    <node id=\"Daneel\">      <data key=\"d0\">R. Daneel;Daneel;Olivaw</data>    </node>    <node id=\"Baley\">      <data key=\"d0\">Elijah;Baley;Lije</data>    </node>    <node id=\"Boris\">      <data key=\"d0\">Boris</data>    </node>    <edge source=\"Daneel\" target=\"Baley\">      <data key=\"d1\">2</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Baley\" target=\"Boris\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>  </graph></graphml>","3":"<graphml xmlns=\"http://graphml.graphdrawing.org/xmlns\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd\">  <key id=\"d3\" for=\"edge\" attr.name=\"polarity_label\" attr.type=\"string\" />  <key id=\"d2\" for=\"edge\" attr.name=\"polarity_score\" attr.type=\"double\" />  <key id=\"d1\" for=\"edge\" attr.name=\"weight\" attr.type=\"long\" />  <key id=\"d0\" for=\"node\" attr.name=\"names\" attr.type=\"string\" />  <graph edgedefault=\"undirected\">    <node id=\"Bentley\">      <data key=\"d0\">Bentley Baley;Bentley</data>    </node>    <node id=\"Daneel\">      <data key=\"d0\">Daneel Olivaw;M. Olivaw;R. Daneel;Daneel;Olivaw</data>    </node>    <node id=\"Julius Enderby\">      <data key=\"d0\">Julius Enderby</data>    </node>    <node id=\"Baley\">      <data key=\"d0\">Lije Baley;Elijah;Baley;Lije</data>    </node>    <node id=\"Baal\">      <data key=\"d0\">Baal</data>    </node>    <node id=\"Ben\">      <data key=\"d0\">Ben</data>    </node>    <node id=\"Elie\">      <data key=\"d0\">Elie</data>    </node>    <node id=\"Jesreel\">      <data key=\"d0\">Jesreel</data>    </node>    <node id=\"Jessie\">      <data key=\"d0\">Jessie</data>    </node>    <node id=\"J&#233;horam\">      <data key=\"d0\">J&#233;horam</data>    </node>    <edge source=\"Bentley\" target=\"Daneel\">      <data key=\"d1\">6</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Bentley\" target=\"Baley\">      <data key=\"d1\">10</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Bentley\" target=\"Ben\">      <data key=\"d1\">2</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Daneel\" target=\"Baley\">      <data key=\"d1\">12</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Daneel\" target=\"Ben\">      <data key=\"d1\">4</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Daneel\" target=\"Jessie\">      <data key=\"d1\">4</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Julius Enderby\" target=\"Baley\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Julius Enderby\" target=\"Jessie\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Baley\" target=\"Ben\">      <data key=\"d1\">2</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Baley\" target=\"Elie\">      <data key=\"d1\">3</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Baley\" target=\"Jessie\">      <data key=\"d1\">3</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Baal\" target=\"Elie\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>  </graph></graphml>","4":"<graphml xmlns=\"http://graphml.graphdrawing.org/xmlns\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd\">  <key id=\"d3\" for=\"edge\" attr.name=\"polarity_label\" attr.type=\"string\" />  <key id=\"d2\" for=\"edge\" attr.name=\"polarity_score\" attr.type=\"double\" />  <key id=\"d1\" for=\"edge\" attr.name=\"weight\" attr.type=\"long\" />  <key id=\"d0\" for=\"node\" attr.name=\"names\" attr.type=\"string\" />  <graph edgedefault=\"undirected\">    <node id=\"Dr Sarton\">      <data key=\"d0\">Dr Sarton</data>    </node>    <node id=\"Enderby\">      <data key=\"d0\">Julius Enderby;Enderby;Julius</data>    </node>    <node id=\"Daneel\">      <data key=\"d0\">R. Daneel;Daneel;Olivaw</data>    </node>    <node id=\"Baley\">      <data key=\"d0\">Elijah;Baley;Lije</data>    </node>    <node id=\"Ben\">      <data key=\"d0\">Ben</data>    </node>    <edge source=\"Dr Sarton\" target=\"Daneel\">      <data key=\"d1\">2</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Dr Sarton\" target=\"Baley\">      <data key=\"d1\">2</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Daneel\" target=\"Baley\">      <data key=\"d1\">5</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>  </graph></graphml>","5":"<graphml xmlns=\"http://graphml.graphdrawing.org/xmlns\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd\">  <key id=\"d3\" for=\"edge\" attr.name=\"polarity_label\" attr.type=\"string\" />  <key id=\"d2\" for=\"edge\" attr.name=\"polarity_score\" attr.type=\"double\" />  <key id=\"d1\" for=\"edge\" attr.name=\"weight\" attr.type=\"long\" />  <key id=\"d0\" for=\"node\" attr.name=\"names\" attr.type=\"string\" />  <graph edgedefault=\"undirected\">    <node id=\"Daneel\">      <data key=\"d0\">R. Daneel Olivaw;Daneel;Olivaw</data>    </node>    <node id=\"Baley\">      <data key=\"d0\">Elijah Baley;Elijah;Baley;Lije</data>    </node>    <node id=\"Enderby\">      <data key=\"d0\">Julius Enderby;Enderby;Julius</data>    </node>    <node id=\"Bentley\">      <data key=\"d0\">Bentley Baley;Bentley</data>    </node>    <edge source=\"Daneel\" target=\"Baley\">      <data key=\"d1\">2</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Baley\" target=\"Enderby\">      <data key=\"d1\">5</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>  </graph></graphml>","6":"<graphml xmlns=\"http://graphml.graphdrawing.org/xmlns\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd\">  <key id=\"d3\" for=\"edge\" attr.name=\"polarity_label\" attr.type=\"string\" />  <key id=\"d2\" for=\"edge\" attr.name=\"polarity_score\" attr.type=\"double\" />  <key id=\"d1\" for=\"edge\" attr.name=\"weight\" attr.type=\"long\" />  <key id=\"d0\" for=\"node\" attr.name=\"names\" attr.type=\"string\" />  <graph edgedefault=\"undirected\">    <node id=\"Daneel\">      <data key=\"d0\">R. Daneel Olivaw;Daneel Olivaw;R. Daneel;Daneel;Olivaw</data>    </node>    <node id=\"Dr Sarton\">      <data key=\"d0\">Dr Sarton</data>    </node>    <node id=\"R. Sammy\">      <data key=\"d0\">R. Sammy</data>    </node>    <node id=\"Baley\">      <data key=\"d0\">Elijah;Baley;Lije</data>    </node>    <node id=\"Enderby\">      <data key=\"d0\">Enderby;Julius</data>    </node>    <node id=\"Fastolfe\">      <data key=\"d0\">Fastolfe</data>    </node>    <edge source=\"Daneel\" target=\"Baley\">      <data key=\"d1\">11</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Daneel\" target=\"Enderby\">      <data key=\"d1\">2</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Daneel\" target=\"Fastolfe\">      <data key=\"d1\">3</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Dr Sarton\" target=\"Baley\">      <data key=\"d1\">2</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Dr Sarton\" target=\"Enderby\">      <data key=\"d1\">2</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Baley\" target=\"Enderby\">      <data key=\"d1\">4</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Baley\" target=\"Fastolfe\">      <data key=\"d1\">4</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Enderby\" target=\"Fastolfe\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>  </graph></graphml>","7":"<graphml xmlns=\"http://graphml.graphdrawing.org/xmlns\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd\">  <key id=\"d3\" for=\"edge\" attr.name=\"polarity_label\" attr.type=\"string\" />  <key id=\"d2\" for=\"edge\" attr.name=\"polarity_score\" attr.type=\"double\" />  <key id=\"d1\" for=\"edge\" attr.name=\"weight\" attr.type=\"long\" />  <key id=\"d0\" for=\"node\" attr.name=\"names\" attr.type=\"string\" />  <graph edgedefault=\"undirected\">    <node id=\"Daneel\">      <data key=\"d0\">Daneel Olivaw;R. Daneel;Daneel;Olivaw</data>    </node>    <node id=\"Dr Sarton\">      <data key=\"d0\">Dr Sarton</data>    </node>    <node id=\"Baley\">      <data key=\"d0\">Elijah;Baley;Lije</data>    </node>    <node id=\"Enderby\">      <data key=\"d0\">Enderby;Julius</data>    </node>    <node id=\"Fastolfe\">      <data key=\"d0\">Fastolfe</data>    </node>    <edge source=\"Daneel\" target=\"Dr Sarton\">      <data key=\"d1\">3</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Daneel\" target=\"Baley\">      <data key=\"d1\">11</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Daneel\" target=\"Enderby\">      <data key=\"d1\">4</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Daneel\" target=\"Fastolfe\">      <data key=\"d1\">7</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Dr Sarton\" target=\"Baley\">      <data key=\"d1\">3</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Dr Sarton\" target=\"Enderby\">      <data key=\"d1\">4</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Dr Sarton\" target=\"Fastolfe\">      <data key=\"d1\">3</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Baley\" target=\"Enderby\">      <data key=\"d1\">5</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Baley\" target=\"Fastolfe\">      <data key=\"d1\">7</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Enderby\" target=\"Fastolfe\">      <data key=\"d1\">5</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>  </graph></graphml>","8":"<graphml xmlns=\"http://graphml.graphdrawing.org/xmlns\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd\">  <key id=\"d3\" for=\"edge\" attr.name=\"polarity_label\" attr.type=\"string\" />  <key id=\"d2\" for=\"edge\" attr.name=\"polarity_score\" attr.type=\"double\" />  <key id=\"d1\" for=\"edge\" attr.name=\"weight\" attr.type=\"long\" />  <key id=\"d0\" for=\"node\" attr.name=\"names\" attr.type=\"string\" />  <graph edgedefault=\"undirected\">    <node id=\"Fastolfe\">      <data key=\"d0\">Dr Fastolfe;Fastolfe</data>    </node>    <node id=\"Daneel\">      <data key=\"d0\">R. Daneel;Daneel;Olivaw</data>    </node>    <node id=\"Baley\">      <data key=\"d0\">Elijah;Baley;Lije</data>    </node>    <edge source=\"Fastolfe\" target=\"Daneel\">      <data key=\"d1\">2</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Fastolfe\" target=\"Baley\">      <data key=\"d1\">7</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Daneel\" target=\"Baley\">      <data key=\"d1\">4</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>  </graph></graphml>","9":"<graphml xmlns=\"http://graphml.graphdrawing.org/xmlns\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd\">  <key id=\"d3\" for=\"edge\" attr.name=\"polarity_label\" attr.type=\"string\" />  <key id=\"d2\" for=\"edge\" attr.name=\"polarity_score\" attr.type=\"double\" />  <key id=\"d1\" for=\"edge\" attr.name=\"weight\" attr.type=\"long\" />  <key id=\"d0\" for=\"node\" attr.name=\"names\" attr.type=\"string\" />  <graph edgedefault=\"undirected\">    <node id=\"Fastolfe\">      <data key=\"d0\">Dr Fastolfe;Fastolfe</data>    </node>    <node id=\"Dr Sarton\">      <data key=\"d0\">Dr Sarton</data>    </node>    <node id=\"Daneel\">      <data key=\"d0\">R. Daneel;Daneel;Olivaw</data>    </node>    <node id=\"Baley\">      <data key=\"d0\">Elijah;Baley;Lije</data>    </node>    <node id=\"Bentley\">      <data key=\"d0\">Bentley Baley;Bentley</data>    </node>    <node id=\"Enderby\">      <data key=\"d0\">Enderby;Julius</data>    </node>    <node id=\"Jessie\">      <data key=\"d0\">Jessie</data>    </node>    <edge source=\"Fastolfe\" target=\"Baley\">      <data key=\"d1\">1</data>      <data key=\"d2\">1.0</data>      <data key=\"d3\">ami</data>    </edge>    <edge source=\"Fastolfe\" target=\"Bentley\">      <data key=\"d1\">2</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Dr Sarton\" target=\"Baley\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Dr Sarton\" target=\"Enderby\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Daneel\" target=\"Baley\">      <data key=\"d1\">7</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Daneel\" target=\"Jessie\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Baley\" target=\"Jessie\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>  </graph></graphml>","10":"<graphml xmlns=\"http://graphml.graphdrawing.org/xmlns\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd\">  <key id=\"d3\" for=\"edge\" attr.name=\"polarity_label\" attr.type=\"string\" />  <key id=\"d2\" for=\"edge\" attr.name=\"polarity_score\" attr.type=\"double\" />  <key id=\"d1\" for=\"edge\" attr.name=\"weight\" attr.type=\"long\" />  <key id=\"d0\" for=\"node\" attr.name=\"names\" attr.type=\"string\" />  <graph edgedefault=\"undirected\">    <node id=\"Baley\">      <data key=\"d0\">Elijah Baley;Elijah;Baley;Lije</data>    </node>    <node id=\"Daneel\">      <data key=\"d0\">R. Daneel;Daneel;Olivaw</data>    </node>    <node id=\"Ben\">      <data key=\"d0\">Ben</data>    </node>    <node id=\"Jessie\">      <data key=\"d0\">Jessie</data>    </node>    <edge source=\"Baley\" target=\"Daneel\">      <data key=\"d1\">10</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Baley\" target=\"Ben\">      <data key=\"d1\">3</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Baley\" target=\"Jessie\">      <data key=\"d1\">2</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>  </graph></graphml>","11":"<graphml xmlns=\"http://graphml.graphdrawing.org/xmlns\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd\">  <key id=\"d3\" for=\"edge\" attr.name=\"polarity_label\" attr.type=\"string\" />  <key id=\"d2\" for=\"edge\" attr.name=\"polarity_score\" attr.type=\"double\" />  <key id=\"d1\" for=\"edge\" attr.name=\"weight\" attr.type=\"long\" />  <key id=\"d0\" for=\"node\" attr.name=\"names\" attr.type=\"string\" />  <graph edgedefault=\"undirected\">    <node id=\"A. Gerrigel\">      <data key=\"d0\">A. Gerrigel;Gerrigel</data>    </node>    <node id=\"Francis Clousarr\">      <data key=\"d0\">Francis Clousarr</data>    </node>    <node id=\"Paul Gerhard\">      <data key=\"d0\">Paul Gerhard</data>    </node>    <node id=\"Daneel\">      <data key=\"d0\">R. Daneel;Daneel;Olivaw</data>    </node>    <node id=\"Sammy\">      <data key=\"d0\">R. Sammy;Sammy</data>    </node>    <node id=\"Baley\">      <data key=\"d0\">Elijah;Baley;Lije</data>    </node>    <node id=\"Chester\">      <data key=\"d0\">Chester</data>    </node>    <node id=\"Enderby\">      <data key=\"d0\">Enderby;Julius</data>    </node>    <edge source=\"A. Gerrigel\" target=\"Daneel\">      <data key=\"d1\">3</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"A. Gerrigel\" target=\"Baley\">      <data key=\"d1\">5</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Francis Clousarr\" target=\"Baley\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Paul Gerhard\" target=\"Baley\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Daneel\" target=\"Baley\">      <data key=\"d1\">4</data>      <data key=\"d2\">-1.0</data>      <data key=\"d3\">ennemi</data>    </edge>    <edge source=\"Sammy\" target=\"Baley\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Baley\" target=\"Enderby\">      <data key=\"d1\">2</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>  </graph></graphml>","12":"<graphml xmlns=\"http://graphml.graphdrawing.org/xmlns\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd\">  <key id=\"d3\" for=\"edge\" attr.name=\"polarity_label\" attr.type=\"string\" />  <key id=\"d2\" for=\"edge\" attr.name=\"polarity_score\" attr.type=\"double\" />  <key id=\"d1\" for=\"edge\" attr.name=\"weight\" attr.type=\"long\" />  <key id=\"d0\" for=\"node\" attr.name=\"names\" attr.type=\"string\" />  <graph edgedefault=\"undirected\">    <node id=\"Dr Fastolfe\">      <data key=\"d0\">Dr Fastolfe</data>    </node>    <node id=\"Dr Sarton\">      <data key=\"d0\">Dr Sarton</data>    </node>    <node id=\"Enderby\">      <data key=\"d0\">Julius Enderby;Enderby;Julius</data>    </node>    <node id=\"Daneel\">      <data key=\"d0\">R. Daneel;Daneel;Olivaw</data>    </node>    <node id=\"Sammy\">      <data key=\"d0\">R. Sammy;Sammy</data>    </node>    <node id=\"Vince\">      <data key=\"d0\">Vince Barrett;Barrett;Vince</data>    </node>    <node id=\"Baley\">      <data key=\"d0\">Elijah;Baley;Lije</data>    </node>    <node id=\"Bentley\">      <data key=\"d0\">Bentley Baley;Bentley</data>    </node>    <node id=\"Gerrigel\">      <data key=\"d0\">Gerrigel</data>    </node>    <node id=\"Norris\">      <data key=\"d0\">Norris</data>    </node>    <node id=\"Phil\">      <data key=\"d0\">Phil</data>    </node>    <edge source=\"Dr Fastolfe\" target=\"Enderby\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Dr Fastolfe\" target=\"Daneel\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Dr Sarton\" target=\"Enderby\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Enderby\" target=\"Daneel\">      <data key=\"d1\">5</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Enderby\" target=\"Baley\">      <data key=\"d1\">2</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Daneel\" target=\"Baley\">      <data key=\"d1\">5</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Daneel\" target=\"Gerrigel\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Sammy\" target=\"Vince\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Sammy\" target=\"Baley\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Sammy\" target=\"Norris\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Vince\" target=\"Baley\">      <data key=\"d1\">4</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Vince\" target=\"Norris\">      <data key=\"d1\">4</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Baley\" target=\"Gerrigel\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Baley\" target=\"Norris\">      <data key=\"d1\">6</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Norris\" target=\"Phil\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>  </graph></graphml>","13":"<graphml xmlns=\"http://graphml.graphdrawing.org/xmlns\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd\">  <key id=\"d3\" for=\"edge\" attr.name=\"polarity_label\" attr.type=\"string\" />  <key id=\"d2\" for=\"edge\" attr.name=\"polarity_score\" attr.type=\"double\" />  <key id=\"d1\" for=\"edge\" attr.name=\"weight\" attr.type=\"long\" />  <key id=\"d0\" for=\"node\" attr.name=\"names\" attr.type=\"string\" />  <graph edgedefault=\"undirected\">    <node id=\"Francis Clousarr\">      <data key=\"d0\">Francis Clousarr</data>    </node>    <node id=\"Jane Myers\">      <data key=\"d0\">Jane Myers</data>    </node>    <node id=\"Joseph Klemin\">      <data key=\"d0\">Joseph Klemin;Klemin</data>    </node>    <node id=\"Daneel\">      <data key=\"d0\">R. Daneel;Daneel;Olivaw</data>    </node>    <node id=\"Baley\">      <data key=\"d0\">Elijah;Baley;Lije</data>    </node>    <node id=\"Bentley\">      <data key=\"d0\">Bentley Baley;Bentley</data>    </node>    <node id=\"Elisabeth\">      <data key=\"d0\">Elisabeth</data>    </node>    <node id=\"Lizzy\">      <data key=\"d0\">Lizzy</data>    </node>    <edge source=\"Francis Clousarr\" target=\"Daneel\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Francis Clousarr\" target=\"Baley\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Jane Myers\" target=\"Elisabeth\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Daneel\" target=\"Baley\">      <data key=\"d1\">7</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Baley\" target=\"Bentley\">      <data key=\"d1\">1</data>      <data key=\"d2\">-1.0</data>      <data key=\"d3\">ennemi</data>    </edge>  </graph></graphml>","14":"<graphml xmlns=\"http://graphml.graphdrawing.org/xmlns\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd\">  <key id=\"d3\" for=\"edge\" attr.name=\"polarity_label\" attr.type=\"string\" />  <key id=\"d2\" for=\"edge\" attr.name=\"polarity_score\" attr.type=\"double\" />  <key id=\"d1\" for=\"edge\" attr.name=\"weight\" attr.type=\"long\" />  <key id=\"d0\" for=\"node\" attr.name=\"names\" attr.type=\"string\" />  <graph edgedefault=\"undirected\">    <node id=\"Dr Fastolfe\">      <data key=\"d0\">Dr Fastolfe</data>    </node>    <node id=\"Clousarr\">      <data key=\"d0\">Francis Clousarr;M. Clousarr;Clousarr</data>    </node>    <node id=\"Daneel\">      <data key=\"d0\">R. Daneel;Daneel;Olivaw</data>    </node>    <node id=\"Sammy\">      <data key=\"d0\">R. Sammy;Sammy</data>    </node>    <node id=\"Baley\">      <data key=\"d0\">Elijah;Baley;Lije</data>    </node>    <node id=\"Boris\">      <data key=\"d0\">Boris</data>    </node>    <node id=\"Enderby\">      <data key=\"d0\">Enderby;Julius</data>    </node>    <edge source=\"Dr Fastolfe\" target=\"Baley\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Clousarr\" target=\"Daneel\">      <data key=\"d1\">8</data>      <data key=\"d2\">1.0</data>      <data key=\"d3\">ami</data>    </edge>    <edge source=\"Clousarr\" target=\"Baley\">      <data key=\"d1\">10</data>      <data key=\"d2\">1.0</data>      <data key=\"d3\">ami</data>    </edge>    <edge source=\"Daneel\" target=\"Baley\">      <data key=\"d1\">7</data>      <data key=\"d2\">1.0</data>      <data key=\"d3\">ami</data>    </edge>    <edge source=\"Sammy\" target=\"Baley\">      <data key=\"d1\">3</data>      <data key=\"d2\">-1.0</data>      <data key=\"d3\">ennemi</data>    </edge>    <edge source=\"Baley\" target=\"Enderby\">      <data key=\"d1\">2</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>  </graph></graphml>","15":"<graphml xmlns=\"http://graphml.graphdrawing.org/xmlns\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd\">  <key id=\"d3\" for=\"edge\" attr.name=\"polarity_label\" attr.type=\"string\" />  <key id=\"d2\" for=\"edge\" attr.name=\"polarity_score\" attr.type=\"double\" />  <key id=\"d1\" for=\"edge\" attr.name=\"weight\" attr.type=\"long\" />  <key id=\"d0\" for=\"node\" attr.name=\"names\" attr.type=\"string\" />  <graph edgedefault=\"undirected\">    <node id=\"Gerrigel\">      <data key=\"d0\">Docteur Gerrigel;Gerrigel</data>    </node>    <node id=\"Daneel\">      <data key=\"d0\">R. Daneel;Daneel;Olivaw</data>    </node>    <node id=\"Sammy\">      <data key=\"d0\">R. Sammy;Sammy</data>    </node>    <node id=\"Vince Barrett\">      <data key=\"d0\">Vince Barrett</data>    </node>    <node id=\"Baley\">      <data key=\"d0\">Elijah;Baley;Lije</data>    </node>    <node id=\"Clousarr\">      <data key=\"d0\">Clousarr</data>    </node>    <node id=\"Enderby\">      <data key=\"d0\">Enderby;Julius</data>    </node>    <node id=\"Francis\">      <data key=\"d0\">Francis</data>    </node>    <edge source=\"Daneel\" target=\"Sammy\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Daneel\" target=\"Baley\">      <data key=\"d1\">9</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Daneel\" target=\"Clousarr\">      <data key=\"d1\">7</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Daneel\" target=\"Enderby\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Sammy\" target=\"Baley\">      <data key=\"d1\">5</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Sammy\" target=\"Enderby\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Baley\" target=\"Clousarr\">      <data key=\"d1\">5</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Baley\" target=\"Enderby\">      <data key=\"d1\">4</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>  </graph></graphml>","16":"<graphml xmlns=\"http://graphml.graphdrawing.org/xmlns\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd\">  <key id=\"d3\" for=\"edge\" attr.name=\"polarity_label\" attr.type=\"string\" />  <key id=\"d2\" for=\"edge\" attr.name=\"polarity_score\" attr.type=\"double\" />  <key id=\"d1\" for=\"edge\" attr.name=\"weight\" attr.type=\"long\" />  <key id=\"d0\" for=\"node\" attr.name=\"names\" attr.type=\"string\" />  <graph edgedefault=\"undirected\">    <node id=\"Dr Fastolfe\">      <data key=\"d0\">Dr Fastolfe</data>    </node>    <node id=\"Sarton\">      <data key=\"d0\">Dr Sarton;Sarton</data>    </node>    <node id=\"Baley\">      <data key=\"d0\">Elijah Baley;Elijah;Baley;Lije</data>    </node>    <node id=\"Francis Clousarr\">      <data key=\"d0\">Francis Clousarr</data>    </node>    <node id=\"Daneel\">      <data key=\"d0\">R. Daneel;Daneel;Olivaw</data>    </node>    <node id=\"Sammy\">      <data key=\"d0\">R. Sammy;Sammy</data>    </node>    <node id=\"Enderby\">      <data key=\"d0\">Enderby;Julius</data>    </node>    <edge source=\"Sarton\" target=\"Baley\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Baley\" target=\"Francis Clousarr\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Baley\" target=\"Daneel\">      <data key=\"d1\">6</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Baley\" target=\"Sammy\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Baley\" target=\"Enderby\">      <data key=\"d1\">2</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Francis Clousarr\" target=\"Sammy\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Daneel\" target=\"Sammy\">      <data key=\"d1\">1</data>      <data key=\"d2\">-1.0</data>      <data key=\"d3\">ennemi</data>    </edge>    <edge source=\"Daneel\" target=\"Enderby\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>  </graph></graphml>","17":"<graphml xmlns=\"http://graphml.graphdrawing.org/xmlns\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd\">  <key id=\"d3\" for=\"edge\" attr.name=\"polarity_label\" attr.type=\"string\" />  <key id=\"d2\" for=\"edge\" attr.name=\"polarity_score\" attr.type=\"double\" />  <key id=\"d1\" for=\"edge\" attr.name=\"weight\" attr.type=\"long\" />  <key id=\"d0\" for=\"node\" attr.name=\"names\" attr.type=\"string\" />  <graph edgedefault=\"undirected\">    <node id=\"Dr Fastolfe\">      <data key=\"d0\">Dr Fastolfe</data>    </node>    <node id=\"Sarton\">      <data key=\"d0\">Dr Sarton;Sarton</data>    </node>    <node id=\"Enderby\">      <data key=\"d0\">Julius Enderby;Enderby;Julius</data>    </node>    <node id=\"Daneel\">      <data key=\"d0\">R. Daneel;Daneel;Olivaw</data>    </node>    <node id=\"Sammy\">      <data key=\"d0\">R. Sammy;Sammy</data>    </node>    <node id=\"Baley\">      <data key=\"d0\">Elijah;Baley;Lije</data>    </node>    <node id=\"Bentley\">      <data key=\"d0\">Bentley Baley;Bentley</data>    </node>    <node id=\"Clousarr\">      <data key=\"d0\">Clousarr</data>    </node>    <node id=\"Jessie\">      <data key=\"d0\">Jessie</data>    </node>    <edge source=\"Sarton\" target=\"Enderby\">      <data key=\"d1\">9</data>      <data key=\"d2\">-1.0</data>      <data key=\"d3\">ennemi</data>    </edge>    <edge source=\"Sarton\" target=\"Daneel\">      <data key=\"d1\">12</data>      <data key=\"d2\">-1.0</data>      <data key=\"d3\">ennemi</data>    </edge>    <edge source=\"Sarton\" target=\"Sammy\">      <data key=\"d1\">5</data>      <data key=\"d2\">-1.0</data>      <data key=\"d3\">ennemi</data>    </edge>    <edge source=\"Sarton\" target=\"Baley\">      <data key=\"d1\">4</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Sarton\" target=\"Clousarr\">      <data key=\"d1\">2</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Enderby\" target=\"Daneel\">      <data key=\"d1\">2</data>      <data key=\"d2\">-1.0</data>      <data key=\"d3\">ennemi</data>    </edge>    <edge source=\"Enderby\" target=\"Sammy\">      <data key=\"d1\">1</data>      <data key=\"d2\">-1.0</data>      <data key=\"d3\">ennemi</data>    </edge>    <edge source=\"Enderby\" target=\"Baley\">      <data key=\"d1\">5</data>      <data key=\"d2\">-1.0</data>      <data key=\"d3\">ennemi</data>    </edge>    <edge source=\"Enderby\" target=\"Clousarr\">      <data key=\"d1\">3</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Daneel\" target=\"Sammy\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Daneel\" target=\"Baley\">      <data key=\"d1\">5</data>      <data key=\"d2\">-1.0</data>      <data key=\"d3\">ennemi</data>    </edge>    <edge source=\"Daneel\" target=\"Jessie\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Sammy\" target=\"Baley\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Baley\" target=\"Clousarr\">      <data key=\"d1\">2</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Baley\" target=\"Jessie\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Clousarr\" target=\"Jessie\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>  </graph></graphml>"},"paf":{"0":"<graphml xmlns=\"http://graphml.graphdrawing.org/xmlns\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd\">  <key id=\"d3\" for=\"edge\" attr.name=\"polarity_label\" attr.type=\"string\" />  <key id=\"d2\" for=\"edge\" attr.name=\"polarity_score\" attr.type=\"double\" />  <key id=\"d1\" for=\"edge\" attr.name=\"weight\" attr.type=\"long\" />  <key id=\"d0\" for=\"node\" attr.name=\"names\" attr.type=\"string\" />  <graph edgedefault=\"undirected\">    <node id=\"Alban Wellis\">      <data key=\"d0\">Lieutenant Alban Wellis;Alban Wellis;Lieutenant;Wellis</data>    </node>    <node id=\"CL&#201;ON Ier\">      <data key=\"d0\">CL&#201;ON Ier;Cl&#233;on</data>    </node>    <node id=\"Demerzel\">      <data key=\"d0\">Eto Demerzel;Demerzel</data>    </node>    <node id=\"Hari Seldon\">      <data key=\"d0\">Hari Seldon;Seldon</data>    </node>    <node id=\"Cl&#233;on\">      <data key=\"d0\">L'Empereur;l&#8217;Empereur;Empereur;Cl&#233;on</data>    </node>    <node id=\"Hummin\">      <data key=\"d0\">Hummin</data>    </node>    <edge source=\"Alban Wellis\" target=\"Demerzel\">      <data key=\"d1\">4</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Alban Wellis\" target=\"Hari Seldon\">      <data key=\"d1\">2</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Alban Wellis\" target=\"Cl&#233;on\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"CL&#201;ON Ier\" target=\"Demerzel\">      <data key=\"d1\">5</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"CL&#201;ON Ier\" target=\"Hari Seldon\">      <data key=\"d1\">9</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"CL&#201;ON Ier\" target=\"Cl&#233;on\">      <data key=\"d1\">9</data>      <data key=\"d2\">1.0</data>      <data key=\"d3\">ami</data>    </edge>    <edge source=\"Demerzel\" target=\"Hari Seldon\">      <data key=\"d1\">5</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Demerzel\" target=\"Cl&#233;on\">      <data key=\"d1\">4</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Demerzel\" target=\"Hummin\">      <data key=\"d1\">3</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Cl&#233;on\">      <data key=\"d1\">17</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Hummin\">      <data key=\"d1\">2</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>  </graph></graphml>","1":"<graphml xmlns=\"http://graphml.graphdrawing.org/xmlns\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd\">  <key id=\"d3\" for=\"edge\" attr.name=\"polarity_label\" attr.type=\"string\" />  <key id=\"d2\" for=\"edge\" attr.name=\"polarity_score\" attr.type=\"double\" />  <key id=\"d1\" for=\"edge\" attr.name=\"weight\" attr.type=\"long\" />  <key id=\"d0\" for=\"node\" attr.name=\"names\" attr.type=\"string\" />  <graph edgedefault=\"undirected\">    <node id=\"Cl&#233;on Ier\">      <data key=\"d0\">Cl&#233;on Ier</data>    </node>    <node id=\"Hari Seldon\">      <data key=\"d0\">Hari Seldon;Seldon</data>    </node>    <node id=\"Alem\">      <data key=\"d0\">Alem</data>    </node>    <node id=\"Demerzel\">      <data key=\"d0\">Demerzel</data>    </node>    <node id=\"Hummin\">      <data key=\"d0\">Hummin</data>    </node>    <node id=\"Marbie\">      <data key=\"d0\">Marbie</data>    </node>    <node id=\"l'Empereur\">      <data key=\"d0\">l'Empereur</data>    </node>    <edge source=\"Hari Seldon\" target=\"Alem\">      <data key=\"d1\">4</data>      <data key=\"d2\">-1.0</data>      <data key=\"d3\">ennemi</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Demerzel\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Hummin\">      <data key=\"d1\">17</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Marbie\">      <data key=\"d1\">2</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Alem\" target=\"Hummin\">      <data key=\"d1\">5</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Alem\" target=\"Marbie\">      <data key=\"d1\">4</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hummin\" target=\"Marbie\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>  </graph></graphml>","2":"<graphml xmlns=\"http://graphml.graphdrawing.org/xmlns\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd\">  <key id=\"d3\" for=\"edge\" attr.name=\"polarity_label\" attr.type=\"string\" />  <key id=\"d2\" for=\"edge\" attr.name=\"polarity_score\" attr.type=\"double\" />  <key id=\"d1\" for=\"edge\" attr.name=\"weight\" attr.type=\"long\" />  <key id=\"d0\" for=\"node\" attr.name=\"names\" attr.type=\"string\" />  <graph edgedefault=\"undirected\">    <node id=\"Chetter Hummin\">      <data key=\"d0\">Chetter Hummin;Hummin</data>    </node>    <node id=\"Hari Seldon\">      <data key=\"d0\">Hari Seldon;Seldon</data>    </node>    <node id=\"Demerzel\">      <data key=\"d0\">Demerzel</data>    </node>    <node id=\"Cl&#233;on\">      <data key=\"d0\">L'Empereur;l&#8217;Empereur;Empereur;Cl&#233;on</data>    </node>    <node id=\"Strelitzia\">      <data key=\"d0\">Strelitzia</data>    </node>    <node id=\"Suaverose\">      <data key=\"d0\">Suaverose</data>    </node>    <edge source=\"Chetter Hummin\" target=\"Hari Seldon\">      <data key=\"d1\">7</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Demerzel\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Cl&#233;on\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Strelitzia\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Suaverose\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Demerzel\" target=\"Cl&#233;on\">      <data key=\"d1\">2</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Strelitzia\" target=\"Suaverose\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>  </graph></graphml>","3":"<graphml xmlns=\"http://graphml.graphdrawing.org/xmlns\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd\">  <key id=\"d3\" for=\"edge\" attr.name=\"polarity_label\" attr.type=\"string\" />  <key id=\"d2\" for=\"edge\" attr.name=\"polarity_score\" attr.type=\"double\" />  <key id=\"d1\" for=\"edge\" attr.name=\"weight\" attr.type=\"long\" />  <key id=\"d0\" for=\"node\" attr.name=\"names\" attr.type=\"string\" />  <graph edgedefault=\"undirected\">    <node id=\"Chetter\">      <data key=\"d0\">Chetter Hummin;Chetter;Hummin</data>    </node>    <node id=\"Dors\">      <data key=\"d0\">Dors Venabili;Venabili;Dors</data>    </node>    <node id=\"Hari Seldon\">      <data key=\"d0\">docteur Seldon;Hari Seldon;Seldon;Hari</data>    </node>    <node id=\"Cinna\">      <data key=\"d0\">Cinna</data>    </node>    <node id=\"Cl&#233;on\">      <data key=\"d0\">L'Empereur;l&#8217;Empereur;Empereur;Cl&#233;on</data>    </node>    <node id=\"Demerzel\">      <data key=\"d0\">Demerzel</data>    </node>    <edge source=\"Chetter\" target=\"Dors\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Chetter\" target=\"Hari Seldon\">      <data key=\"d1\">7</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Dors\" target=\"Hari Seldon\">      <data key=\"d1\">5</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Dors\" target=\"Cinna\">      <data key=\"d1\">2</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Cinna\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Cl&#233;on\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Demerzel\">      <data key=\"d1\">3</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Cl&#233;on\" target=\"Demerzel\">      <data key=\"d1\">10</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>  </graph></graphml>","4":"<graphml xmlns=\"http://graphml.graphdrawing.org/xmlns\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd\">  <key id=\"d3\" for=\"edge\" attr.name=\"polarity_label\" attr.type=\"string\" />  <key id=\"d2\" for=\"edge\" attr.name=\"polarity_score\" attr.type=\"double\" />  <key id=\"d1\" for=\"edge\" attr.name=\"weight\" attr.type=\"long\" />  <key id=\"d0\" for=\"node\" attr.name=\"names\" attr.type=\"string\" />  <graph edgedefault=\"undirected\">    <node id=\"Dors\">      <data key=\"d0\">Dors Venabili;Dors</data>    </node>    <node id=\"Hari Seldon\">      <data key=\"d0\">Hari Seldon;Seldon;Hari</data>    </node>    <node id=\"Jenarr Leggen\">      <data key=\"d0\">docteur Leggen;Jenarr Leggen;Leggen</data>    </node>    <node id=\"Kiangtow Randa\">      <data key=\"d0\">Kiangtow Randa;Randa</data>    </node>    <node id=\"Clowzia\">      <data key=\"d0\">Clowzia</data>    </node>    <node id=\"Hummin\">      <data key=\"d0\">Hummin</data>    </node>    <node id=\"Lisung\">      <data key=\"d0\">Lisung</data>    </node>    <edge source=\"Dors\" target=\"Hari Seldon\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Dors\" target=\"Kiangtow Randa\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Dors\" target=\"Lisung\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Jenarr Leggen\">      <data key=\"d1\">4</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Kiangtow Randa\">      <data key=\"d1\">4</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Clowzia\">      <data key=\"d1\">4</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Hummin\">      <data key=\"d1\">3</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Lisung\">      <data key=\"d1\">2</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Jenarr Leggen\" target=\"Clowzia\">      <data key=\"d1\">2</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Kiangtow Randa\" target=\"Lisung\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>  </graph></graphml>","5":"<graphml xmlns=\"http://graphml.graphdrawing.org/xmlns\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd\">  <key id=\"d3\" for=\"edge\" attr.name=\"polarity_label\" attr.type=\"string\" />  <key id=\"d2\" for=\"edge\" attr.name=\"polarity_score\" attr.type=\"double\" />  <key id=\"d1\" for=\"edge\" attr.name=\"weight\" attr.type=\"long\" />  <key id=\"d0\" for=\"node\" attr.name=\"names\" attr.type=\"string\" />  <graph edgedefault=\"undirected\">    <node id=\"Dors Venabili\">      <data key=\"d0\">docteur Venabili;Dors Venabili;Ma&#238;tresse;Venabili</data>    </node>    <node id=\"Hari Seldon\">      <data key=\"d0\">docteur Seldon;Hari Seldon;Seldon;Hari</data>    </node>    <node id=\"Leggen\">      <data key=\"d0\">docteur Leggen;Jenarr Leggen;Jenarr;Leggen</data>    </node>    <node id=\"Benastra\">      <data key=\"d0\">Benastra</data>    </node>    <node id=\"Clowzia\">      <data key=\"d0\">Clowzia</data>    </node>    <edge source=\"Dors Venabili\" target=\"Hari Seldon\">      <data key=\"d1\">2</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Dors Venabili\" target=\"Leggen\">      <data key=\"d1\">4</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Dors Venabili\" target=\"Benastra\">      <data key=\"d1\">2</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Leggen\">      <data key=\"d1\">9</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Benastra\">      <data key=\"d1\">2</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Clowzia\">      <data key=\"d1\">3</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Leggen\" target=\"Benastra\">      <data key=\"d1\">3</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Leggen\" target=\"Clowzia\">      <data key=\"d1\">3</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>  </graph></graphml>","6":"<graphml xmlns=\"http://graphml.graphdrawing.org/xmlns\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd\">  <key id=\"d3\" for=\"edge\" attr.name=\"polarity_label\" attr.type=\"string\" />  <key id=\"d2\" for=\"edge\" attr.name=\"polarity_score\" attr.type=\"double\" />  <key id=\"d1\" for=\"edge\" attr.name=\"weight\" attr.type=\"long\" />  <key id=\"d0\" for=\"node\" attr.name=\"names\" attr.type=\"string\" />  <graph edgedefault=\"undirected\">    <node id=\"Damiano Nord\">      <data key=\"d0\">Damiano Nord</data>    </node>    <node id=\"Dors Venabili\">      <data key=\"d0\">Dors Venabili;Ma&#238;tresse</data>    </node>    <node id=\"Demerzel\">      <data key=\"d0\">Eto Demerzel;Demerzel</data>    </node>    <node id=\"Hari Seldon\">      <data key=\"d0\">Hari Seldon;Seldon;Hari</data>    </node>    <node id=\"Leggen\">      <data key=\"d0\">docteur Leggen;Jenarr;Leggen</data>    </node>    <node id=\"Cinna\">      <data key=\"d0\">Cinna</data>    </node>    <node id=\"Cl&#233;on\">      <data key=\"d0\">L'Empereur;l&#8217;Empereur;Empereur;Cl&#233;on</data>    </node>    <node id=\"Hummin\">      <data key=\"d0\">Hummin</data>    </node>    <node id=\"Randa\">      <data key=\"d0\">Randa</data>    </node>    <node id=\"Ziggoreth\">      <data key=\"d0\">Ziggoreth</data>    </node>    <edge source=\"Damiano Nord\" target=\"Leggen\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Damiano Nord\" target=\"Ziggoreth\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Dors Venabili\" target=\"Hari Seldon\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Demerzel\" target=\"Hari Seldon\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Demerzel\" target=\"Hummin\">      <data key=\"d1\">4</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Leggen\">      <data key=\"d1\">4</data>      <data key=\"d2\">-1.0</data>      <data key=\"d3\">ennemi</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Cl&#233;on\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Hummin\">      <data key=\"d1\">7</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Leggen\" target=\"Hummin\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Leggen\" target=\"Ziggoreth\">      <data key=\"d1\">2</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hummin\" target=\"Randa\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>  </graph></graphml>","7":"<graphml xmlns=\"http://graphml.graphdrawing.org/xmlns\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd\">  <key id=\"d3\" for=\"edge\" attr.name=\"polarity_label\" attr.type=\"string\" />  <key id=\"d2\" for=\"edge\" attr.name=\"polarity_score\" attr.type=\"double\" />  <key id=\"d1\" for=\"edge\" attr.name=\"weight\" attr.type=\"long\" />  <key id=\"d0\" for=\"node\" attr.name=\"names\" attr.type=\"string\" />  <graph edgedefault=\"undirected\">    <node id=\"Chetter Hummin\">      <data key=\"d0\">Chetter Hummin;Hummin</data>    </node>    <node id=\"Dors Venabili\">      <data key=\"d0\">Dors Venabili;Ma&#238;tresse</data>    </node>    <node id=\"Endor Levanian\">      <data key=\"d0\">Endor Levanian;Levanian</data>    </node>    <node id=\"Hari Seldon\">      <data key=\"d0\">Hari Seldon;Seldon;Hari</data>    </node>    <node id=\"Cinna\">      <data key=\"d0\">Cinna</data>    </node>    <node id=\"Clowzia\">      <data key=\"d0\">Clowzia</data>    </node>    <node id=\"Grisnuage\">      <data key=\"d0\">Grisnuage</data>    </node>    <edge source=\"Chetter Hummin\" target=\"Endor Levanian\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Dors Venabili\" target=\"Hari Seldon\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Endor Levanian\" target=\"Hari Seldon\">      <data key=\"d1\">2</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Cinna\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Clowzia\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Grisnuage\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>  </graph></graphml>","8":"<graphml xmlns=\"http://graphml.graphdrawing.org/xmlns\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd\">  <key id=\"d3\" for=\"edge\" attr.name=\"polarity_label\" attr.type=\"string\" />  <key id=\"d2\" for=\"edge\" attr.name=\"polarity_score\" attr.type=\"double\" />  <key id=\"d1\" for=\"edge\" attr.name=\"weight\" attr.type=\"long\" />  <key id=\"d0\" for=\"node\" attr.name=\"names\" attr.type=\"string\" />  <graph edgedefault=\"undirected\">    <node id=\"Chetter Hummin\">      <data key=\"d0\">Chetter Hummin;Hummin</data>    </node>    <node id=\"Hari Seldon\">      <data key=\"d0\">Hari Seldon;Seldon;Hari</data>    </node>    <node id=\"Dors\">      <data key=\"d0\">Dors</data>    </node>    <node id=\"Grisnuage\">      <data key=\"d0\">Grisnuage</data>    </node>    <edge source=\"Chetter Hummin\" target=\"Hari Seldon\">      <data key=\"d1\">2</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Chetter Hummin\" target=\"Dors\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Dors\">      <data key=\"d1\">11</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Grisnuage\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Dors\" target=\"Grisnuage\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>  </graph></graphml>","9":"<graphml xmlns=\"http://graphml.graphdrawing.org/xmlns\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd\">  <key id=\"d3\" for=\"edge\" attr.name=\"polarity_label\" attr.type=\"string\" />  <key id=\"d2\" for=\"edge\" attr.name=\"polarity_score\" attr.type=\"double\" />  <key id=\"d1\" for=\"edge\" attr.name=\"weight\" attr.type=\"long\" />  <key id=\"d0\" for=\"node\" attr.name=\"names\" attr.type=\"string\" />  <graph edgedefault=\"undirected\">    <node id=\"Dors Venabili\">      <data key=\"d0\">Dors Venabili;Ma&#238;tresse</data>    </node>    <node id=\"Hari Seldon\">      <data key=\"d0\">Hari Seldon;Seldon;Hari</data>    </node>    <edge source=\"Dors Venabili\" target=\"Hari Seldon\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>  </graph></graphml>","10":"<graphml xmlns=\"http://graphml.graphdrawing.org/xmlns\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd\">  <key id=\"d3\" for=\"edge\" attr.name=\"polarity_label\" attr.type=\"string\" />  <key id=\"d2\" for=\"edge\" attr.name=\"polarity_score\" attr.type=\"double\" />  <key id=\"d1\" for=\"edge\" attr.name=\"weight\" attr.type=\"long\" />  <key id=\"d0\" for=\"node\" attr.name=\"names\" attr.type=\"string\" />  <graph edgedefault=\"undirected\">    <node id=\"Fils de l'Aube\">      <data key=\"d0\">Fils de l'Aube</data>    </node>    <node id=\"Dors Venabili\">      <data key=\"d0\">Dors Venabili;Ma&#238;tresse</data>    </node>    <node id=\"Hari Seldon\">      <data key=\"d0\">Hari Seldon;Seldon;Hari</data>    </node>    <node id=\"Myc&#233;lium Soixante-douze\">      <data key=\"d0\">Myc&#233;lium Soixante-douze</data>    </node>    <node id=\"Cinna\">      <data key=\"d0\">Cinna</data>    </node>    <node id=\"Hummin\">      <data key=\"d0\">Hummin</data>    </node>    <node id=\"Lissauer\">      <data key=\"d0\">Lissauer</data>    </node>    <node id=\"Novigor\">      <data key=\"d0\">Novigor</data>    </node>    <edge source=\"Dors Venabili\" target=\"Hari Seldon\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Dors Venabili\" target=\"Cinna\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Myc&#233;lium Soixante-douze\">      <data key=\"d1\">2</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Cinna\">      <data key=\"d1\">3</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Lissauer\" target=\"Novigor\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>  </graph></graphml>","11":"<graphml xmlns=\"http://graphml.graphdrawing.org/xmlns\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd\">  <key id=\"d3\" for=\"edge\" attr.name=\"polarity_label\" attr.type=\"string\" />  <key id=\"d2\" for=\"edge\" attr.name=\"polarity_score\" attr.type=\"double\" />  <key id=\"d1\" for=\"edge\" attr.name=\"weight\" attr.type=\"long\" />  <key id=\"d0\" for=\"node\" attr.name=\"names\" attr.type=\"string\" />  <graph edgedefault=\"undirected\">    <node id=\"Dors Venabili\">      <data key=\"d0\">docteur Venabili;Dors Venabili;Ma&#238;tresse;Venabili</data>    </node>    <node id=\"Demerzel\">      <data key=\"d0\">Eto Demerzel;Demerzel</data>    </node>    <node id=\"Hari Seldon\">      <data key=\"d0\">Hari Seldon;Seldon;Hari</data>    </node>    <node id=\"Myc&#233;lium Soixante-douze\">      <data key=\"d0\">Myc&#233;lium Soixante-douze</data>    </node>    <node id=\"Bendar\">      <data key=\"d0\">Bendar</data>    </node>    <node id=\"Chetter\">      <data key=\"d0\">Chetter</data>    </node>    <node id=\"Hummin\">      <data key=\"d0\">Hummin</data>    </node>    <node id=\"Wendome\">      <data key=\"d0\">Wendome</data>    </node>    <node id=\"l'Empereur\">      <data key=\"d0\">l'Empereur</data>    </node>    <edge source=\"Dors Venabili\" target=\"Hari Seldon\">      <data key=\"d1\">2</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Dors Venabili\" target=\"Hummin\">      <data key=\"d1\">3</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Myc&#233;lium Soixante-douze\">      <data key=\"d1\">2</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Chetter\">      <data key=\"d1\">2</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Hummin\">      <data key=\"d1\">10</data>      <data key=\"d2\">1.0</data>      <data key=\"d3\">ami</data>    </edge>    <edge source=\"Bendar\" target=\"Wendome\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Chetter\" target=\"Hummin\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>  </graph></graphml>","12":"<graphml xmlns=\"http://graphml.graphdrawing.org/xmlns\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd\">  <key id=\"d3\" for=\"edge\" attr.name=\"polarity_label\" attr.type=\"string\" />  <key id=\"d2\" for=\"edge\" attr.name=\"polarity_score\" attr.type=\"double\" />  <key id=\"d1\" for=\"edge\" attr.name=\"weight\" attr.type=\"long\" />  <key id=\"d0\" for=\"node\" attr.name=\"names\" attr.type=\"string\" />  <graph edgedefault=\"undirected\">    <node id=\"Anat Bigell\">      <data key=\"d0\">Anat Bigell</data>    </node>    <node id=\"Dors Venabili\">      <data key=\"d0\">Ma&#238;tresse Venabili;Dors Venabili;Ma&#238;tresse;Venabili</data>    </node>    <node id=\"Hano Lindor\">      <data key=\"d0\">Hano Lindor;Lindor</data>    </node>    <node id=\"Hari Seldon\">      <data key=\"d0\">docteur Seldon;Ma&#238;tre Seldon;Hari Seldon;Seldon;Hari</data>    </node>    <node id=\"Tisalver\">      <data key=\"d0\">Ma&#238;tresse Tisalver;Tisalver</data>    </node>    <node id=\"M&#232;re Rittah\">      <data key=\"d0\">M&#232;re Rittah</data>    </node>    <node id=\"Amaryl\">      <data key=\"d0\">Amaryl</data>    </node>    <node id=\"Casilia\">      <data key=\"d0\">Casilia</data>    </node>    <node id=\"Cl&#233;on\">      <data key=\"d0\">L'Empereur;l&#8217;Empereur;Empereur;Cl&#233;on</data>    </node>    <node id=\"Demerzel\">      <data key=\"d0\">Demerzel</data>    </node>    <node id=\"Hummin\">      <data key=\"d0\">Hummin</data>    </node>    <edge source=\"Dors Venabili\" target=\"Hano Lindor\">      <data key=\"d1\">2</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Dors Venabili\" target=\"Hari Seldon\">      <data key=\"d1\">9</data>      <data key=\"d2\">1.0</data>      <data key=\"d3\">ami</data>    </edge>    <edge source=\"Dors Venabili\" target=\"Tisalver\">      <data key=\"d1\">12</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hano Lindor\" target=\"Hari Seldon\">      <data key=\"d1\">3</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hano Lindor\" target=\"Tisalver\">      <data key=\"d1\">3</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Tisalver\">      <data key=\"d1\">19</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Amaryl\">      <data key=\"d1\">6</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Casilia\">      <data key=\"d1\">6</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Cl&#233;on\">      <data key=\"d1\">2</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Hummin\">      <data key=\"d1\">5</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Tisalver\" target=\"Casilia\">      <data key=\"d1\">2</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Tisalver\" target=\"Cl&#233;on\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Cl&#233;on\" target=\"Demerzel\">      <data key=\"d1\">11</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>  </graph></graphml>","13":"<graphml xmlns=\"http://graphml.graphdrawing.org/xmlns\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd\">  <key id=\"d3\" for=\"edge\" attr.name=\"polarity_label\" attr.type=\"string\" />  <key id=\"d2\" for=\"edge\" attr.name=\"polarity_score\" attr.type=\"double\" />  <key id=\"d1\" for=\"edge\" attr.name=\"weight\" attr.type=\"long\" />  <key id=\"d0\" for=\"node\" attr.name=\"names\" attr.type=\"string\" />  <graph edgedefault=\"undirected\">    <node id=\"Chetter Hummin\">      <data key=\"d0\">Chetter Hummin;Hummin</data>    </node>    <node id=\"Dors Venabili\">      <data key=\"d0\">Ma&#238;tresse Venabili;Dors Venabili;Ma&#238;tresse</data>    </node>    <node id=\"Hari Seldon\">      <data key=\"d0\">Ma&#238;tre Seldon;Hari Seldon;Seldon;Hari</data>    </node>    <node id=\"M&#232;re\">      <data key=\"d0\">M&#232;re Rittah;Rittah;M&#232;re</data>    </node>    <node id=\"Yugo Amaryl\">      <data key=\"d0\">Yugo Amaryl</data>    </node>    <node id=\"Bouge\">      <data key=\"d0\">Bouge</data>    </node>    <node id=\"Casilia\">      <data key=\"d0\">Casilia</data>    </node>    <node id=\"Cinna\">      <data key=\"d0\">Cinna</data>    </node>    <node id=\"Demerzel\">      <data key=\"d0\">Demerzel</data>    </node>    <node id=\"Marron\">      <data key=\"d0\">Marron</data>    </node>    <node id=\"N&#226;n\">      <data key=\"d0\">N&#226;n</data>    </node>    <node id=\"Raych\">      <data key=\"d0\">Raych</data>    </node>    <node id=\"Tisalver\">      <data key=\"d0\">Tisalver</data>    </node>    <node id=\"l'Empereur\">      <data key=\"d0\">l'Empereur</data>    </node>    <edge source=\"Chetter Hummin\" target=\"Demerzel\">      <data key=\"d1\">2</data>      <data key=\"d2\">1.0</data>      <data key=\"d3\">ami</data>    </edge>    <edge source=\"Dors Venabili\" target=\"Hari Seldon\">      <data key=\"d1\">5</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Dors Venabili\" target=\"M&#232;re\">      <data key=\"d1\">2</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Dors Venabili\" target=\"Cinna\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Dors Venabili\" target=\"Tisalver\">      <data key=\"d1\">2</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"M&#232;re\">      <data key=\"d1\">11</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Casilia\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Cinna\">      <data key=\"d1\">3</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Marron\">      <data key=\"d1\">4</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Raych\">      <data key=\"d1\">2</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Tisalver\">      <data key=\"d1\">9</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"M&#232;re\" target=\"Cinna\">      <data key=\"d1\">3</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"M&#232;re\" target=\"Raych\">      <data key=\"d1\">3</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Casilia\" target=\"Tisalver\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"N&#226;n\" target=\"Raych\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>  </graph></graphml>","14":"<graphml xmlns=\"http://graphml.graphdrawing.org/xmlns\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd\">  <key id=\"d3\" for=\"edge\" attr.name=\"polarity_label\" attr.type=\"string\" />  <key id=\"d2\" for=\"edge\" attr.name=\"polarity_score\" attr.type=\"double\" />  <key id=\"d1\" for=\"edge\" attr.name=\"weight\" attr.type=\"long\" />  <key id=\"d0\" for=\"node\" attr.name=\"names\" attr.type=\"string\" />  <graph edgedefault=\"undirected\">    <node id=\"Dors Venabili\">      <data key=\"d0\">Ma&#238;tresse Venabili;Dors Venabili;Ma&#238;tresse;Venabili</data>    </node>    <node id=\"Hari Seldon\">      <data key=\"d0\">Hari Seldon;Seldon</data>    </node>    <node id=\"Marlo Tanto\">      <data key=\"d0\">Marlo Tanto</data>    </node>    <node id=\"Davan\">      <data key=\"d0\">Ma&#238;tre Davan;Davan</data>    </node>    <node id=\"Tisalver\">      <data key=\"d0\">Ma&#238;tresse Tisalver;Ma&#238;tre Tisalver;Tisalver</data>    </node>    <node id=\"Amaryl\">      <data key=\"d0\">Yugo Amaryl;Amaryl</data>    </node>    <node id=\"Ch'sais\">      <data key=\"d0\">Ch'sais</data>    </node>    <node id=\"Demerzel\">      <data key=\"d0\">Demerzel</data>    </node>    <node id=\"Hummin\">      <data key=\"d0\">Hummin</data>    </node>    <node id=\"Raych\">      <data key=\"d0\">Raych</data>    </node>    <node id=\"f'\">      <data key=\"d0\">f'</data>    </node>    <node id=\"l'Empereur\">      <data key=\"d0\">l'Empereur</data>    </node>    <node id=\"p't-&#234;tre\">      <data key=\"d0\">p't-&#234;tre</data>    </node>    <edge source=\"Dors Venabili\" target=\"Hari Seldon\">      <data key=\"d1\">4</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Dors Venabili\" target=\"Tisalver\">      <data key=\"d1\">8</data>      <data key=\"d2\">-1.0</data>      <data key=\"d3\">ennemi</data>    </edge>    <edge source=\"Dors Venabili\" target=\"Raych\">      <data key=\"d1\">2</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Davan\">      <data key=\"d1\">6</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Tisalver\">      <data key=\"d1\">3</data>      <data key=\"d2\">-1.0</data>      <data key=\"d3\">ennemi</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Amaryl\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Hummin\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Raych\">      <data key=\"d1\">6</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Davan\" target=\"Amaryl\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Davan\" target=\"Hummin\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Davan\" target=\"Raych\">      <data key=\"d1\">5</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>  </graph></graphml>","15":"<graphml xmlns=\"http://graphml.graphdrawing.org/xmlns\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd\">  <key id=\"d3\" for=\"edge\" attr.name=\"polarity_label\" attr.type=\"string\" />  <key id=\"d2\" for=\"edge\" attr.name=\"polarity_score\" attr.type=\"double\" />  <key id=\"d1\" for=\"edge\" attr.name=\"weight\" attr.type=\"long\" />  <key id=\"d0\" for=\"node\" attr.name=\"names\" attr.type=\"string\" />  <graph edgedefault=\"undirected\">    <node id=\"Hari Seldon\">      <data key=\"d0\">Hari Seldon d'H&#233;licon;Ma&#238;tre Seldon;Hari Seldon;Seldon;Hari</data>    </node>    <node id=\"Dors Venabili\">      <data key=\"d0\">Dors Venabili;Ma&#238;tresse</data>    </node>    <node id=\"Elgin Marron\">      <data key=\"d0\">Elgin Marron;Marron</data>    </node>    <node id=\"Lanel Russ\">      <data key=\"d0\">Lanel Russ;Russ</data>    </node>    <node id=\"Tisalver\">      <data key=\"d0\">Ma&#238;tresse Tisalver;Tisalver</data>    </node>    <node id=\"Astinwald\">      <data key=\"d0\">Astinwald</data>    </node>    <node id=\"Casilia\">      <data key=\"d0\">Casilia</data>    </node>    <node id=\"Cinna\">      <data key=\"d0\">Cinna</data>    </node>    <node id=\"Davan\">      <data key=\"d0\">Davan</data>    </node>    <node id=\"Demerzel\">      <data key=\"d0\">Demerzel</data>    </node>    <node id=\"Cl&#233;on\">      <data key=\"d0\">L'Empereur;l&#8217;Empereur;Empereur;Cl&#233;on</data>    </node>    <node id=\"Gebore\">      <data key=\"d0\">Gebore</data>    </node>    <node id=\"Hummin\">      <data key=\"d0\">Hummin</data>    </node>    <node id=\"Raych\">      <data key=\"d0\">Raych</data>    </node>    <edge source=\"Hari Seldon\" target=\"Dors Venabili\">      <data key=\"d1\">5</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Lanel Russ\">      <data key=\"d1\">10</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Tisalver\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Astinwald\">      <data key=\"d1\">3</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Cinna\">      <data key=\"d1\">6</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Davan\">      <data key=\"d1\">2</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Cl&#233;on\">      <data key=\"d1\">2</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Gebore\">      <data key=\"d1\">2</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Raych\">      <data key=\"d1\">8</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Dors Venabili\" target=\"Lanel Russ\">      <data key=\"d1\">4</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Dors Venabili\" target=\"Tisalver\">      <data key=\"d1\">2</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Dors Venabili\" target=\"Cinna\">      <data key=\"d1\">2</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Lanel Russ\" target=\"Tisalver\">      <data key=\"d1\">2</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Lanel Russ\" target=\"Astinwald\">      <data key=\"d1\">5</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Lanel Russ\" target=\"Cinna\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Lanel Russ\" target=\"Gebore\">      <data key=\"d1\">2</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Lanel Russ\" target=\"Raych\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Tisalver\" target=\"Casilia\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Tisalver\" target=\"Cl&#233;on\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Tisalver\" target=\"Raych\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Astinwald\" target=\"Gebore\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Astinwald\" target=\"Raych\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Cl&#233;on\" target=\"Hummin\">      <data key=\"d1\">2</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Cl&#233;on\" target=\"Raych\">      <data key=\"d1\">3</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>  </graph></graphml>","16":"<graphml xmlns=\"http://graphml.graphdrawing.org/xmlns\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd\">  <key id=\"d3\" for=\"edge\" attr.name=\"polarity_label\" attr.type=\"string\" />  <key id=\"d2\" for=\"edge\" attr.name=\"polarity_score\" attr.type=\"double\" />  <key id=\"d1\" for=\"edge\" attr.name=\"weight\" attr.type=\"long\" />  <key id=\"d0\" for=\"node\" attr.name=\"names\" attr.type=\"string\" />  <graph edgedefault=\"undirected\">    <node id=\"Kan d'&#8213; anti-empereurs &#8214;\">      <data key=\"d0\">Kan d'&#8213; anti-empereurs &#8214;</data>    </node>    <node id=\"Imp&#233;ratrice de Rien\">      <data key=\"d0\">madame l'imp&#233;ratrice de Rien;Imp&#233;ratrice de Rien</data>    </node>    <node id=\"Maire\">      <data key=\"d0\">madame le Maire &#8214;;madame le Maire;Maire</data>    </node>    <node id=\"Dors Venabili\">      <data key=\"d0\">docteur Dors Venabili;Dors Venabili;Ma&#238;tresse;Venabili</data>    </node>    <node id=\"imp&#233;ratrice de Rien\">      <data key=\"d0\">imp&#233;ratrice de Rien</data>    </node>    <node id=\"Chetter Hummin\">      <data key=\"d0\">Chetter Hummin;Hummin</data>    </node>    <node id=\"Emmer Thalus\">      <data key=\"d0\">Emmer Thalus;Thalus</data>    </node>    <node id=\"Hari Seldon\">      <data key=\"d0\">docteur Seldon;Ma&#238;tre Seldon;Hari Seldon;Seldon;Hari</data>    </node>    <node id=\"Mannix\">      <data key=\"d0\">Mannix IV de Kan;Mannix IV;Mannix</data>    </node>    <node id=\"Yugo Amaryl\">      <data key=\"d0\">Yugo Amaryl</data>    </node>    <node id=\"Davan\">      <data key=\"d0\">Davan</data>    </node>    <node id=\"Demerzel\">      <data key=\"d0\">Demerzel</data>    </node>    <node id=\"Cl&#233;on\">      <data key=\"d0\">L'Empereur;l&#8217;Empereur;Empereur;Cl&#233;on</data>    </node>    <node id=\"M'dame\">      <data key=\"d0\">M'dame</data>    </node>    <node id=\"Rachelle\">      <data key=\"d0\">Rachelle</data>    </node>    <node id=\"Raych\">      <data key=\"d0\">Raych</data>    </node>    <node id=\"l'Empereur\">      <data key=\"d0\">l'Empereur</data>    </node>    <edge source=\"Maire\" target=\"Hari Seldon\">      <data key=\"d1\">5</data>      <data key=\"d2\">-1.0</data>      <data key=\"d3\">ennemi</data>    </edge>    <edge source=\"Maire\" target=\"Mannix\">      <data key=\"d1\">2</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Maire\" target=\"Rachelle\">      <data key=\"d1\">4</data>      <data key=\"d2\">-1.0</data>      <data key=\"d3\">ennemi</data>    </edge>    <edge source=\"Maire\" target=\"Raych\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Dors Venabili\" target=\"Hari Seldon\">      <data key=\"d1\">5</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Dors Venabili\" target=\"Rachelle\">      <data key=\"d1\">3</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Dors Venabili\" target=\"Raych\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Chetter Hummin\" target=\"Hari Seldon\">      <data key=\"d1\">2</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Chetter Hummin\" target=\"Rachelle\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Emmer Thalus\" target=\"Hari Seldon\">      <data key=\"d1\">5</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Emmer Thalus\" target=\"Yugo Amaryl\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Emmer Thalus\" target=\"Raych\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Mannix\">      <data key=\"d1\">2</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Davan\">      <data key=\"d1\">4</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Rachelle\">      <data key=\"d1\">11</data>      <data key=\"d2\">-1.0</data>      <data key=\"d3\">ennemi</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Raych\">      <data key=\"d1\">14</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Davan\" target=\"Raych\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Cl&#233;on\" target=\"Rachelle\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Rachelle\" target=\"Raych\">      <data key=\"d1\">6</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>  </graph></graphml>","17":"<graphml xmlns=\"http://graphml.graphdrawing.org/xmlns\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd\">  <key id=\"d3\" for=\"edge\" attr.name=\"polarity_label\" attr.type=\"string\" />  <key id=\"d2\" for=\"edge\" attr.name=\"polarity_score\" attr.type=\"double\" />  <key id=\"d1\" for=\"edge\" attr.name=\"weight\" attr.type=\"long\" />  <key id=\"d0\" for=\"node\" attr.name=\"names\" attr.type=\"string\" />  <graph edgedefault=\"undirected\">    <node id=\"Madame le Maire\">      <data key=\"d0\">Madame le Maire;madame Maire</data>    </node>    <node id=\"Chetter Hummin\">      <data key=\"d0\">Chetter Hummin;Hummin</data>    </node>    <node id=\"Dors Venabili\">      <data key=\"d0\">Dors Venabili;Ma&#238;tresse;Venabili</data>    </node>    <node id=\"Mannix\">      <data key=\"d0\">Mannix IV de Kan;Mannix IV;Mannix</data>    </node>    <node id=\"Hari Seldon\">      <data key=\"d0\">Ma&#238;tre Seldon;Hari Seldon;Seldon</data>    </node>    <node id=\"Rachelle\">      <data key=\"d0\">Rachelle Ire;Rachelle</data>    </node>    <node id=\"Cl&#233;on\">      <data key=\"d0\">L'Empereur;l&#8217;Empereur;Empereur;Cl&#233;on</data>    </node>    <node id=\"Demerzel\">      <data key=\"d0\">Demerzel</data>    </node>    <node id=\"Hari\">      <data key=\"d0\">Hari</data>    </node>    <node id=\"Maire\">      <data key=\"d0\">madame le Maire &#8214;;Maire</data>    </node>    <node id=\"Raych\">      <data key=\"d0\">Raych</data>    </node>    <node id=\"Thalus\">      <data key=\"d0\">Thalus</data>    </node>    <node id=\"l'Empereur\">      <data key=\"d0\">l'Empereur</data>    </node>    <edge source=\"Madame le Maire\" target=\"Dors Venabili\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Madame le Maire\" target=\"Hari Seldon\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Madame le Maire\" target=\"Maire\">      <data key=\"d1\">5</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Madame le Maire\" target=\"Raych\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Chetter Hummin\" target=\"Dors Venabili\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Chetter Hummin\" target=\"Hari Seldon\">      <data key=\"d1\">7</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Chetter Hummin\" target=\"Rachelle\">      <data key=\"d1\">5</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Chetter Hummin\" target=\"Demerzel\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Dors Venabili\" target=\"Mannix\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Dors Venabili\" target=\"Hari Seldon\">      <data key=\"d1\">3</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Dors Venabili\" target=\"Rachelle\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Dors Venabili\" target=\"Demerzel\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Dors Venabili\" target=\"Maire\">      <data key=\"d1\">2</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Dors Venabili\" target=\"Raych\">      <data key=\"d1\">4</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Mannix\" target=\"Hari Seldon\">      <data key=\"d1\">2</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Mannix\" target=\"Rachelle\">      <data key=\"d1\">2</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Mannix\" target=\"Maire\">      <data key=\"d1\">2</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Mannix\" target=\"Raych\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Rachelle\">      <data key=\"d1\">5</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Cl&#233;on\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Demerzel\">      <data key=\"d1\">2</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Hari\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Maire\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Raych\">      <data key=\"d1\">7</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Rachelle\" target=\"Cl&#233;on\">      <data key=\"d1\">3</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Rachelle\" target=\"Demerzel\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Rachelle\" target=\"Raych\">      <data key=\"d1\">3</data>      <data key=\"d2\">1.0</data>      <data key=\"d3\">ami</data>    </edge>    <edge source=\"Cl&#233;on\" target=\"Demerzel\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Maire\" target=\"Raych\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>  </graph></graphml>","18":"<graphml xmlns=\"http://graphml.graphdrawing.org/xmlns\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd\">  <key id=\"d3\" for=\"edge\" attr.name=\"polarity_label\" attr.type=\"string\" />  <key id=\"d2\" for=\"edge\" attr.name=\"polarity_score\" attr.type=\"double\" />  <key id=\"d1\" for=\"edge\" attr.name=\"weight\" attr.type=\"long\" />  <key id=\"d0\" for=\"node\" attr.name=\"names\" attr.type=\"string\" />  <graph edgedefault=\"undirected\">    <node id=\"Mannix\">      <data key=\"d0\">Mannix IV de Kan;Mannix</data>    </node>    <node id=\"Hari Seldon\">      <data key=\"d0\">Hari Seldon;Seldon;Hari</data>    </node>    <node id=\"M&#232;re\">      <data key=\"d0\">M&#232;re Rittah;Rittah;M&#232;re</data>    </node>    <node id=\"Raych\">      <data key=\"d0\">Raych Seldon;Raych</data>    </node>    <node id=\"Yugo Amaryl\">      <data key=\"d0\">Yugo Amaryl</data>    </node>    <node id=\"Cl&#233;on\">      <data key=\"d0\">L'Empereur;l&#8217;Empereur;Empereur;Cl&#233;on</data>    </node>    <node id=\"Daneel\">      <data key=\"d0\">Daneel;Olivaw</data>    </node>    <node id=\"Dors\">      <data key=\"d0\">Dors</data>    </node>    <node id=\"Hummin\">      <data key=\"d0\">Hummin</data>    </node>    <node id=\"Maire\">      <data key=\"d0\">madame le Maire &#8214;;Maire</data>    </node>    <node id=\"Rachelle\">      <data key=\"d0\">Rachelle</data>    </node>    <edge source=\"Mannix\" target=\"Maire\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Mannix\" target=\"Rachelle\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Raych\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Daneel\">      <data key=\"d1\">5</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Dors\">      <data key=\"d1\">12</data>      <data key=\"d2\">-1.0</data>      <data key=\"d3\">ennemi</data>    </edge>    <edge source=\"Hari Seldon\" target=\"Hummin\">      <data key=\"d1\">5</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Raych\" target=\"Yugo Amaryl\">      <data key=\"d1\">2</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Raych\" target=\"Dors\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Daneel\" target=\"Dors\">      <data key=\"d1\">3</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Daneel\" target=\"Hummin\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Dors\" target=\"Hummin\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>    <edge source=\"Maire\" target=\"Rachelle\">      <data key=\"d1\">1</data>      <data key=\"d2\">0.0</data>      <data key=\"d3\">neutre</data>    </edge>  </graph></graphml>"}};
+// STATE
+// ============================================================
+let currentBook = 'lca';
+let currentChapter = null;
+let simulation = null;
+
+const BOOK_META = {
+  lca: { name: "Les Cavernes d'Acier", color: '#c9a84c', colorFade: 'rgba(201,168,76,' },
+  paf: { name: "Prélude à Foundation",  color: '#4cc9c9', colorFade: 'rgba(76,201,201,' }
+};
+
+// ============================================================
+// PARSE GRAPHML
+// ============================================================
+function parseGraphML(xmlStr) {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(xmlStr, 'application/xml');
+  const ns = 'http://graphml.graphdrawing.org/xmlns';
+
+  const nodes = [];
+  const edges = [];
+  const nodeMap = {};
+
+  doc.querySelectorAll('graph > node').forEach(n => {
+    const id = n.getAttribute('id');
+    const dataEl = n.querySelector('data[key="d0"]');
+    const names = dataEl ? dataEl.textContent.split(';').map(s => s.trim()).filter(Boolean) : [id];
+    nodes.push({ id, label: id, aliases: names, degree: 0 });
+    nodeMap[id] = nodes[nodes.length - 1];
+  });
+
+  doc.querySelectorAll('graph > edge').forEach(e => {
+    const src = e.getAttribute('source');
+    const tgt = e.getAttribute('target');
+    const dataEl = e.querySelector('data[key="d1"]');
+    const weight = dataEl ? parseInt(dataEl.textContent) || 1 : 1;
+    edges.push({ source: src, target: tgt, weight });
+    if (nodeMap[src]) nodeMap[src].degree += weight;
+    if (nodeMap[tgt]) nodeMap[tgt].degree += weight;
+  });
+
+  return { nodes, edges };
+}
+
+// ============================================================
+// UI SETUP
+// ============================================================
+function selectBook(book) {
+  currentBook = book;
+  currentChapter = null;
+
+  // Update tabs
+  document.querySelectorAll('.book-tab').forEach(t => {
+    t.className = 'book-tab';
+    if (t.dataset.book === book) t.classList.add(`active-${book}`);
+  });
+
+  buildChapterGrid();
+  clearGraph();
+  resetStats();
+}
+
+function buildChapterGrid() {
+  const grid = document.getElementById('chapter-grid');
+  const chapters = Object.keys(GRAPH_DATA[currentBook]).map(Number).sort((a,b) => a-b);
+  grid.innerHTML = '';
+  chapters.forEach(c => {
+    const btn = document.createElement('button');
+    btn.className = 'chap-btn';
+    btn.textContent = c;
+    btn.dataset.chapter = c;
+    btn.onclick = () => selectChapter(c);
+    grid.appendChild(btn);
+  });
+}
+
+function selectChapter(chap) {
+  currentChapter = chap;
+
+  document.querySelectorAll('.chap-btn').forEach(b => {
+    b.className = 'chap-btn';
+    if (parseInt(b.dataset.chapter) === chap) b.classList.add(`active-${currentBook}`);
+  });
+
+  const xmlStr = GRAPH_DATA[currentBook][String(chap)];
+  if (!xmlStr) return;
+
+  const { nodes, edges } = parseGraphML(xmlStr);
+  renderGraph(nodes, edges);
+  updateStats(nodes, edges);
+  updateCharList(nodes);
+
+  document.getElementById('chapter-id-display').textContent = `${currentBook.toUpperCase()}${chap}`;
+  document.getElementById('loading-state').style.display = 'none';
+}
+
+function resetStats() {
+  document.getElementById('stat-nodes').textContent = '—';
+  document.getElementById('stat-edges').textContent = '—';
+  document.getElementById('stat-density').textContent = '—';
+  document.getElementById('char-list').innerHTML = `
+    <div style="font-size:12px;color:var(--muted);text-align:center;padding:12px 0;font-style:italic;">
+      Sélectionnez un chapitre
+    </div>`;
+  document.getElementById('chapter-id-display').textContent = '';
+}
+
+function updateStats(nodes, edges) {
+  document.getElementById('stat-nodes').textContent = nodes.length;
+  document.getElementById('stat-edges').textContent = edges.length;
+  const totalWeight = edges.reduce((s, e) => s + e.weight, 0);
+  document.getElementById('stat-density').textContent = totalWeight;
+}
+
+function updateCharList(nodes) {
+  const sorted = [...nodes].sort((a,b) => b.degree - a.degree).slice(0, 7);
+  const maxDeg = sorted[0]?.degree || 1;
+  const color = BOOK_META[currentBook].color;
+  const colorFade = BOOK_META[currentBook].colorFade;
+
+  const listEl = document.getElementById('char-list');
+  listEl.innerHTML = sorted.map((n, i) => `
+    <div class="char-row">
+      <span class="char-rank">${i+1}</span>
+      <div class="char-bar-wrap">
+        <div class="char-bar" style="width:${(n.degree/maxDeg*100).toFixed(1)}%;background:${color}"></div>
+      </div>
+      <span class="char-name" style="color:${color}">${n.label}</span>
+      <span class="char-weight">${n.degree}</span>
+    </div>
+  `).join('');
+}
+
+// ============================================================
+// D3 GRAPH RENDERING
+// ============================================================
+function clearGraph() {
+  const svg = d3.select('#graph-svg');
+  svg.selectAll('*').remove();
+  if (simulation) { simulation.stop(); simulation = null; }
+  document.getElementById('loading-state').style.display = 'flex';
+  document.getElementById('loading-state').innerHTML = '<div>Sélectionnez un chapitre pour visualiser le graphe</div>';
+}
+
+function renderGraph(nodes, edges) {
+  const color = BOOK_META[currentBook].color;
+  const colorFade = BOOK_META[currentBook].colorFade;
+  const svg = d3.select('#graph-svg');
+  svg.selectAll('*').remove();
+
+  const W = svg.node().clientWidth || 900;
+  const H = svg.node().clientHeight || 600;
+
+  const maxDeg = Math.max(...nodes.map(n => n.degree), 1);
+  const maxWeight = Math.max(...edges.map(e => e.weight), 1);
+
+  // Radius scale
+  const rScale = d3.scaleSqrt().domain([0, maxDeg]).range([5, 28]);
+  // Edge width scale
+  const wScale = d3.scaleLinear().domain([1, maxWeight]).range([0.5, 5]);
+
+  // Container with zoom
+  const g = svg.append('g');
+
+  const zoom = d3.zoom()
+    .scaleExtent([0.3, 5])
+    .on('zoom', event => g.attr('transform', event.transform));
+
+  svg.call(zoom);
+
+  // Force simulation
+  simulation = d3.forceSimulation(nodes)
+    .force('link', d3.forceLink(edges).id(d => d.id).distance(d => 80 + (maxWeight - d.weight) * 3).strength(0.7))
+    .force('charge', d3.forceManyBody().strength(-200))
+    .force('center', d3.forceCenter(W / 2, H / 2))
+    .force('collision', d3.forceCollide().radius(d => rScale(d.degree) + 8));
+
+  // Edges
+  const link = g.append('g').selectAll('line')
+    .data(edges).join('line')
+    .attr('class', 'edge-line')
+    .attr('stroke-width', d => wScale(d.weight))
+    .attr('stroke', d => `${colorFade}${(0.1 + (d.weight / maxWeight) * 0.5).toFixed(2)})`);
+
+  // Node groups
+  const nodeGroup = g.append('g').selectAll('g')
+    .data(nodes).join('g')
+    .attr('cursor', 'pointer')
+    .call(d3.drag()
+      .on('start', (event, d) => { if (!event.active) simulation.alphaTarget(0.2).restart(); d.fx = d.x; d.fy = d.y; })
+      .on('drag', (event, d) => { d.fx = event.x; d.fy = event.y; })
+      .on('end', (event, d) => { if (!event.active) simulation.alphaTarget(0); d.fx = null; d.fy = null; })
+    );
+
+  // Glow filter
+  const defs = svg.append('defs');
+  const filter = defs.append('filter').attr('id', 'glow');
+  filter.append('feGaussianBlur').attr('stdDeviation', '3.5').attr('result', 'coloredBlur');
+  const feMerge = filter.append('feMerge');
+  feMerge.append('feMergeNode').attr('in', 'coloredBlur');
+  feMerge.append('feMergeNode').attr('in', 'SourceGraphic');
+
+  // Node halo
+  nodeGroup.append('circle')
+    .attr('r', d => rScale(d.degree) + 3)
+    .attr('fill', `${colorFade}0.05)`)
+    .attr('stroke', `${colorFade}0.15)`)
+    .attr('stroke-width', 1);
+
+  // Node circle
+  nodeGroup.append('circle')
+    .attr('class', 'node-circle')
+    .attr('r', d => rScale(d.degree))
+    .attr('fill', d => {
+      const t = d.degree / maxDeg;
+      return d3.interpolateRgb('#2a1f08', color)(t);
+    })
+    .attr('stroke', color)
+    .attr('stroke-width', 1.5)
+    .attr('filter', 'url(#glow)');
+
+  // Labels
+  nodeGroup.append('text')
+    .attr('class', 'node-label')
+    .attr('dy', d => rScale(d.degree) + 14)
+    .attr('text-anchor', 'middle')
+    .text(d => d.label)
+    .style('font-size', d => d.degree > maxDeg * 0.5 ? '13px' : '11px');
+
+  // Tooltip
+  const tooltip = document.getElementById('tooltip');
+
+  nodeGroup
+    .on('mouseover', (event, d) => {
+      const aliases = d.aliases.filter(a => a !== d.label).join(', ');
+      tooltip.innerHTML = `
+        <div class="tooltip-name" style="color:${color}">${d.label}</div>
+        ${aliases ? `<div class="tooltip-aliases">${aliases}</div>` : ''}
+        <div class="tooltip-degree">Poids total : ${d.degree}</div>
+      `;
+      tooltip.classList.add('visible');
+
+      // Highlight connected
+      const connected = new Set([d.id]);
+      edges.forEach(e => {
+        if (e.source.id === d.id || e.target.id === d.id) {
+          connected.add(e.source.id || e.source);
+          connected.add(e.target.id || e.target);
+        }
+      });
+
+      nodeGroup.style('opacity', n => connected.has(n.id) ? 1 : 0.2);
+      link.style('opacity', e => {
+        const sid = e.source.id || e.source;
+        const tid = e.target.id || e.target;
+        return (sid === d.id || tid === d.id) ? 1 : 0.05;
+      });
+    })
+    .on('mousemove', event => {
+      const rect = document.querySelector('.graph-area').getBoundingClientRect();
+      tooltip.style.left = (event.clientX - rect.left + 12) + 'px';
+      tooltip.style.top = (event.clientY - rect.top - 10) + 'px';
+    })
+    .on('mouseout', () => {
+      tooltip.classList.remove('visible');
+      nodeGroup.style('opacity', 1);
+      link.style('opacity', 1);
+    });
+
+  // Simulation tick
+  simulation.on('tick', () => {
+    link
+      .attr('x1', d => d.source.x)
+      .attr('y1', d => d.source.y)
+      .attr('x2', d => d.target.x)
+      .attr('y2', d => d.target.y);
+
+    nodeGroup.attr('transform', d => `translate(${d.x},${d.y})`);
+  });
+}
+
+// ============================================================
+// INIT
+// ============================================================
+selectBook('lca');
+</script>
+</body>
+</html>
