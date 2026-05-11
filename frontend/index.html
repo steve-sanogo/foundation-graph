@@ -979,24 +979,28 @@ function renderGraph(nodes, edges) {
 
   nodeGroup.append('circle')
     .attr('r', d => rScale(d.degree) + 3)
-    .attr('fill',   `${colorFade}0.05)`)
-    .attr('stroke', `${colorFade}0.15)`)
+    .attr('fill',   d => d.degree === 0 ? 'rgba(90,106,126,0.06)' : `${colorFade}0.05)`)
+    .attr('stroke', d => d.degree === 0 ? 'rgba(90,106,126,0.2)'  : `${colorFade}0.15)`)
     .attr('stroke-width', 1);
 
   nodeGroup.append('circle')
     .attr('class', 'node-circle')
     .attr('r',      d => rScale(d.degree))
-    .attr('fill',   d => d3.interpolateRgb('#2a1f08', color)(d.degree / maxDeg))
-    .attr('stroke', color)
+    .attr('fill',   d => d.degree === 0
+      ? 'rgba(90,106,126,0.3)'
+      : d3.interpolateRgb('#2a1f08', color)(d.degree / maxDeg))
+    .attr('stroke', d => d.degree === 0 ? '#5a6a7e' : color)
     .attr('stroke-width', 1.5)
-    .attr('filter', 'url(#glow)');
+    .attr('stroke-dasharray', d => d.degree === 0 ? '3,2' : null)
+    .attr('filter', d => d.degree === 0 ? null : 'url(#glow)');
 
   nodeGroup.append('text')
     .attr('class', 'node-label')
     .attr('dy', d => rScale(d.degree) + 14)
     .attr('text-anchor', 'middle')
     .text(d => d.label)
-    .style('font-size', d => d.degree > maxDeg * .5 ? '13px' : '11px');
+    .style('font-size', d => d.degree > maxDeg * .5 ? '13px' : '11px')
+    .style('fill', d => d.degree === 0 ? '#5a6a7e' : null);
 
   const tooltip = document.getElementById('tooltip');
 
@@ -1011,7 +1015,7 @@ function renderGraph(nodes, edges) {
       connEdges.forEach(e => { if (e.polarity_label in polCount) polCount[e.polarity_label]++; });
 
       tooltip.innerHTML = `
-        <div class="tooltip-name" style="color:${color}">${d.label}</div>
+        <div class="tooltip-name" style="color:${d.degree === 0 ? '#5a6a7e' : color}">${d.label}${d.degree === 0 ? ' <span style="color:var(--muted);font-style:italic;font-size:10px;letter-spacing:.05em">· isolé</span>' : ''}</div>
         ${aliases ? `<div class="tooltip-aliases">${aliases}</div>` : ''}
         <div class="tooltip-polarity">
           <span style="color:var(--ami)">▲ ${polCount.ami}</span>
